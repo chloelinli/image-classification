@@ -1,4 +1,4 @@
-chloelinli.github.io
+# chloelinli.github.io
 
 ## Data
 #### Raw data for "Binocular Summation and Suppression of Contrast Sensitivity in Strabismus, Fusion and Amblyopia"
