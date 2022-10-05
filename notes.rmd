@@ -1,4 +1,6 @@
-Unable to run scripts in Visual Studio? Use the following command in the terminal:
-```
-Set-ExecutionPolicy -Scope CurrentUser Unrestricted
-```
+Plan:
+* Clean/process data in Google Sheets
+* Run queries in Azure?
+* Create visualizations in Sheets/Tableau
+* Try visualizations in R?
+* Upload files to Github
