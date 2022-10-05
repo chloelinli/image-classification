@@ -2,9 +2,9 @@
 USE strabismus
 
 -- create table
-CREATE TABLE cleaned_strabismus_data
-    ('Subject_ID' VARCHAR PRIMARY KEY,
-    'Group' VARCHAR,
+CREATE TABLE cleaned_strabismus_data (
+    Subject_ID VARCHAR,
+    Group VARCHAR,
     'Age' INT,
     'Fuse_status' BOOLEAN,
     'NDE' VARCHAR,
@@ -30,12 +30,13 @@ CREATE TABLE cleaned_strabismus_data
     'Gamma_OU' FLOAT,
     'Ref_OD (Sphere CyL Axis)' VARCHAR,
     'Ref_OS' VARCHAR,
-    'Type' VARCHAR)
+    'Type' VARCHAR
+)
 GO
 BULK INSERT cleaned_strabismus_data
-    FROM 'C:\Users\chloe\chloelinli.github.io\projects\strabismus_project_20221003\strabismus_data.csv'
+    FROM 'projects\strabismus_project_20221003\strabismus_data.csv'
     WITH
         (FIRSTROW = 2,
         FIELDTERMINATOR = ',',
         ROWTERMINATOR = '\n')
-GO
+GO;
