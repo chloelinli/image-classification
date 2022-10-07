@@ -1,5 +1,6 @@
 1.0.1 - 2022-10-06
 * Excluded mother's age of "45-54 years" column as outlier due to extremely low percentages, most being below 0.1%
+* Updated data to separate (single years) attribute
 
 1.0.0 - 2022-10-06
 * Separated data into sheets based on race
