@@ -1,9 +1,8 @@
-2022-10-06
-1. Imported birth rate dataset to Google Sheets
-2. Separated data into sheets based on race
-3. Excluded Native Hawaiian data due to unknown values under "45-54 years" column
-4. Excluded mother's age of "10-14 years" column as outlier due to extremely low percentages, most being below 0.1%
-5. Included columns of percentages of live births per 1,000 women (v / 1000 * 100%)
+1.0.1 - 2022-10-06
+* Excluded mother's age of "45-54 years" column as outlier due to extremely low percentages, most being below 0.1%
 
-2022-10-06
-1. Excluded mother's age of "45-54 years" column as outlier due to extremely low percentages, most being below 0.1%
+1.0.0 - 2022-10-06
+* Separated data into sheets based on race
+* Excluded Native Hawaiian data due to unknown values under "45-54 years" column
+* Excluded mother's age of "10-14 years" column as outlier due to extremely low percentages, most being below 0.1%
+* Created columns of percentages of live births per 1,000 women (v / 1000 * 100%)
