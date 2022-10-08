@@ -9,7 +9,7 @@ to, but will continue to calculate the data separately and
 include it in the spreadsheets.
 
 Unsure why there is 18-19 (and 15-17) if there is already
-a group for15-19
+a group for 15-19
 */
 
 -- All races
