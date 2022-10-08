@@ -1,5 +1,6 @@
 1.0.2 - 2022-10-08
 * Added Year attribute to queries to calculate differences in percentages
+* Decided to use Google Sheets instead of SQL to analyze data - will delete queries
 
 1.0.1 - 2022-10-07
 * Excluded mother's age of "45-54 years" column as outlier due to extremely low percentages, most being below 0.1%
