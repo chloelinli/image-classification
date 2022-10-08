@@ -1,10 +1,12 @@
 /*
-These queries use BigQuery to calculate the difference in values within the
-birth rates for each race within the 25-29 age group. These values were
-then manually written into a Google Spreadsheet and formatted as percentages.
-"All" refers to the section labeled "All races" as provided by the CDC dataset.
-Unsure what "Single Race" is meant to refer to, but will continue to calculate
-the data separately and include it in the spreadsheets.
+These queries use my personal BigQuery project to calculate
+the difference in values within the birth rates for each race
+within the 25-29 age group. These values were then manually
+written into a Google Spreadsheet and formatted as percentages.
+"All" refers to the section labeled "All races" as provided by
+the CDC dataset. Unsure what "Single Race" is meant to refer
+to, but will continue to calculate the data separately and
+include it in the spreadsheets.
 */
 
 -- All races
