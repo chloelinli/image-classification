@@ -83,8 +83,16 @@ ORDER BY Year;
 
 -- White
 SELECT
+  Year,
   _35_39_years__percentage_ - LAG(_15_19_years__percentage_) OVER (ORDER BY Year) AS diff_curr_prev_percentage
 FROM `myportfolio-110818.us_birth_rate_trends.birth_rates_white`
+ORDER BY Year;
+
+-- White (Single Race)
+SELECT
+  Year,
+  _35_39_years__percentage_ - LAG(_15_19_years__percentage_) OVER (ORDER BY Year) AS diff_curr_prev_percentage
+FROM `myportfolio-110818.us_birth_rate_trends.birth_rates_white_single_race`
 ORDER BY Year;
 
 -- White, not Hispanic or Latina
