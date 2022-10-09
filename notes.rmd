@@ -1,6 +1,6 @@
 Plan:
 * Clean/process data in Google Sheets
-* Analyze data in Google Sheets
+* Analyze data in Google Sheets/SQL
 * Create visualizations in Sheets/Tableau
 * Try visualizations in R?
 * Upload files to Github
