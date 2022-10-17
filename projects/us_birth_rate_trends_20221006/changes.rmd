@@ -1,6 +1,6 @@
 1.1.0 - 2022-10-17
-* Removed all Single Race data; and all 15-17, 18-19 age group data (898bf49)[https://github.com/chloelinli/chloelinli.github.io/commit/898bf49deff4931c046a1d45b37f62ad1ed35db9], (0a3a7ca)[https://github.com/chloelinli/chloelinli.github.io/commit/0a3a7cae1fda1d42b243cbf5d2bc895eac607500]
-* Included total births for each age group, then included and added to "All races" sheet (cc3f9af)[https://github.com/chloelinli/chloelinli.github.io/commit/cc3f9af70a648e2089dbbcd9df511604a1fee3a9]
+* Removed all Single Race data; and all 15-17, 18-19 age group data [898bf49](https://github.com/chloelinli/chloelinli.github.io/commit/898bf49deff4931c046a1d45b37f62ad1ed35db9), [0a3a7ca](https://github.com/chloelinli/chloelinli.github.io/commit/0a3a7cae1fda1d42b243cbf5d2bc895eac607500)
+* Included total births for each age group, then included and added to "All races" sheet [cc3f9af](https://github.com/chloelinli/chloelinli.github.io/commit/cc3f9af70a648e2089dbbcd9df511604a1fee3a9)
 
 1.0.3 - 2022-10-10
 * Stopped using age groups 15-17 and 18-19 due to redundancy with 15-19 (
