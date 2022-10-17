@@ -1,21 +1,21 @@
 1.1.0 - 2022-10-17
-* Removed all Single Race data; and all 15-17, 18-19 age group data [898bf49](https://github.com/chloelinli/chloelinli.github.io/commit/898bf49deff4931c046a1d45b37f62ad1ed35db9), [0a3a7ca](https://github.com/chloelinli/chloelinli.github.io/commit/0a3a7cae1fda1d42b243cbf5d2bc895eac607500)
-* Included total births for each age group, then included and added to "All races" sheet [cc3f9af](https://github.com/chloelinli/chloelinli.github.io/commit/cc3f9af70a648e2089dbbcd9df511604a1fee3a9)
+* Removed all Single Race data; and all 15-17, 18-19 age group data [#898bf49](https://github.com/chloelinli/chloelinli.github.io/commit/898bf49deff4931c046a1d45b37f62ad1ed35db9), [#0a3a7ca](https://github.com/chloelinli/chloelinli.github.io/commit/0a3a7cae1fda1d42b243cbf5d2bc895eac607500)
+* Included total births for each age group, then included and added to "All races" sheet [#cc3f9af](https://github.com/chloelinli/chloelinli.github.io/commit/cc3f9af70a648e2089dbbcd9df511604a1fee3a9)
 
 1.0.3 - 2022-10-10
-* Stopped using age groups 15-17 and 18-19 due to redundancy with 15-19 (
-* Added summation of percentage differences in age group files (
+* Stopped using age groups 15-17 and 18-19 due to redundancy with 15-19 [#7d8baad](https://github.com/chloelinli/chloelinli.github.io/commit/7d8baad129ee517b3b0946679507fcdc3e907b26)
+* Added summation of percentage differences in age group files [#8beaa08](https://github.com/chloelinli/chloelinli.github.io/commit/8beaa083473097cf10cfc3178899a2003f447433)
 
-1.0.2 - 2022-10-08
-* Added Year attribute to queries to calculate differences in percentages (
-* Used Google Sheets instead of SQL to analyze data - will delete queries (
+1.0.2 - 2022-10-09
+* Added Year attribute to queries to calculate differences in percentages [#4c7b972](https://github.com/chloelinli/chloelinli.github.io/commit/4c7b972bea67e6abe8f7aaca7b454a2d58d49e58)
+* Used Google Sheets instead of SQL to analyze data - will delete queries [#21271b8](https://github.com/chloelinli/chloelinli.github.io/commit/21271b8e01b4d08c1603e9597e1680e4c671f468)
 
 1.0.1 - 2022-10-07
-* Excluded mother's age of "45-54 years" column as outlier due to extremely low percentages, most being below 0.1% (
-* Updated data to separate (single years) attribute (
+* Excluded mother's age of "45-54 years" column as outlier due to extremely low percentages, most being below 0.1%
+* Updated data to separate (single years) attribute [#025eaff](https://github.com/chloelinli/chloelinli.github.io/commit/025eaffee9a075cd46b24a0b726a7cf0ddaf773d)
 
 1.0.0 - 2022-10-06
 * Separated data into sheets based on race (
-* Excluded Native Hawaiian data due to unknown values under "45-54 years" column (
-* Excluded mother's age of "10-14 years" column as outlier due to extremely low percentages, most being below 0.1% (
-* Created columns of percentages of live births per 1,000 women -> v / 1000 * 100% (#cc3f9af
+* Excluded Native Hawaiian data due to unknown values under "45-54 years" column
+* Excluded mother's age of "10-14 years" column as outlier due to extremely low percentages, most being below 0.1%
+* Created columns of percentages of live births per 1,000 women -> v / 1000 * 100%
