@@ -1,5 +1,5 @@
 ---
-title: Changelog
+title: Birth Rate Project Changelog
 output: html_document
 ---
 
@@ -21,7 +21,7 @@ output: html_document
 * Updated data to separate (single years) attribute [#025eaff](https://github.com/chloelinli/chloelinli.github.io/commit/025eaffee9a075cd46b24a0b726a7cf0ddaf773d)
 
 1.0.0 - 2022-10-06
-* Separated data into sheets based on race [bd2a7f2](https://github.com/chloelinli/chloelinli.github.io/commit/bd2a7f269cf8795f89969f2a48183b416d44c354)
+* Separated data into sheets based on race [#bd2a7f2](https://github.com/chloelinli/chloelinli.github.io/commit/bd2a7f269cf8795f89969f2a48183b416d44c354)
 * Excluded Native Hawaiian data due to unknown values under "45-54 years" column
 * Excluded mother's age of "10-14 years" column as outlier due to extremely low percentages, most being below 0.1%
 * Created columns of percentages of live births per 1,000 women -> v / 1000 * 100%
