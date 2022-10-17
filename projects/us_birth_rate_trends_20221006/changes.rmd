@@ -1,6 +1,5 @@
 1.1.0 - 2022-10-17
-* Removed all Single Race data
-* Removed all 15-17, 18-19 age group data
+* Removed all Single Race data; and all 15-17, 18-19 age group data
 * Included total births for each age group, then included and added to "All races" sheet
 
 1.0.3 - 2022-10-10
