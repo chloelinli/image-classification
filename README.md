@@ -1,7 +1,7 @@
 # Data Analytics Portfolio
 Hello! Welcome to my repository which will contain personal projects I have put together as an entry-level data analytics professional currently looking for data analyst positions!
 
-[CLick here for my website!](https://chloelinli.github.io/)
+[Click here for my website!](https://chloelinli.github.io/)
 
 ## Contents
 ### [Birth Rate Trends](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/us_birth_rate_trends_20221006)
