@@ -1,8 +1,0 @@
-## Plan:
-
-#### Birth Rate Project
-* Clean/process data in Google Sheets
-* Analyze data in Google Sheets
-* Create visualizations in Sheets
-* Try visualizations in R?
-* Upload files to Github
