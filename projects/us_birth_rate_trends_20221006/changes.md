@@ -1,3 +1,7 @@
+### 2.0.0 - 2022-10-29
+* Deleted old data, uploaded new data; only includes 2003-2020 [#106e81f](https://github.com/chloelinli/chloelinli.github.io/commit/106e81f4b13a612a5e4a28ef4225d953d9d8198c)
+
+
 ### 1.1.1 - 2022-10-18
 * Created file containing 2000 and 2019 births and differences [#14afc39](https://github.com/chloelinli/chloelinli.github.io/commit/14afc393986f97d0e70346684a66ccefe4e3d0dc)
 * Added sums of 2019 births [#882efe4](https://github.com/chloelinli/chloelinli.github.io/commit/882efe465271067b8051816c9f078cd21d6f11e1)
