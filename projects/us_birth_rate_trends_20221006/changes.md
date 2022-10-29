@@ -1,6 +1,5 @@
 ### 2.0.0 - 2022-10-29
-* Deleted old data, uploaded new data; only includes 2003-2020 [#106e81f](https://github.com/chloelinli/chloelinli.github.io/commit/106e81f4b13a612a5e4a28ef4225d953d9d8198c)
-* Recalculated % of Total Births in compiled data to account for the merging of 2003-2020 [#accf948](https://github.com/chloelinli/chloelinli.github.io/commit/accf948e757ea052941c15a6f0ca4c66210d1d4b)
+* Deleted old data, uploaded new data; only includes 2011-2020 [#510916a](https://github.com/chloelinli/chloelinli.github.io/commit/510916a22dce03240c17c582a69104f0337ec7ad)
 
 ---
 
