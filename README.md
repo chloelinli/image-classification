@@ -7,4 +7,5 @@ Due to the concern of overpopulation, I asked myself, "A high birth rate greatly
 
 #### Data used
 Centers for Disease Control and Prevention. (n.d.). Natality, 2003-2006 request. Centers for Disease Control and Prevention. Retrieved October 28, 2022, from [https://wonder.cdc.gov/natality-v2006.html](https://wonder.cdc.gov/natality-v2006.html).
+
 Centers for Disease Control and Prevention. (n.d.). Natality, 2007-2020 request. Centers for Disease Control and Prevention. Retrieved October 28, 2022, from [https://wonder.cdc.gov/natality-current.html](https://wonder.cdc.gov/natality-current.html).
