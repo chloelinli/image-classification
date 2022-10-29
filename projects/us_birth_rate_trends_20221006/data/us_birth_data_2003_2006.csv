@@ -1,0 +1,87 @@
+Notes,Census Region,Census Region Code,State,State Code,Births,% of Total Births,Total Population,Birth Rate,Average Age of Mother
+,Census Region 1: Northeast,CENS-R1,Connecticut,9,168506,1.01%,14004846,12.03,29.48
+,Census Region 1: Northeast,CENS-R1,Maine,23,56062,0.34%,5262607,10.65,27.71
+,Census Region 1: Northeast,CENS-R1,Massachusetts,25,313209,1.89%,25648220,12.21,29.82
+,Census Region 1: Northeast,CENS-R1,New Hampshire,33,57756,0.35%,5176842,11.16,28.96
+,Census Region 1: Northeast,CENS-R1,Rhode Island,44,51057,0.31%,4276933,11.94,28.45
+,Census Region 1: Northeast,CENS-R1,Vermont,50,25994,0.16%,2481885,10.47,28.45
+,Census Region 1: Northeast,CENS-R1,New Jersey,34,461032,2.78%,34549616,13.34,29.47
+,Census Region 1: Northeast,CENS-R1,New York,36,1000116,6.02%,76584747,13.06,28.86
+,Census Region 1: Northeast,CENS-R1,Pennsylvania,42,585180,3.52%,49746179,11.76,28
+Total,Census Region 1: Northeast,CENS-R1,,,2718912,16.37%,217731875,12.49,28.9
+,Census Region 2: Midwest,CENS-R2,Illinois,17,722865,4.35%,50399637,14.34,27.82
+,Census Region 2: Midwest,CENS-R2,Indiana,18,349400,2.10%,25040930,13.95,26.62
+,Census Region 2: Midwest,CENS-R2,Michigan,26,516059,3.11%,40183685,12.84,27.49
+,Census Region 2: Midwest,CENS-R2,Ohio,39,597614,3.60%,45831572,13.04,27.08
+,Census Region 2: Midwest,CENS-R2,Wisconsin,55,283510,1.71%,22117050,12.82,27.7
+,Census Region 2: Midwest,CENS-R2,Iowa,19,156530,0.94%,11842732,13.22,27.12
+,Census Region 2: Midwest,CENS-R2,Kansas,20,160001,0.96%,10965607,14.59,26.83
+,Census Region 2: Midwest,CENS-R2,Minnesota,27,285118,1.72%,20424438,13.96,28.23
+,Census Region 2: Midwest,CENS-R2,Missouri,29,314813,1.90%,23090148,13.63,26.62
+,Census Region 2: Midwest,CENS-R2,Nebraska,31,105121,0.63%,7022203,14.97,27.27
+,Census Region 2: Midwest,CENS-R2,North Dakota,38,33172,0.20%,2579033,12.86,27.13
+,Census Region 2: Midwest,CENS-R2,South Dakota,46,45746,0.28%,3092651,14.79,26.81
+Total,Census Region 2: Midwest,CENS-R2,,,3569949,21.50%,262589686,13.6,27.34
+,Census Region 3: South,CENS-R3,Delaware,10,46330,0.28%,3353224,13.82,27.34
+,Census Region 3: South,CENS-R3,District of Columbia,11,32046,0.19%,2274073,14.09,28.13
+,Census Region 3: South,CENS-R3,Florida,12,893345,5.38%,70428431,12.68,27.33
+,Census Region 3: South,CENS-R3,Georgia,13,565661,3.41%,35473780,15.95,26.84
+,Census Region 3: South,CENS-R3,Maryland,24,302032,1.82%,22262950,13.57,28.55
+,Census Region 3: South,CENS-R3,North Carolina,37,489125,2.95%,34598330,14.14,26.95
+,Census Region 3: South,CENS-R3,South Carolina,45,232121,1.40%,16989215,13.66,26.35
+,Census Region 3: South,CENS-R3,Virginia,51,417559,2.51%,30093382,13.88,28.01
+,Census Region 3: South,CENS-R3,West Virginia,54,83582,0.50%,7277137,11.49,26.09
+,Census Region 3: South,CENS-R3,Alabama,1,242747,1.46%,18233006,13.31,25.96
+,Census Region 3: South,CENS-R3,Kentucky,21,225650,1.36%,16665252,13.54,26.22
+,Census Region 3: South,CENS-R3,Mississippi,28,173658,1.05%,11568243,15.01,25.25
+,Census Region 3: South,CENS-R3,Tennessee,47,324634,1.95%,23838444,13.62,26.23
+,Census Region 3: South,CENS-R3,Arkansas,5,156526,0.94%,11077360,14.13,25.44
+,Census Region 3: South,CENS-R3,Louisiana,22,254722,1.53%,17952573,14.19,25.72
+,Census Region 3: South,CENS-R3,Oklahoma,40,208104,1.25%,14172812,14.68,25.71
+,Census Region 3: South,CENS-R3,Texas,48,1544287,9.30%,90562657,17.05,26.45
+Total,Census Region 3: South,CENS-R3,,,6192129,37.29%,426820869,14.51,26.71
+,Census Region 4: West,CENS-R4,Arizona,4,383258,2.31%,23030986,16.64,26.61
+,Census Region 4: West,CENS-R4,Colorado,8,277537,1.67%,18456056,15.04,27.69
+,Census Region 4: West,CENS-R4,Idaho,16,91578,0.55%,5652092,16.2,26.53
+,Census Region 4: West,CENS-R4,Montana,30,47032,0.28%,3742433,12.57,26.87
+,Census Region 4: West,CENS-R4,Nevada,32,146142,0.88%,9549873,15.3,27.07
+,Census Region 4: West,CENS-R4,New Mexico,35,114976,0.69%,7675793,14.98,25.83
+,Census Region 4: West,CENS-R4,Utah,49,205590,1.24%,9744943,21.1,26.85
+,Census Region 4: West,CENS-R4,Wyoming,56,28418,0.17%,2049383,13.87,25.95
+,Census Region 4: West,CENS-R4,Alaska,2,41879,0.25%,2649948,15.8,27
+,Census Region 4: West,CENS-R4,California,6,2197162,13.23%,142676880,15.4,28.05
+,Census Region 4: West,CENS-R4,Hawaii,15,73287,0.44%,5127183,14.29,28
+,Census Region 4: West,CENS-R4,Oregon,41,186242,1.12%,14400924,12.93,27.48
+,Census Region 4: West,CENS-R4,Washington,53,331815,2.00%,24910818,13.32,27.87
+Total,Census Region 4: West,CENS-R4,,,4124916,24.84%,269667312,15.3,27.62
+Total,,,,,16605906,100.00%,1176809742,14.11,27.43
+---,,,,,,,,,
+"Dataset: Natality, 2003-2006",,,,,,,,,
+Query Parameters:,,,,,,,,,
+Group By: Census Region; State,,,,,,,,,
+Show Totals: True,,,,,,,,,
+Show Zero Values: False,,,,,,,,,
+Show Suppressed: False,,,,,,,,,
+"Calculate Rates Per: 1,000",,,,,,,,,
+Population Option: Default intercensal populations for years 2003-2006,,,,,,,,,
+---,,,,,,,,,
+Help: See http://wonder.cdc.gov/wonder/help/Natality.html for more information.,,,,,,,,,
+---,,,,,,,,,
+"Query Date: Oct 28, 2022 9:04:46 AM",,,,,,,,,
+---,,,,,,,,,
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics",,,,,,,,,
+"System, Natality on CDC WONDER Online Database. Data are from the Natality Records 2003-2006, as compiled from data provided by",,,,,,,,,
+the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed at,,,,,,,,,
+"http://wonder.cdc.gov/natality-v2006.html on Oct 28, 2022 9:04:46 AM",,,,,,,,,
+---,,,,,,,,,
+Caveats:,,,,,,,,,
+1. Each birth record represents one liveborn infant.,,,,,,,,,
+2. Birth rates are calculated as the number of births divided by total population in the given year(s). When the numerator is,,,,,,,,,
+"sub-set by mother's race, location, or year of birth, then the same sub-set for age, race, location and year applies to the",,,,,,,,,
+denominator population.,,,,,,,,,
+3. Please note that the Percent of Total presented here may not be consistent with percentages published by NCHS. NCHS excludes,,,,,,,,,
+"births categorized as ""Unknown"", ""Not Stated"", ""Not on Certificate"", ""Excluded"", and ""Not Reported"" from the",,,,,,,,,
+denominator when calculating percentages.,,,,,,,,,
+4. Birth rates and fertility rates for years 2003-2006 are calculated using the revised intercensal bridged-race series of July,,,,,,,,,
+"1st estimates of the resident population, released by NCHS on October 26, 2012. More information:",,,,,,,,,
+http://wonder.cdc.gov/wonder/help/Natality.html#Denominator-Population-Sources.,,,,,,,,,
