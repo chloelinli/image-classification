@@ -1,3 +1,6 @@
+### 2.1.0 - 2022-10-31
+* Updated data and graphs [#8ad599c](https://github.com/chloelinli/chloelinli.github.io/commit/8ad599c4d4f086be7e1a70ec777a0590d5ed7e3e)
+
 ### 2.0.1 - 2022-10-30
 * New calculations and graphs [#331046c](https://github.com/chloelinli/chloelinli.github.io/commit/331046ca4338062575fafee0c68ff0b580cd5957), [#61468be](https://github.com/chloelinli/chloelinli.github.io/commit/61468be81fa0828b87bc28eaaa4837ec042d3133), [#6f6fe54](https://github.com/chloelinli/chloelinli.github.io/commit/6f6fe548233898235805518fa1bbcdb00e40d0c9)
 
