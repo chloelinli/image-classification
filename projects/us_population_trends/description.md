@@ -10,8 +10,12 @@ Thanks to advanced medicine and technology, birth rates have increased while dea
 
 ### Data and Approach
 #### Data
-* CDC birth data between 2011-2020
-* 2010 and 2020 census data, in order to help approximate population growth
+Bureau, U. S. C. (n.d.). Explore census data. Retrieved October 30, 2022, from [https://data.census.gov/cedsci/table?q=us+population+2010&tid=DECENNIALPLNAT2010.P1](https://data.census.gov/cedsci/table?q=us+population+2010&tid=DECENNIALPLNAT2010.P1)
+
+Bureau, U. S. C. (n.d.). Explore census data. Retrieved October 30, 2022, from [https://data.census.gov/cedsci/table?q=us+population+2020&tid=DECENNIALPL2020.P1](https://data.census.gov/cedsci/table?q=us+population+2020&tid=DECENNIALPL2020.P1)
+
+Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics System, Natality on CDC WONDER Online Database. Data are from the Natality Records 2007-2020, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed at [http://wonder.cdc.gov/natality-current.html](http://wonder.cdc.gov/natality-current.html) with requested records 2011-2020 on Oct 29, 2022 5:51:00 PM.
+
 #### Approach
 * Fit linear model census data and 2050 population approximated by CDC to estimate population growth
 * Fit linear model to change in births per year and percentage of births each year out of total births between 2011-2020
