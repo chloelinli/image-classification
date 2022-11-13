@@ -1,3 +1,6 @@
+### 1.0.1 - 2022-11-12
+* Added music phases [#3cc1dd6](https://github.com/chloelinli/chloelinli.github.io/commit/3cc1dd643d0ca312c4b2238c5e1d26a5c8013d5f)
+
 ### 1.0.0 - 2022-11-11
 * Manually input unofficial stats from statsforspotify.com using my personal account
 * Included only current rank, track title, artist, genre, language used, duration, total times listened
