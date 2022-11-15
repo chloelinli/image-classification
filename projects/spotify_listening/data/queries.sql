@@ -1,5 +1,5 @@
 /*
-Queries made using person BigQuery project named myportfolio-110818 under dataset spotify_trends.
+Queries made using personal BigQuery project named myportfolio-110818 under dataset spotify_trends.
 
 Tables used:
 official_1_year for all official personal Spotify stats for past year
