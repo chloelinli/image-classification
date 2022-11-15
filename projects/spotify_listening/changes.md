@@ -1,5 +1,6 @@
 ### 1.0.2 - 2022-11-14
 * Uploaded official Spotify data [#841ab4b](https://github.com/chloelinli/chloelinli.github.io/commit/841ab4bf8c9d590aa38f05bd893e00416f90e190)
+* Converted json to csv [#ba9d19e](https://github.com/chloelinli/chloelinli.github.io/commit/ba9d19e624259aebea2fff1505ad24f0f8dddc16)
 
 ### 1.0.1 - 2022-11-12
 * Added music phases [#3cc1dd6](https://github.com/chloelinli/chloelinli.github.io/commit/3cc1dd643d0ca312c4b2238c5e1d26a5c8013d5f)
