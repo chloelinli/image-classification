@@ -1,5 +1,7 @@
 ### 1.0.3 - 2022-11-15
 * Removed unofficial data and added queries for official data [#f4537fb](https://github.com/chloelinli/chloelinli.github.io/commit/f4537fb63271dd680f50602ed1ea2f592a31e213{})
+* Removed white space in official data and changed end time of song to order of listening [#3f1e7a9](https://github.com/chloelinli/chloelinli.github.io/commit/3f1e7a963b5c9d56a84fc3e6dd1e1681cd1d7f83)
+* Official query results [#b7f9d13](https://github.com/chloelinli/chloelinli.github.io/commit/b7f9d139a0e0068e51b5b69935916d836aa5a3af)
 
 ### 1.0.2 - 2022-11-14
 * Uploaded official Spotify data [#841ab4b](https://github.com/chloelinli/chloelinli.github.io/commit/841ab4bf8c9d590aa38f05bd893e00416f90e190)
