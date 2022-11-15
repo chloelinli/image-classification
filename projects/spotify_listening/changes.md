@@ -1,3 +1,6 @@
+### 1.0.3 - 2022-11-15
+* Removed unofficial data and added queries for official data [#f4537fb](https://github.com/chloelinli/chloelinli.github.io/commit/f4537fb63271dd680f50602ed1ea2f592a31e213{})
+
 ### 1.0.2 - 2022-11-14
 * Uploaded official Spotify data [#841ab4b](https://github.com/chloelinli/chloelinli.github.io/commit/841ab4bf8c9d590aa38f05bd893e00416f90e190)
 * Converted json to csv [#ba9d19e](https://github.com/chloelinli/chloelinli.github.io/commit/ba9d19e624259aebea2fff1505ad24f0f8dddc16)
