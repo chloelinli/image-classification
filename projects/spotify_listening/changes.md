@@ -2,6 +2,7 @@
 * Removed unofficial data and added queries for official data [#f4537fb](https://github.com/chloelinli/chloelinli.github.io/commit/f4537fb63271dd680f50602ed1ea2f592a31e213{})
 * Removed white space in official data and changed end time of song to order of listening [#3f1e7a9](https://github.com/chloelinli/chloelinli.github.io/commit/3f1e7a963b5c9d56a84fc3e6dd1e1681cd1d7f83)
 * Official query results [#b7f9d13](https://github.com/chloelinli/chloelinli.github.io/commit/b7f9d139a0e0068e51b5b69935916d836aa5a3af)
+* Added percentages of listening to each language/genre out of top 50 [#99d33f4](https://github.com/chloelinli/chloelinli.github.io/commit/99d33f4ae7a719e06f04889a178fbb9b43de5602)
 
 ### 1.0.2 - 2022-11-14
 * Uploaded official Spotify data [#841ab4b](https://github.com/chloelinli/chloelinli.github.io/commit/841ab4bf8c9d590aa38f05bd893e00416f90e190)
