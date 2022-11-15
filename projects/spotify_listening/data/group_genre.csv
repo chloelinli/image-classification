@@ -1,11 +1,11 @@
-Genre,Total_Genre_Listened
-Mandopop,21
-Chinese Drama Ost,13
-N/A,5
-Chinese Viral Pop,4
-Pop,2
-Cantopop,1
-Chinese Manyao,1
-Chinese Singer-songwriter,1
-Holiday,1
-Dance Pop,1
+Genre,Total_Genre_Listened,Percentage
+Mandopop (42%),21,0.42
+Chinese Drama Ost (26%),13,0.26
+N/A (10%),5,0.1
+Chinese Viral Pop (8%),4,0.08
+Pop (4%),2,0.04
+Cantopop (2%),1,0.02
+Chinese Manyao (2%),1,0.02
+Chinese Singer-songwriter (2%),1,0.02
+Holiday (2%),1,0.02
+Dance Pop (2%),1,0.02
