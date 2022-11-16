@@ -21,7 +21,7 @@ LIMIT 50;
 -- 2. grouping songs per language
 SELECT
   Language,
-  COUNT(Times_Listened) AS Total_Language_Listened
+  COUNT(Times_Listened) AS Songs_Per_Language
 FROM `myportfolio-110818.spotify_trends.official_1_year_genre_language`
 GROUP BY Language
 ORDER BY Total_Language_Listened DESC;
@@ -29,7 +29,7 @@ ORDER BY Total_Language_Listened DESC;
 -- 3. grouping songs per genre
 SELECT
   Genre,
-  COUNT(Times_Listened) AS Total_Genre_Listened
+  COUNT(Times_Listened) AS Songs_Per_Genre
 FROM `myportfolio-110818.spotify_trends.official_1_year_genre_language`
 GROUP BY Genre
 ORDER BY Total_Genre_Listened DESC;
