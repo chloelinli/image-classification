@@ -1,3 +1,6 @@
+### 1.0.4 - 2022-11-16
+* Used Tableau to graph song count using multiple attributes [#f08474f](https://github.com/chloelinli/chloelinli.github.io/commit/f08474f22501ee52bcb10aa35aea1727400caed0)
+
 ### 1.0.3 - 2022-11-15
 * Removed unofficial data and added queries for official data [#f4537fb](https://github.com/chloelinli/chloelinli.github.io/commit/f4537fb63271dd680f50602ed1ea2f592a31e213{})
 * Removed white space in official data and changed end time of song to order of listening [#3f1e7a9](https://github.com/chloelinli/chloelinli.github.io/commit/3f1e7a963b5c9d56a84fc3e6dd1e1681cd1d7f83)
