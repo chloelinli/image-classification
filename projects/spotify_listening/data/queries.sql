@@ -33,3 +33,19 @@ SELECT
 FROM `myportfolio-110818.spotify_trends.official_1_year_genre_language`
 GROUP BY Genre
 ORDER BY Total_Genre_Listened DESC;
+
+-- 4. grouping total listenings per language
+SELECT
+  Language,
+  SUM(Times_Listened) AS Total_Language_Listened
+FROM `myportfolio-110818.spotify_trends.official_1_year_genre_language`
+GROUP BY Language
+ORDER BY Total_Language_Listened DESC;
+
+-- 5. grouping total listenings per genre
+SELECT
+  Genre,
+  SUM(Times_Listened) AS Total_Genre_Listened
+FROM `myportfolio-110818.spotify_trends.official_1_year_genre_language`
+GROUP BY Genre
+ORDER BY Total_Genre_Listened DESC;
