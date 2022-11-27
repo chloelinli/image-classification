@@ -19,7 +19,7 @@ img_name = '/images/shenhe_small_test'
 img_csv = open(path+'/train_images_small_test.csv', 'w', encoding='utf8')
 
 # loop - conversion
-for i in range(5):
+for i in range(6):
     # current image number
     num = i + 1
     img_num = str(num) + '.jpg'
