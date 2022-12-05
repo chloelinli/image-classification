@@ -41,8 +41,10 @@ for i in range(6):
         rgb_gray = (0.2989*pixels[0]) + (0.5870*pixels[1]) + (0.1140*pixels[2])
         img_reshaped.append(rgb_gray)
     
-    # save to csv
+    # save pictures to flder and csv
     img_reshaped = np.array(img_reshaped)
+    gray_path = path + '/small_test/gray' + str(i+1) + '.jpg'
+    plt.imsave(gray_path, np.reshape(img_reshaped,  (300, 300)), cmap='gray')
     np.savetxt(csv_path, img_reshaped, delimiter=',', newline=',')
 
     # new line if not last image
