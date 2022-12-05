@@ -26,7 +26,7 @@ csv_path = open(path+'/train_images_small_test.csv', 'w', encoding='utf8')
 # loop - conversion
 for i in range(6):
     # current image name
-    img_name = '/small_test/test' + str(i+1) + '.jpg'
+    img_name = '/small_test/train' + str(i+1) + '.jpg'
     full_path = path + img_name
 
     img = im.imread(full_path)
