@@ -1,3 +1,4 @@
+## Training
 In order to run the scripts that reconstruct the converted images, you must install matplotlib.
 
 ```pip install matplotlib```
