@@ -14,6 +14,7 @@ Added loop for multiple images.
 
 
 # import statements
+import matplotlib.pyplot as plt
 import matplotlib.image as im # read data as numpy array
 import numpy as np
 
@@ -32,10 +33,16 @@ for i in range(6):
     img = im.imread(full_path)
     img_fp = img/255 # to floating point between 0 and 1
 
-    # reshape from 3d to 2d numpy array, then 2d to 1d
-    img_reshaped = np.reshape(img_fp, (90000, 3))
-    img_reshaped = np.reshape(img_reshaped, (270000))
-
+    # reshape from 3d to 2d to convert from rgb to gray, which will convert from 2d to 1d
+    tmp_reshaped = np.reshape(img_fp, (90000, 3))
+    img_reshaped = []
+    for j in range(len(tmp_reshaped)):
+        pixels = tmp_reshaped[j]
+        rgb_gray = (0.2989*pixels[0]) + (0.5870*pixels[1]) + (0.1140*pixels[2])
+        img_reshaped.append(rgb_gray)
+    
+    # save to csv
+    img_reshaped = np.array(img_reshaped)
     np.savetxt(csv_path, img_reshaped, delimiter=',', newline=',')
 
     # new line if not last image
