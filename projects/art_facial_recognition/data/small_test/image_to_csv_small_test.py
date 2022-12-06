@@ -22,12 +22,12 @@ import numpy as np
 path = 'projects/art_facial_recognition/data'
 
 # open csv to write to
-csv_path = open(path+'/train_images_small_test.csv', 'w', encoding='utf8')
+csv_path = open(path+'/small_test/train_images_small_test.csv', 'w', encoding='utf8')
 
 # loop - conversion
 for i in range(6):
     # current image name
-    img_name = '/small_test/train' + str(i+1) + '.jpg'
+    img_name = '/small_test/training/train' + str(i+1) + '.jpg'
     full_path = path + img_name
 
     img = im.imread(full_path)
@@ -43,7 +43,7 @@ for i in range(6):
     
     # save pictures to flder and csv
     img_reshaped = np.array(img_reshaped)
-    gray_path = path + '/small_test/gray' + str(i+1) + '.jpg'
+    gray_path = path + '/small_test/training/gray' + str(i+1) + '.jpg'
     plt.imsave(gray_path, np.reshape(img_reshaped,  (300, 300)), cmap='gray')
     np.savetxt(csv_path, img_reshaped, delimiter=',', newline=',')
 
