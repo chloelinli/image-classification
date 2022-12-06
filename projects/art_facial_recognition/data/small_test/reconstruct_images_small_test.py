@@ -54,14 +54,6 @@ U, S, VT = np.linalg.svd(X, full_matrices=False)
 V = VT.T
 #V = abs(V) # has negative numbers, must be nonnegative floating point between 0-1
 
-# calculate scores for training images and save as csv for later
-scores = X @ V
-csv_path = open(path+'/scores_small_test.csv', 'w', encoding='utf8')
-for i in range(6):
-    np.savetxt(csv_path, scores[i], delimiter=',', newline=',') # remove last column later
-    if i < 5:
-        csv_path.write('\n')
-
 
 """
 training: best values to get highest accuracy in reconstruction;
