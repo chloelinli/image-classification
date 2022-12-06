@@ -3,12 +3,11 @@ This script converts images into usable data in csv format.
 
 NOTE: Although converting images to CSV is not necessary, it is useful
 to know how to implement reconstruction and recognition when data is
-originally given in CSV format with no image reference.
+originally given in CSV format with no image reference. Images are expected
+to be 300x300 pixels.
 
 Information found to extract data from images, save 3d array to csv by reshaping to 2d:
 - https://matplotlib.org/stable/tutorials/introductory/images.html
-- https://www.geeksforgeeks.org/how-to-load-and-save-3d-numpy-array-to-file-using-savetxt-and-loadtxt-functions/
-- https://www.pythonpool.com/numpy-reshape-3d-to-2d/
 Added loop for multiple images.
 """
 
@@ -19,15 +18,15 @@ import matplotlib.image as im # read data as numpy array
 import numpy as np
 
 # initialize vars for redundancy
-path = 'projects/art_facial_recognition/data'
+path = 'projects/art_facial_recognition/data/small_test'
 
 # open csv to write to
-csv_path = open(path+'/small_test/train_images_small_test.csv', 'w', encoding='utf8')
+csv_path = open(path+'/train_images_small_test.csv', 'w', encoding='utf8')
 
 # loop - conversion
 for i in range(6):
     # current image name
-    img_name = '/small_test/training/train' + str(i+1) + '.jpg'
+    img_name = '/training/train' + str(i+1) + '.jpg'
     full_path = path + img_name
 
     img = im.imread(full_path)
@@ -43,7 +42,7 @@ for i in range(6):
     
     # save pictures to flder and csv
     img_reshaped = np.array(img_reshaped)
-    gray_path = path + '/small_test/training/gray' + str(i+1) + '.jpg'
+    gray_path = path + '/training/gray' + str(i+1) + '.jpg'
     plt.imsave(gray_path, np.reshape(img_reshaped,  (300, 300)), cmap='gray')
     np.savetxt(csv_path, img_reshaped, delimiter=',', newline=',')
 

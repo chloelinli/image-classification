@@ -1,18 +1,16 @@
 """
-This script attempts to reconstruct images using the mean value of all the images.
-
-Information found to properly reshape arrays:
-- https://stackoverflow.com/questions/36412762/how-to-understand-empty-dimension-in-python-numpy-array
+This script attempts to reconstruct image through the mean of all
+images and singular values. Data is expected to be in CSV format
+with each row representing an image and its 300x300=90000 pixels,
+as well as the pixels being in grayscale.
 """
-
 
 # import statements
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.image import imread
 
 
-path = 'projects/art_facial_recognition/data'
+path = 'projects/art_facial_recognition/data/small_test'
 
 
 """
@@ -21,7 +19,7 @@ need to have each array 300x300 with 3 rgb values for each entry
 """
 
 # load data
-data = np.genfromtxt(path+'/small_test/train_images_small_test.csv', delimiter=',')
+data = np.genfromtxt(path+'/train_images_small_test.csv', delimiter=',')
 h = 300
 w = 300
 
@@ -38,13 +36,10 @@ data_reshaped = np.array(data_reshaped)
 
 # find average of data
 avg = np.mean(data_reshaped, axis=0)
-# uncomment to view and save to local machine
-#avg = np.reshape(avg, (h, w))
-# uncomment to view and save to local machine
+# uncomment to view
 #plt.imshow(avg, cmap='gray')
 #plt.show()
-#plt.imsave(path+'/small_test/average.jpg', avg, cmap='gray')
-
+plt.imsave(path+'/average_gray.jpg', np.reshape(avg, (h, w)), cmap='gray')
 
 """
 observe how pictures deviate from average;
@@ -61,7 +56,7 @@ V = VT.T
 
 # calculate scores for training images and save as csv for later
 scores = X @ V
-csv_path = open(path+'/small_test/scores_small_test.csv', 'w', encoding='utf8')
+csv_path = open(path+'/scores_small_test.csv', 'w', encoding='utf8')
 for i in range(6):
     np.savetxt(csv_path, scores[i], delimiter=',', newline=',') # remove last column later
     if i < 5:
@@ -93,7 +88,7 @@ for i in range(len(E)):
 #print(k_90, k_99, len(E)) # 3, 4, 6 (last index 5); not a very small k value so cannot meaningfully compress data (most likely due to small dataset)
 
 # reconstruct each picture using first 3 and 4 singular values/vectors - display and save
-reconstruct_path = path + '/small_test/reconstructed/svd'
+reconstruct_path = path + '/reconstructed/svd'
 
 U_3 = U[:, 0:3]
 S_3 = np.diag(S[0:3])
@@ -102,11 +97,8 @@ V_3 = V[:, 0:3]
 reconstructed_3 = scores_3 @ V_3.T
 
 data_3 = []
-data_3_path = open(reconstruct_path+'3/svd_3_data.csv', 'w', encoding='utf8')
-
 for i in range(6):
     img = reconstructed_3[i, :] + avg
-    np.savetxt(data_3_path, img, delimiter=',', newline=',') # remove last column later
     img = np.reshape(img, (h, w))
     plt.imsave(reconstruct_path+'3/gray3_'+str(i+1)+'.jpg', img, cmap='gray')
 
@@ -117,10 +109,7 @@ V_4 = V[:, 0:4]
 reconstructed_4 = scores_4 @ V_4.T
 
 data_4 = []
-data_4_path = open(reconstruct_path+'4/svd_4_data.csv', 'w', encoding='utf8')
-
 for i in range(6):
     img = reconstructed_4[i, :] + avg
-    np.savetxt(data_4_path, img, delimiter=',', newline=',') # remove last column later
     img = np.reshape(img, (h, w))
     plt.imsave(reconstruct_path+'4/gray4_'+str(i+1)+'.jpg', img, cmap='gray')
