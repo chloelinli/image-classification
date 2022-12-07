@@ -6,7 +6,7 @@ to know how to implement reconstruction and recognition when data is
 originally given in CSV format with no image reference. Images are expected
 to be 300x300 pixels.
 
-Information found to extract data from images, save 3d array to csv by reshaping to 2d:
+Information found to extract data from images:
 - https://matplotlib.org/stable/tutorials/introductory/images.html
 Added loop for multiple images.
 """
