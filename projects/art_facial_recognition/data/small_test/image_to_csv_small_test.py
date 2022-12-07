@@ -48,4 +48,4 @@ for i in range(6):
 
     # new line if not last image
     if i < 5:
-        csv_path.write('\n') 
+        csv_path.write('\n')
