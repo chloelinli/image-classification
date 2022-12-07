@@ -17,39 +17,6 @@ import matplotlib.pyplot as plt
 import matplotlib.image as im # read data as numpy array
 import numpy as np
 import os
-"""
-# initialize vars for redundancy
-path = 'projects/art_facial_recognition/data/small_test'
-
-# open csv to write to
-csv_path = open(path+'/train_images_small_test.csv', 'w', encoding='utf8')
-
-# loop - conversion
-for i in range(6):
-    # current image name
-    img_name = '/training/train' + str(i+1) + '.jpg'
-    full_path = path + img_name
-
-    img = im.imread(full_path)
-    img_fp = img/255 # to floating point between 0 and 1
-
-    # reshape from 3d to 2d to convert from rgb to gray, which will convert from 2d to 1d
-    tmp_reshaped = np.reshape(img_fp, (90000, 3))
-    img_reshaped = []
-    for j in range(len(tmp_reshaped)):
-        pixels = tmp_reshaped[j]
-        rgb_gray = (0.2989*pixels[0]) + (0.5870*pixels[1]) + (0.1140*pixels[2])
-        img_reshaped.append(rgb_gray)
-    
-    # save pictures to folder and csv
-    img_reshaped = np.array(img_reshaped)
-    gray_path = path + '/training/gray' + str(i+1) + '.jpg'
-    plt.imsave(gray_path, np.reshape(img_reshaped,  (300, 300)), cmap='gray')
-    np.savetxt(csv_path, img_reshaped, delimiter=',', newline=',')
-
-    # new line if not last image
-    if i < 5:
-        csv_path.write('\n')"""
 
 
 def main():
@@ -62,15 +29,61 @@ def main():
     testH_count = count_img(path+'/testing/rgb/hard') # hard
 
     # convert each directory of images
+    rgb_to_gray(path+'/training/rgb/train_rgb', train_count, path+'/training/gray/train_gray', path+'/training_images.csv')
+    rgb_to_gray(path+'/testing/rgb/easy/test_rgb', testE_count, path+'/testing/gray/easy/test_gray', path+'/testingE_images.csv')
+    rgb_to_gray(path+'/testing/rgb/medium/test_rgb', testM_count, path+'/testing/gray/medium/test_gray', path+'/testingM_images.csv')
+    rgb_to_gray(path+'/testing/rgb/hard/test_rgb', testH_count, path+'/testing/gray/hard/test_gray', path+'/testingH_images.csv')
+
 
 """
-method looks through given directory and returns total files/images contained in it
+counts and returns total files/images contained in directory
+arguments:
+    dir_path: directory containing images to count
 """
 def count_img(dir_path):
     num = 0
     for root_dir, cur_dir, files in os.walk(dir_path):
         num += len(files)
     return num
+
+
+"""
+converts and saves pictures from rgb to grayscale, and outputs data into csv
+arguments:
+    rgb_path: relative path to directory containing images
+    num_img: total images within given directory
+    gray_path: relative path to directory to save images to
+    csv_name: name of csv to write to
+"""
+def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):    
+    # open csv to write to
+    csv_path = open(csv_name, 'w', encoding='utf8')
+    
+    # loop - conversion
+    for i in range(num_img):
+        # current image name
+        img_path = rgb_path + str(i+1) + '.jpg'
+        img_gray = gray_path + str(i+1) + '.jpg'
+        
+        img = im.imread(img_path)
+        img_fp = img/255 # to floating point between 0 and 1
+        
+        # reshape from 3d to 2d to convert from rgb to gray, which will convert from 2d to 1d
+        tmp_reshaped = np.reshape(img_fp, (90000, 3))
+        img_reshaped = []
+        for j in range(len(tmp_reshaped)):
+            pixels = tmp_reshaped[j]
+            rgb_gray = (0.2989*pixels[0]) + (0.5870*pixels[1]) + (0.1140*pixels[2])
+            img_reshaped.append(rgb_gray)
+
+        # save pictures to folder and csv
+        img_reshaped = np.array(img_reshaped)
+        plt.imsave(img_gray, np.reshape(img_reshaped,  (300, 300)), cmap='gray')
+        np.savetxt(csv_path, img_reshaped, delimiter=',', newline=',')
+        
+        # new line if not last image
+        if i < (num_img-1):
+            csv_path.write('\n')
 
 
 if __name__ == '__main__':
