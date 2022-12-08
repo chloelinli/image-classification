@@ -56,6 +56,10 @@ arguments:
     csv_name: name of csv to write to
 """
 def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):    
+    #initialize dimensions
+    h = 300
+    w = 300
+
     # open csv to write to
     csv_path = open(csv_name, 'w', encoding='utf8')
     
@@ -69,7 +73,7 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
         img_fp = img/255 # to floating point between 0 and 1
         
         # reshape from 3d to 2d to convert from rgb to gray, which will convert from 2d to 1d
-        tmp_reshaped = np.reshape(img_fp, (90000, 3))
+        tmp_reshaped = np.reshape(img_fp, (h*w, 3))
         img_reshaped = []
         for j in range(len(tmp_reshaped)):
             pixels = tmp_reshaped[j]
@@ -78,7 +82,7 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
 
         # save pictures to folder and csv
         img_reshaped = np.array(img_reshaped)
-        plt.imsave(img_gray, np.reshape(img_reshaped,  (300, 300)), cmap='gray')
+        plt.imsave(img_gray, np.reshape(img_reshaped,  (h, w)), cmap='gray')
         np.savetxt(csv_path, img_reshaped, delimiter=',', newline=',')
         
         # new line if not last image
