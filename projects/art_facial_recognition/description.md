@@ -1,3 +1,9 @@
+## Running files
+If you are struggling to run the files properly on your own system due to "No such file or directory" or similar errors, you may have to modify the paths in the following files:
+
+```run_files.py```
+```image_to_csv.py```
+
 ## Training
 In order to run the scripts that reconstruct the converted images, you must install matplotlib.
 
