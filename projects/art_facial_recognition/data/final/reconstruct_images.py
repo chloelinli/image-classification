@@ -76,7 +76,7 @@ def reconstruct(path, train_path, count, scores_path):
     study data by finding the reduced SVD of data - average
     """
 
-    """# subtract average from data
+    # subtract average from data
     X = data_reshaped - np.ones((count, 1)) @ avg.reshape((1, -1))
 
     # reduced svd
@@ -89,8 +89,8 @@ def reconstruct(path, train_path, count, scores_path):
     csv_path = open(scores_path, 'w', encoding='utf8')
     for i in range(count):
         np.savetxt(csv_path, scores[i], delimiter=',', newline=',') # remove last column later
-        if i < 5:
-            csv_path.write('\n')"""
+        if i < (count-1):
+            csv_path.write('\n')
 
 
     """
@@ -99,8 +99,8 @@ def reconstruct(path, train_path, count, scores_path):
     """
 
     # find, plot, and save rescaled energies
-    # # what is largest k such that E_k > 0.90? (90% of information) what about 0.99?
-    #E = np.cumsum(S**2) / np.sum(S**2)
+    # what is largest k such that E_k > 0.90? (90% of information) what about 0.99?
+    E = np.cumsum(S**2) / np.sum(S**2)
 
 """    k_90 = 0
     for i in range(len(E)):
