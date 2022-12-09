@@ -3,6 +3,7 @@ If you are struggling to run the files properly on your own system due to "No su
 
 ```run_files.py```
 ```image_to_csv.py```
+```reconstruct_images.py```
 
 ## Training
 In order to run the scripts that reconstruct the converted images, you must install matplotlib.
