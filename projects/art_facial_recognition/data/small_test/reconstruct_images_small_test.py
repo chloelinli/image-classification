@@ -37,8 +37,9 @@ data_reshaped = np.array(data_reshaped)
 # find average of data
 avg = np.mean(data_reshaped, axis=0)
 # uncomment to view
-#plt.imshow(avg, cmap='gray')
+#plt.imshow(np.reshape(avg, (h, w)), cmap='gray')
 #plt.show()
+# cannot save reshape unless temp var because we're using the original shape later
 plt.imsave(path+'/average_gray.jpg', np.reshape(avg, (h, w)), cmap='gray')
 
 """
