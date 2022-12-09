@@ -77,8 +77,10 @@ for i in range(len(E)):
         k_99 = i
         break
 
+# index 3/svd 4, index 4/svd 5, index 5/size 6
+# not a very small k value so cannot meaningfully compress data (most likely due to small dataset)
 # uncomment to see indices and length
-#print(k_90, k_99, len(E)) # 3, 4, 6 (last index 5); not a very small k value so cannot meaningfully compress data (most likely due to small dataset)
+#print(k_90, k_99, len(E)) 
 
 # reconstruct each picture using first 3 and 4 singular values/vectors - display and save
 reconstruct_path = path + '/reconstructed/svd'
