@@ -21,7 +21,7 @@ def main():
     data, avg = reshaping(path, num)
 
     # reconstruction
-    k_90, k_99 = reconstruct(data, avg, path+'/scores.csv', num, path+'/reconstructed/k_9')
+    k_90, k_99 = reconstruct(data, avg, path+'/scores.csv', path, num, path+'/reconstructed/k_9')
 
 """
 counts and returns total files/images contained in directory
@@ -79,10 +79,11 @@ arguments:
     data: array of data pulled from csv
     avg: average of data
     scores_path: path containing scores of data
+    path: outermost directory to save to
     count: number of images
-    path: directory to hold reconstructed images
+    reconstructed_path: directory to hold reconstructed images
 """
-def reconstruct(data, avg, scores_path, count, path):
+def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
 
     """
     observe how pictures deviate from average;
@@ -111,9 +112,22 @@ def reconstruct(data, avg, scores_path, count, path):
     """
 
     # find, plot, and save rescaled energies
-    # what is largest k such that E_k > 0.90 (90% of information)? what about 0.99?
     E = np.cumsum(S**2) / np.sum(S**2)
 
+    fig, (svd_val, scaled_energies) = plt.subplots(2)
+
+    svd_val.set_title('Singular Values')
+    scaled_energies.set_title('Scaled Energies of SVDs')
+
+    plt.subplots_adjust(hspace=0.5)
+
+    svd_val.plot(S, 'ro')
+    scaled_energies.plot(E, 'ro')
+
+    plt.show()
+    fig.savefig(path+'/svds_scaled_energies.jpg')
+
+    # what is largest k such that E_k > 0.90 (90% of information)? what about 0.99?
     k_90 = 0
     for i in range(len(E)):
         if E[i] > 0.9:
@@ -148,7 +162,7 @@ def reconstruct(data, avg, scores_path, count, path):
         img = reconstructed_k90[i, :] + avg
         data_k90.append(img)
         img = np.reshape(img, (h, w))
-        plt.imsave(path+'0/k90_'+str(i+1)+'.jpg', img, cmap='gray')
+        plt.imsave(reconstructed_path+'0/k90_'+str(i+1)+'.jpg', img, cmap='gray')
     data_k90 = np.array(data_k90)
 
     U_k99 = U[:, :k_99+1]
@@ -162,7 +176,7 @@ def reconstruct(data, avg, scores_path, count, path):
         img = reconstructed_k99[i, :] + avg
         data_k99.append(img)
         img = np.reshape(img, (h, w))
-        plt.imsave(path+'9/k99_'+str(i+1)+'.jpg', img, cmap='gray')
+        plt.imsave(reconstructed_path+'9/k99_'+str(i+1)+'.jpg', img, cmap='gray')
     data_k99 = np.array(data_k99)
 
     return data_k90, data_k99
