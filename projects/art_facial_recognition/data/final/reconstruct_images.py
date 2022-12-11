@@ -17,9 +17,11 @@ def main():
     # get total training images
     num = count_img(path+'/training/gray')
 
-    # reconstruction
-    reconstruct(path, path+'/training_images.csv', num, path+'/scores.csv')
+    # reshape data and calculate average
+    data, avg = reshaping(path, num)
 
+    # reconstruction
+    k_90, k_99 = reconstruct(data, avg, path+'/scores.csv', num, path+'/reconstructed/k_9')
 
 """
 counts and returns total files/images contained in directory
@@ -34,24 +36,20 @@ def count_img(dir_path):
 
 
 """
-reconstructs images using data - avg of data and checks accuracy using svd
+reshapes data from csv to remove last empty column and use for comparison later, returns data and average
 arguments:
-    path: outermost directory to save to
-    csv_name: path to csv to write to
+    path: directory to save to
     count: number of images
-    scores_path: path to csv of image scores for testing
 """
-def reconstruct(path, train_path, count, scores_path):
-
+def reshaping(path, count):
     """
     load and reshape data to be able to work with as pixels;
     need to have each array 300x300 with 3 rgb values for each entry
     """
 
     # load data
-    data = np.genfromtxt(train_path, delimiter=',')
-    h = 300
-    w = 300
+    data = np.genfromtxt(path+'/training_images.csv', delimiter=',')
+    h = w = 300
 
     # remove last column of data -> empty from newline in image_to_csv
     data_reshaped = []
@@ -64,6 +62,7 @@ def reconstruct(path, train_path, count, scores_path):
     # list to array to use for plotting
     data_reshaped = np.array(data_reshaped)
 
+
     # find average of data
     avg = np.mean(data_reshaped, axis=0)
     # uncomment to view
@@ -71,13 +70,27 @@ def reconstruct(path, train_path, count, scores_path):
     #plt.show()
     plt.imsave(path+'/average.jpg', np.reshape(avg, (h, w)), cmap='gray')
 
+    return data_reshaped, avg
+
+
+"""
+reconstructs images using data - avg of data and checks accuracy using svd
+arguments:
+    data: array of data pulled from csv
+    avg: average of data
+    scores_path: path containing scores of data
+    count: number of images
+    path: directory to hold reconstructed images
+"""
+def reconstruct(data, avg, scores_path, count, path):
+
     """
     observe how pictures deviate from average;
     study data by finding the reduced SVD of data - average
     """
 
     # subtract average from data
-    X = data_reshaped - np.ones((count, 1)) @ avg.reshape((1, -1))
+    X = data - np.ones((count, 1)) @ avg.reshape((1, -1))
 
     # reduced svd
     U, S, VT = np.linalg.svd(X, full_matrices=False)
@@ -92,17 +105,16 @@ def reconstruct(path, train_path, count, scores_path):
         if i < (count-1):
             csv_path.write('\n')
 
-
     """
     training: best values to get highest accuracy in reconstruction;
     different diagonal of s? different singular values?
     """
 
     # find, plot, and save rescaled energies
-    # what is largest k such that E_k > 0.90? (90% of information) what about 0.99?
+    # what is largest k such that E_k > 0.90 (90% of information)? what about 0.99?
     E = np.cumsum(S**2) / np.sum(S**2)
 
-"""    k_90 = 0
+    k_90 = 0
     for i in range(len(E)):
         if E[i] > 0.9:
             k_90 = i
@@ -112,37 +124,48 @@ def reconstruct(path, train_path, count, scores_path):
     for i in range(len(E)):
         if E[i] > 0.99:
             k_99 = i
-            break"""
+            break
 
+    # index 19 (svd 20), index 27 (svd 28), size 30 (index 29)
+    # not a very small k value so cannot meaningfully compress data (most likely due to small dataset)
     # uncomment to see indices and length
-    #print(k_90, k_99, len(E)) # 3, 4, 6 (last index 5); not a very small k value so cannot meaningfully compress data (most likely due to small dataset)
+    #print(k_90, k_99, len(E))
 
-"""    # reconstruct each picture using first 3 and 4 singular values/vectors - display and save
-    reconstruct_path = path + '/reconstructed/svd'
+    """
+    display and saved reconstructed images and data using svds containing > 90% and > 99% information
+    return reconstructed data
+    """
+    h = w = 300
 
-    U_3 = U[:, 0:3]
-    S_3 = np.diag(S[0:3])
-    scores_3 = U_3 @ S_3
-    V_3 = V[:, 0:3]
-    reconstructed_3 = scores_3 @ V_3.T
+    U_k90 = U[:, :k_90+1]
+    S_k90 = np.diag(S[:k_90+1])
+    scores_k90 = U_k90 @ S_k90
+    V_k90 = V[:, :k_90+1]
+    reconstructed_k90 = scores_k90 @ V_k90.T
 
-    data_3 = []
-    for i in range(6):
-        img = reconstructed_3[i, :] + avg
+    data_k90 = []
+    for i in range(count):
+        img = reconstructed_k90[i, :] + avg
+        data_k90.append(img)
         img = np.reshape(img, (h, w))
-        plt.imsave(reconstruct_path+'3/gray3_'+str(i+1)+'.jpg', img, cmap='gray')
+        plt.imsave(path+'0/k90_'+str(i+1)+'.jpg', img, cmap='gray')
+    data_k90 = np.array(data_k90)
 
-    U_4 = U[:, 0:4]
-    S_4 = np.diag(S[0:4])
-    scores_4 = U_4 @ S_4
-    V_4 = V[:, 0:4]
-    reconstructed_4 = scores_4 @ V_4.T
+    U_k99 = U[:, :k_99+1]
+    S_k99 = np.diag(S[:k_99+1])
+    scores_k99 = U_k99 @ S_k99
+    V_k99 = V[:, :k_99+1]
+    reconstructed_k99 = scores_k99 @ V_k99.T
 
-    data_4 = []
-    for i in range(6):
-        img = reconstructed_4[i, :] + avg
+    data_k99 = []
+    for i in range(count):
+        img = reconstructed_k99[i, :] + avg
+        data_k99.append(img)
         img = np.reshape(img, (h, w))
-        plt.imsave(reconstruct_path+'4/gray4_'+str(i+1)+'.jpg', img, cmap='gray')"""
+        plt.imsave(path+'9/k99_'+str(i+1)+'.jpg', img, cmap='gray')
+    data_k99 = np.array(data_k99)
+
+    return data_k90, data_k99
 
 
 if __name__ == '__main__':
