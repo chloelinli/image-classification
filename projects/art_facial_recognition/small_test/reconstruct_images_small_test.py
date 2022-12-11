@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-path = 'projects/art_facial_recognition/data/small_test'
+path = 'projects/art_facial_recognition/small_test'
 
 
 """

@@ -20,7 +20,7 @@ import os
 
 
 def main():
-    path = 'projects/art_facial_recognition/data/final'
+    path = 'projects/art_facial_recognition/final'
 
     # get total images for each conversion
     train_count = count_img(path+'/training/rgb')

@@ -18,7 +18,7 @@ import matplotlib.image as im # read data as numpy array
 import numpy as np
 
 # initialize vars for redundancy
-path = 'projects/art_facial_recognition/data/small_test'
+path = 'projects/art_facial_recognition/small_test'
 
 # open csv to write to
 csv_path = open(path+'/train_images_small_test.csv', 'w', encoding='utf8')
