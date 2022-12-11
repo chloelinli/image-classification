@@ -91,7 +91,6 @@ scores_3 = U_3 @ S_3
 V_3 = V[:, 0:4]
 reconstructed_3 = scores_3 @ V_3.T
 
-data_3 = []
 for i in range(6):
     img = reconstructed_3[i, :] + avg
     img = np.reshape(img, (h, w))
@@ -103,7 +102,6 @@ scores_4 = U_4 @ S_4
 V_4 = V[:, 0:5]
 reconstructed_4 = scores_4 @ V_4.T
 
-data_4 = []
 for i in range(6):
     img = reconstructed_4[i, :] + avg
     img = np.reshape(img, (h, w))
