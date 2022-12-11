@@ -124,7 +124,8 @@ def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
     svd_val.plot(S, 'ro')
     scaled_energies.plot(E, 'ro')
 
-    plt.show()
+    # uncomment to view
+    #plt.show()
     fig.savefig(path+'/svds_scaled_energies.jpg')
 
     # what is largest k such that E_k > 0.90 (90% of information)? what about 0.99?
