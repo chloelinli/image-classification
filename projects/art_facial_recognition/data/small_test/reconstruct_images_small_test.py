@@ -77,7 +77,7 @@ for i in range(len(E)):
         k_99 = i
         break
 
-# index 3/svd 4, index 4/svd 5, index 5/size 6
+# index 3 (svd 4), index 4 (svd 5), size 6 (index 5)
 # not a very small k value so cannot meaningfully compress data (most likely due to small dataset)
 # uncomment to see indices and length
 #print(k_90, k_99, len(E)) 
@@ -85,10 +85,10 @@ for i in range(len(E)):
 # reconstruct each picture using first 3 and 4 singular values/vectors - display and save
 reconstruct_path = path + '/reconstructed/svd'
 
-U_3 = U[:, 0:3]
-S_3 = np.diag(S[0:3])
+U_3 = U[:, 0:4]
+S_3 = np.diag(S[0:4])
 scores_3 = U_3 @ S_3
-V_3 = V[:, 0:3]
+V_3 = V[:, 0:4]
 reconstructed_3 = scores_3 @ V_3.T
 
 data_3 = []
@@ -97,10 +97,10 @@ for i in range(6):
     img = np.reshape(img, (h, w))
     plt.imsave(reconstruct_path+'3/gray3_'+str(i+1)+'.jpg', img, cmap='gray')
 
-U_4 = U[:, 0:4]
-S_4 = np.diag(S[0:4])
+U_4 = U[:, 0:5]
+S_4 = np.diag(S[0:5])
 scores_4 = U_4 @ S_4
-V_4 = V[:, 0:4]
+V_4 = V[:, 0:5]
 reconstructed_4 = scores_4 @ V_4.T
 
 data_4 = []
