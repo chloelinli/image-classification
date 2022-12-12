@@ -23,6 +23,12 @@ def main():
     # reconstruction
     k_90, k_99 = reconstruct(data, avg, path+'/scores.csv', path, num, path+'/reconstructed/k_9')
 
+    # calculate accuracies
+    # comment out one calll if printing to help differentiate
+    accuracy(data, k_90, num, path+'/acc_k90.jpg')
+    accuracy(data, k_99, num, path+'/acc_k99.jpg')
+
+
 """
 counts and returns total files/images contained in directory
 arguments:
@@ -84,7 +90,6 @@ arguments:
     reconstructed_path: directory to hold reconstructed images
 """
 def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
-
     """
     observe how pictures deviate from average;
     study data by finding the reduced SVD of data - average
@@ -96,7 +101,6 @@ def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
     # reduced svd
     U, S, VT = np.linalg.svd(X, full_matrices=False)
     V = VT.T
-    #V = abs(V) # has negative numbers, must be nonnegative floating point between 0-1
 
     # calculate scores for training images and save as csv for later
     scores = X @ V
@@ -182,6 +186,38 @@ def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
 
     return data_k90, data_k99
 
+
+"""
+calculates average accuracy of reconstructed grayscale pixels
+arguments:
+    original: original data
+    reconstructed: reconstructed data
+    count: number of images
+    img: path/name of plot to save
+"""
+def accuracy(original, reconstructed, count, img):
+    h = w = 300
+    err = []
+    avg = []
+
+    # calculate error (without percent)
+    for i in range(count):
+        o = original[i]
+        r = reconstructed[i]
+        err.append(abs(o-r)/r)
+
+    # calulate accuracy
+    err = np.array(err)
+    acc = np.ones((count, h*w)) - err
+
+    # calculate average accuracy per image
+    for i in range(count):
+        tmp = acc[i]
+        avg.append(np.sum(tmp)/len(tmp))
+    
+    avg = np.array(avg)
+    # uncomment for manual input into separate csv - want to compile different accuracies in the future
+    #print(avg)
 
 if __name__ == '__main__':
     main()
