@@ -5,6 +5,7 @@
 * Updated reconstructed images with SVDs in small test [#e2938f4](https://github.com/chloelinli/chloelinli.github.io/commit/e2938f40c7dd2e377889a1630cb1c3d0ae882646)
 * Included plots of SVDs and their scaled energies [#8ae7166](https://github.com/chloelinli/chloelinli.github.io/commit/8ae71661fee4e8495c86c62fa1ff6a6bcde0f1a5)
 * Added accuracy of reconstruction to final file [#db3655a](https://github.com/chloelinli/chloelinli.github.io/commit/db3655a56ade42cb1864f45ec3c6afd8f4ac32e9)
+* Fixed image conversion by adding second file [#e0e62a6](https://github.com/chloelinli/chloelinli.github.io/commit/e0e62a6b92d07539b0cbdaf60221401dd7c9202f)
 
 ### 1.0.0
 #### Small test
