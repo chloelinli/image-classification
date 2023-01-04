@@ -21,7 +21,7 @@ def main():
     data, avg = reshaping(path, num)
 
     # reconstruction
-    k_90, k_99, v_90, v_99 = reconstruct(data, avg, path+'/scores.csv', path, num, path+'/reconstructed/k_9')
+    k_90, k_99, v = reconstruct(data, avg, path+'/scores.csv', path, num, path+'/reconstructed/k_9')
 
     # calculate accuracies
     # comment out one call if printing to help differentiate
@@ -29,8 +29,7 @@ def main():
     accuracy(data, k_99, num)
 
     # adds V values from SVDs to csv to use later
-    v_csv(v_90, path+'/reconstructed/k_90/V_90.csv')
-    v_csv(v_99, path+'/reconstructed/k_99/V_99.csv')
+    v_csv(v, path+'/V_values.csv')
 
 
 """
@@ -188,7 +187,7 @@ def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
         plt.imsave(reconstructed_path+'9/k99_'+str(i+1)+'.jpg', img, cmap='gray')
     data_k99 = np.array(data_k99)
 
-    return data_k90, data_k99, V_k90, V_k99
+    return data_k90, data_k99, V
 
 
 """
@@ -227,7 +226,7 @@ def accuracy(original, reconstructed, count):
 """
 this method writes the V values to their own csv to be used later
 arguments:
-    v_val: V values for 90% and 99% accurate reconstruction
+    v_val: V values from training data SVD
     csv_name: csv to write to
 """
 def v_csv(v_val, csv_name):
