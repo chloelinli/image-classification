@@ -21,12 +21,16 @@ def main():
     data, avg = reshaping(path, num)
 
     # reconstruction
-    k_90, k_99 = reconstruct(data, avg, path+'/scores.csv', path, num, path+'/reconstructed/k_9')
+    k_90, k_99, v_90, v_99 = reconstruct(data, avg, path+'/scores.csv', path, num, path+'/reconstructed/k_9')
 
     # calculate accuracies
     # comment out one call if printing to help differentiate
     accuracy(data, k_90, num)
     accuracy(data, k_99, num)
+
+    # adds V values from SVDs to csv to use later
+    v_csv(v_90, path+'/reconstructed/k_90/V_90.csv')
+    v_csv(v_99, path+'/reconstructed/k_99/V_99.csv')
 
 
 """
@@ -80,7 +84,7 @@ def reshaping(path, count):
 
 
 """
-reconstructs images using data - avg of data and checks accuracy using svd
+reconstructs images using data - avg of data and returns reconstructed data and V values
 arguments:
     data: array of data pulled from csv
     avg: average of data
@@ -184,7 +188,7 @@ def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
         plt.imsave(reconstructed_path+'9/k99_'+str(i+1)+'.jpg', img, cmap='gray')
     data_k99 = np.array(data_k99)
 
-    return data_k90, data_k99
+    return data_k90, data_k99, V_k90, V_k99
 
 
 """
@@ -218,6 +222,18 @@ def accuracy(original, reconstructed, count):
 
     # uncomment for manual input into separate csv - want to compile different accuracies in the future
     #print(avg)
+
+
+"""
+this method writes the V values to their own csv to be used later
+arguments:
+    v_val: V values for 90% and 99% accurate reconstruction
+    csv_name: csv to write to
+"""
+def v_csv(v_val, csv_name):
+    csv_path = open(csv_name, 'w', encoding='utf8')
+    np.savetxt(csv_path, v_val, delimiter=',', newline=',')
+
 
 if __name__ == '__main__':
     main()
