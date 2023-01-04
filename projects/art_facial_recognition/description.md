@@ -10,7 +10,7 @@ In order to run the scripts that reconstruct the converted images, you must inst
 
 ```pip install matplotlib```
 
-If you are wanting to use similar code in the reconstruction file, thegenfromtxt method will not work if your images are not of dimension `n x n`. The given code assumes pictures of size 300x300, so if you have not sized your images as such, you will have to manually change the dimension variables `h, w` in the following files, if you plan to use them:
+If you are wanting to use similar code in the reconstruction file, thegenfromtxt method will not work if your images are not of dimension `n x n`. The given code assumes pictures of size 300x300, so if you have not sized your images as such, you will have to manually change the dimension variables `h, w` in the following files:
 
 ```image_to_csv.py```
 ```reconstruct_images.py```
