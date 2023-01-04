@@ -24,9 +24,9 @@ def main():
     k_90, k_99 = reconstruct(data, avg, path+'/scores.csv', path, num, path+'/reconstructed/k_9')
 
     # calculate accuracies
-    # comment out one calll if printing to help differentiate
-    accuracy(data, k_90, num, path+'/acc_k90.jpg')
-    accuracy(data, k_99, num, path+'/acc_k99.jpg')
+    # comment out one call if printing to help differentiate
+    accuracy(data, k_90, num)
+    accuracy(data, k_99, num)
 
 
 """
@@ -193,9 +193,8 @@ arguments:
     original: original data
     reconstructed: reconstructed data
     count: number of images
-    img: path/name of plot to save
 """
-def accuracy(original, reconstructed, count, img):
+def accuracy(original, reconstructed, count):
     h = w = 300
     err = []
     avg = []
@@ -216,6 +215,7 @@ def accuracy(original, reconstructed, count, img):
         avg.append(np.sum(tmp)/len(tmp))
     
     avg = np.array(avg)
+
     # uncomment for manual input into separate csv - want to compile different accuracies in the future
     #print(avg)
 
