@@ -7,7 +7,7 @@
 * Added accuracy of reconstruction to final file [#db3655a](https://github.com/chloelinli/chloelinli.github.io/commit/db3655a56ade42cb1864f45ec3c6afd8f4ac32e9)
 * Fixed image conversion by adding second file [#e0e62a6](https://github.com/chloelinli/chloelinli.github.io/commit/e0e62a6b92d07539b0cbdaf60221401dd7c9202f)
 * Added V values from SVD to csvs for future use [#bafcd0e](https://github.com/chloelinli/chloelinli.github.io/commit/bafcd0e39cfdfdfb5403d52f3765b26f3c078df2), [#a0572ad](https://github.com/chloelinli/chloelinli.github.io/commit/a0572ad467105e241c27cfe75c278126316c2209})
-* Added unrelated characters to training images [#1337f54](https://github.com/chloelinli/chloelinli.github.io/commit/1337f54d42fc2a71120dbbb98a10f84b88154131)
+* Added unrelated characters to training images [#1337f54](https://github.com/chloelinli/chloelinli.github.io/commit/1337f54d42fc2a71120dbbb98a10f84b88154131), [#7080abd](https://github.com/chloelinli/chloelinli.github.io/commit/7080abd6e8a98273a309da6955b65ba8d41fee41)
 
 ### 1.0.0
 #### Small test
