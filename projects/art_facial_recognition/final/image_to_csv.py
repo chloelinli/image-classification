@@ -6,9 +6,8 @@ to know how to implement reconstruction and recognition when data is
 originally given in CSV format with no image reference. Images are expected
 to be 300x300 pixels.
 
-Conversion for medium/hard difficulty test images is in image_to_csv_MH.py
-due to unknown problems when running this file with medium/hard, followed by
-recognize_images.py.
+Conversion for easy/hard difficulty test images in separate files due to unknown
+problems when running this file with easy/medium, followed by recognize_images.py.
 
 Information found to extract data from images:
 - https://matplotlib.org/stable/tutorials/introductory/images.html
@@ -28,14 +27,14 @@ def main():
 
     # get total images for each conversion
     train_count = count_img(path+'/training/rgb')
-    testE_count = count_img(path+'/testing/rgb/easy') # easy
-    #testM_count = count_img(path+'/testing/rgb/medium') # medium
+    #testE_count = count_img(path+'/testing/rgb/easy') # easy
+    testM_count = count_img(path+'/testing/rgb/medium') # medium
     #testH_count = count_img(path+'/testing/rgb/hard') # hard
 
     # convert each directory of images
     rgb_to_gray(path+'/training/rgb/train_rgb', train_count, path+'/training/gray/train_gray', path+'/training_images.csv')
-    rgb_to_gray(path+'/testing/rgb/easy/test_rgb', testE_count, path+'/testing/gray/easy/test_gray', path+'/testingE_images.csv')
-    #rgb_to_gray(path+'/testing/rgb/medium/test_rgb', testM_count, path+'/testing/gray/medium/test_gray', path+'/testingM_images.csv')
+    #rgb_to_gray(path+'/testing/rgb/easy/test_rgb', testE_count, path+'/testing/gray/easy/test_gray', path+'/testingE_images.csv')
+    rgb_to_gray(path+'/testing/rgb/medium/test_rgb', testM_count, path+'/testing/gray/medium/test_gray', path+'/testingM_images.csv')
     #rgb_to_gray(path+'/testing/rgb/hard/test_rgb', testH_count, path+'/testing/gray/hard/test_gray', path+'/testingH_images.csv')
 
 
