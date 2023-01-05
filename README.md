@@ -14,7 +14,7 @@ I wanted to see how the type of music I used to and currently listen to may affe
 - [ ] Learning algorithm for future songs
 
 ### [Facial Recognition within Art](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/art_facial_recognition)
-A past assignment I had asked to see how closely we could reconstruct and recognize something in an image. The language used was MATLAB, but I wanted to use Python for this project so I had to convert the code I had written before. To further expand on the project, I wanted to test different methods for reconstruction and recognition to see which one gives the highest accuracy. As for recognition, I have set up three difficulties in order to compare images, where the test set include various images that are distingishable from the training set based on difficulty. Currently I have not decided how I will test different recognition methods.
+A past assignment I had worked on asked to see how closely we could reconstruct and recognize something in an image. The language used was MATLAB, but I wanted to use Python for this project so I had to convert the code I had written before. To further expand on the project, I wanted to test different methods for reconstruction and recognition to see which one gives the highest accuracy. As for recognition, I have set up three difficulties in order to compare images, where the test set include various images that are distingishable from the training set based on difficulty. Currently I have not decided how I will test different recognition methods.
 - [x] Conversion
 - [x] Reconstruction
 - [ ] Recognition
