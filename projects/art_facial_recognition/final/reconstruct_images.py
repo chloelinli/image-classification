@@ -230,8 +230,13 @@ arguments:
     csv_name: csv to write to
 """
 def v_csv(v_val, csv_name):
+    l = len(v_val)
     csv_path = open(csv_name, 'w', encoding='utf8')
-    np.savetxt(csv_path, v_val, delimiter=',', newline=',')
+    
+    for i in range(l):
+        np.savetxt(csv_path, v_val[i], delimiter=',', newline=',') # remove last column later
+        if i < (l-1):
+            csv_path.write('\n')
 
 
 if __name__ == '__main__':
