@@ -26,4 +26,4 @@ A past assignment I had worked on asked to see how closely we could reconstruct 
 - [ ] Different recognition methods?
 
 
-SKills: Python, Microsoft Excel/Google Sheets
+Skills: Python, Microsoft Excel/Google Sheets
