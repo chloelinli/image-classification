@@ -12,6 +12,7 @@ def main():
     v_val = reshaping(path+'/V_values.csv')
 
     # recognition
+    
     """
     given:
         train[0:30], testE[0:10], testM[0:10], testH[0:10] = initial character
@@ -101,7 +102,6 @@ def recognition(test_data, scores, V):
 
     min_ind = np.zeros(scores_test_len)
     dist = np.zeros(scores_len)
-
 
     """
     find difference between each row of scores_test and scores
