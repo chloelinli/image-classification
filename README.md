@@ -18,7 +18,7 @@ I wanted to see how the type of music I used to and currently listen to may affe
 Skills: SQL, Tableau, Microsoft Excel/Google Sheets, Python
 
 ### [Facial Recognition within Art](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/art_facial_recognition)
-A past assignment I had worked on asked to see how closely we could reconstruct and recognize something in an image. The language used was MATLAB, but I wanted to use Python for this project so I had to convert the code I had written before. To further expand on the project, I wanted to test different methods for reconstruction and recognition to see which one gives the highest accuracy. As for recognition, I have set up three difficulties in order to compare images, where the test set include various images that are distingishable from the training set based on difficulty. To further expand on this project, I plan to calculate runtime as well as look into varying methods of reconstruction and recognition to analyze the most accurate and efficient methods.
+I took a past assignment that asked to see how accurately we can reconstruct and recognize images, and converted the language used from MATLAB to Python I also expanded on recognition by including three difficulties for testing image comparison. To further expand on the project, I plan to calculate runtime as well as look into varying methods of reconstruction and recognition to find which are the most efficient and accurate.
 - [x] Conversion
 - [x] Reconstruction
 - [x] Recognition
