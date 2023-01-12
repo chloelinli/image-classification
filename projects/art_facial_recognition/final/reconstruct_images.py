@@ -148,8 +148,8 @@ def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
             k_99 = i
             break
 
-    # index 19 (svd 20), index 27 (svd 28), size 30 (index 29)
-    # not a very small k value so cannot meaningfully compress data (most likely due to small dataset)
+    # index 36 (svd 37), index 55 (svd 56), size 60 (index 59)
+    # decently sized k value so can possibly meaningfully compress data without too much memory
     # uncomment to see indices and length
     #print(k_90, k_99, len(E))
 
