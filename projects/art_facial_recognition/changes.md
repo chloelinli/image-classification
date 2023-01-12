@@ -1,3 +1,6 @@
+### 1.0.2
+* Updated SVD values in comment to corresponding k_90 and k_99 with new data [#5e63323](https://github.com/chloelinli/chloelinli.github.io/commit/5e63323524a05b6e34df48574cef1730f929d2af)
+
 ### 1.0.1
 * Added functions to image conversion file to be able to work with several different directories instead of using specific values [#6185119](https://github.com/chloelinli/chloelinli.github.io/commit/6185119cb78cb441e8ab8320f2aa63f91aa9acf3)
 * Added file holding commands to run all files easily [#e0a9b3d](https://github.com/chloelinli/chloelinli.github.io/commit/e0a9b3d6bd09f73703badd96015ea02615354fb0)
