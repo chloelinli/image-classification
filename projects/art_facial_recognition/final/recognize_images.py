@@ -58,8 +58,8 @@ def main():
 
 
 """
-this method is similar to the reshaping method in reconstruct_images.py
-instead of finding the average, we are only reshaping the data
+this method is similar to the reshaping method in reconstruct_images.py but we are are only reshaping the data
+returns data
 arguments:
     path: path to file
 """
@@ -83,10 +83,11 @@ def reshaping(path):
 
 """
 this method compares testing and training scores
-first 30 of training images are initial character
-last 30 are split evenly among six unrelated characters;
-first 10 of each set of test images are initial character
-last 10 of each set are split evenly among two unrelated characters
+    first 30 of training images are initial character
+    last 30 are split evenly among six unrelated characters;
+    first 10 of each set of test images are initial character
+    last 10 of each set are split evenly among two unrelated characters
+returns index of shortest distance between scores corresponding to image with smallest difference
 arguments:
     test_data: testing data of each difficulty
     scores: scores of training data

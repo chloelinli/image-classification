@@ -45,7 +45,8 @@ def count_img(dir_path):
 
 
 """
-reshapes data from csv to remove last empty column and use for comparison later, returns data and average
+reshapes data from csv to remove last empty column and use for comparison later
+returns data and average
 arguments:
     path: directory to save to
     count: number of images
@@ -83,7 +84,8 @@ def reshaping(path, count):
 
 
 """
-reconstructs images using data - avg of data and returns reconstructed data and V values
+reconstructs images using (data - avg of data) and returns reconstructed data and V values
+returns reconstructed data
 arguments:
     data: array of data pulled from csv
     avg: average of data
@@ -155,7 +157,6 @@ def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
 
     """
     display and saved reconstructed images and data using svds containing > 90% and > 99% information
-    return reconstructed data
     """
     h = w = 300
 
