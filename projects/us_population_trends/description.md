@@ -24,3 +24,6 @@ Centers for Disease Control and Prevention, National Center for Health Statistic
 
 ### Findings and Conclusion
 Despite advanced medicine and technology, the birth rate has been declining. However, immigration trends are gradually rising. Potentially, immigration will overtake birth rates at a 2-to-1 ratio, and have already done so in the 2021 fiscal year.
+
+## Portfolio Page
+[https://chloerushing.wixsite.com/da-portfolio/us-population-trends](https://chloerushing.wixsite.com/da-portfolio/us-population-trends)
