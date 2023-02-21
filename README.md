@@ -25,5 +25,11 @@ I took a past assignment that asked to see how accurately we can reconstruct and
 - [ ] Different reconstruction methods
 - [ ] Different recognition methods?
 
-
 Skills: Python, Microsoft Excel/Google Sheets
+
+### [Tokyo Airbnb Analysis](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/tokyo_airbnb_analysis)
+In order to practice using Tableau and R, I decided to turn a personal interest into a project. This will then be used to assist in researching for my future trip to Japan. I received constructive criticism from friends who I plan to travel with to help improve the dashboard and make it easier to navigate. Future plans include utilizing the language R to create a dashboard containing information that was otherwise unnecessary in the Tableau dashboard.
+- [x] Tableau dashboard
+- [ ] R code and dashboard
+
+Skills: Tableau, R
