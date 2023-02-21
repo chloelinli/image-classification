@@ -7,7 +7,7 @@ Check out my website [here](https://chloerushing.wixsite.com/da-portfolio)!
 ### [U.S. Population Trends](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/us_population_trends)
 Advanced medicine and technology have contributed to an increased birth rate, correlating to an increased population. Due to overpopulation concerns, it seems that natural increase is a more significant factor in population increase compared to immigration. To complete this project, I compared U.S. public birth rate data with 2010-2020 census results, as well as researched reliable quotes and sources.
 
-Skills: Microsoft Excel/Google Sheets
+**Skills**: Microsoft Excel/Google Sheets
 
 ## In Progress
 ### [My Personal Spotify Listening Habits](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/spotify_listening)
@@ -15,7 +15,7 @@ I wanted to see how the type of music I used to and currently listen to may affe
 - [x] Spotify streaming history
 - [ ] Learning algorithm for future songs
 
-Skills: SQL, Tableau, Microsoft Excel/Google Sheets, Python
+**Skills**: SQL, Tableau, Microsoft Excel/Google Sheets, Python
 
 ### [Facial Recognition within Art](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/art_facial_recognition)
 I took a past assignment that asked to see how accurately we can reconstruct and recognize images, and converted the language used from MATLAB to Python. I also expanded on recognition by including three difficulties for testing image comparison. To further expand on the project, I plan to calculate runtime as well as look into varying methods of reconstruction and recognition to find which are the most efficient and accurate.
@@ -25,11 +25,11 @@ I took a past assignment that asked to see how accurately we can reconstruct and
 - [ ] Different reconstruction methods
 - [ ] Different recognition methods?
 
-Skills: Python, Microsoft Excel/Google Sheets
+**Skills**: Python, Microsoft Excel/Google Sheets
 
 ### [Tokyo Airbnb Analysis](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/tokyo_airbnb_analysis)
 In order to practice using Tableau and R, I decided to turn a personal interest into a project. This will then be used to assist in researching for my future trip to Japan. I received constructive criticism from friends who I plan to travel with to help improve the dashboard and make it easier to navigate. Future plans include utilizing the language R to create a dashboard containing information that was otherwise unnecessary in the Tableau dashboard.
 - [x] Tableau dashboard
 - [ ] R code and dashboard
 
-Skills: Tableau, R
+**Skills**: Tableau, R
