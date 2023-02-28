@@ -28,7 +28,7 @@ install.packages("shinydashboard")
 
 # use read_csv if using kaggle - change path if in different folder
 tokyo_airbnb_data <-
-  read.csv("projects/tokyo_airbnb_analysis/tokyo_airbnb_2019_data.csv")
+  read.csv("tokyo_airbnb_2019_data.csv")
 
 # remove neighbourhood_groups column - empty and unnecessary
 tokyo_airbnb_data <- tokyo_airbnb_data[, -5]
@@ -205,6 +205,24 @@ ui <- dashboardPage(dashboardHeader(title = "Tokyo Airbnb R Dashboard",
                                     titleWidth = 300),
                     dashboardSidebar(disable = TRUE),
                     dashboardBody(
+                      tags$head(tags$style(HTML("
+                                                .skin-blue .main-header .logo {
+                                                background-color:
+                                                #1B1B1B!important;
+                                                }
+                                                .skin-blue .main-header
+                                                .logo-hover {
+                                                background-color:
+                                                #1B1B1B!important;
+                                                }
+                                                .skin-blue .main-header
+                                                .navbar {
+                                                background-color:
+                                                #1B1B1B!important;
+                                                }
+                                                .content-wrapper, .right-side {
+                                                background-color:#1B1B1B;
+                                                }"))),
                       fluidRow(
                         box(width = 12, girafeOutput("reviewsPlot")),
                         box(width = 12, girafeOutput("durationPlot")))))
