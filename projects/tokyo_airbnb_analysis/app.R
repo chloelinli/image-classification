@@ -202,25 +202,10 @@ c1 <- ggplot(data = cheap_neighbor, aes(neighbourhood, avg_price,
 library("shiny")
 library("shinydashboard")
 
-ui <- dashboardPage(dashboardHeader(title = "Tokyo Airbnb R Dashboard",
-                                    titleWidth = 300),
+ui <- dashboardPage(dashboardHeader(disable = TRUE),
                     dashboardSidebar(disable = TRUE),
                     dashboardBody(
                       tags$head(tags$style(HTML("
-                                                .skin-blue .main-header .logo {
-                                                background-color:
-                                                #1B1B1B!important;
-                                                }
-                                                .skin-blue .main-header
-                                                .logo-hover {
-                                                background-color:
-                                                #1B1B1B!important;
-                                                }
-                                                .skin-blue .main-header
-                                                .navbar {
-                                                background-color:
-                                                #1B1B1B!important;
-                                                }
                                                 .content-wrapper, .right-side {
                                                 background-color:#1B1B1B;
                                                 }"))),
