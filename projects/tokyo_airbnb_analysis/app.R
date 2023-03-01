@@ -8,6 +8,7 @@ install.packages("languageserver")
 library("languageserver")
 
 # install and load packages for code
+# comment out install.packages for shinyapp
 install.packages("tidyverse")
 install.packages("ggplot2")
 install.packages("ggiraph")
