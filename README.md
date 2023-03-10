@@ -9,6 +9,11 @@ Advanced medicine and technology have contributed to an increased birth rate, co
 
 **Skills**: Microsoft Excel/Google Sheets
 
+### [Tokyo Airbnb Analysis Dashboards](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/tokyo_airbnb_analysis)
+These interactive dashboards were created as a way to practice using Tableau and R, as well as provide a simple resource to give some friends and myself a jump-start when searching for housing our future trip to Japan. The Tableau dashboard utilizes filters and a pannable map to view location, while the R dashboard utilizes an interactive Shiny app dashboard.
+
+**Skills**: Tableau, R
+
 ## In Progress
 ### [My Personal Spotify Listening Habits](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/spotify_listening)
 I wanted to see how the type of music I used to and currently listen to may affect my future music taste. Using my Spotify streaming history from the past year, I cleaned and queried the data so that I could have the top 50 most listened to songs to analyze and compare to the music phases I had gone through.
