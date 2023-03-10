@@ -13,8 +13,7 @@ Tokyo Airbnb Open Data from 2019, [https://www.kaggle.com/datasets/fuyutaro/toky
 * Interactive charts and dropdown filters for room type availability
 
 ## R Dashboard
-[https://chloerushing.shinyapps.io/tokyo_airbnb_analysis/]
-(https://chloerushing.shinyapps.io/tokyo_airbnb_analysis/)
+[https://chloerushing.shinyapps.io/tokyo_airbnb_analysis/](https://chloerushing.shinyapps.io/tokyo_airbnb_analysis/)
 * Interactive charts
 * Utilizes data that wasn't used in Tableau dashboard
 * Deployed as Shiny app
