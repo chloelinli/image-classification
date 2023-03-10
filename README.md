@@ -14,6 +14,13 @@ These interactive dashboards were created as a way to practice using Tableau and
 
 **Skills**: Tableau, R
 
+### [Tokyo Airbnb Analysis](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/tokyo_airbnb_analysis)
+In order to practice using Tableau and R, I decided to turn a personal interest into a project. This will then be used to assist in researching for my future trip to Japan. I received constructive criticism from friends who I plan to travel with to help improve the dashboard and make it easier to navigate. I then created an interactive dashboard written in R and deployed as a Shiny app.
+- [x] Tableau dashboard
+- [x] R code and dashboard
+
+**Skills**: Tableau, R
+
 ## In Progress
 ### [My Personal Spotify Listening Habits](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/spotify_listening)
 I wanted to see how the type of music I used to and currently listen to may affect my future music taste. Using my Spotify streaming history from the past year, I cleaned and queried the data so that I could have the top 50 most listened to songs to analyze and compare to the music phases I had gone through.
@@ -31,10 +38,3 @@ I took a past assignment that asked to see how accurately we can reconstruct and
 - [ ] Different recognition methods?
 
 **Skills**: Python, Microsoft Excel/Google Sheets
-
-### [Tokyo Airbnb Analysis](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/tokyo_airbnb_analysis)
-In order to practice using Tableau and R, I decided to turn a personal interest into a project. This will then be used to assist in researching for my future trip to Japan. I received constructive criticism from friends who I plan to travel with to help improve the dashboard and make it easier to navigate. Future plans include utilizing the language R to create a dashboard containing information that was otherwise unnecessary in the Tableau dashboard.
-- [x] Tableau dashboard
-- [ ] R code and dashboard
-
-**Skills**: Tableau, R
