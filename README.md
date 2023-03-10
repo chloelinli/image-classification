@@ -9,11 +9,6 @@ Advanced medicine and technology have contributed to an increased birth rate, co
 
 **Skills**: Microsoft Excel/Google Sheets
 
-### [Tokyo Airbnb Analysis Dashboards](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/tokyo_airbnb_analysis)
-These interactive dashboards were created as a way to practice using Tableau and R, as well as provide a simple resource to give some friends and myself a jump-start when searching for housing our future trip to Japan. The Tableau dashboard utilizes filters and a pannable map to view location, while the R dashboard utilizes an interactive Shiny app dashboard.
-
-**Skills**: Tableau, R
-
 ### [Tokyo Airbnb Analysis](https://github.com/chloelinli/chloelinli.github.io/tree/main/projects/tokyo_airbnb_analysis)
 In order to practice using Tableau and R, I decided to turn a personal interest into a project. This will then be used to assist in researching for my future trip to Japan. I received constructive criticism from friends who I plan to travel with to help improve the dashboard and make it easier to navigate. I then created an interactive dashboard written in R and deployed as a Shiny app.
 - [x] Tableau dashboard
