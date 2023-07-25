@@ -23,8 +23,10 @@ def preprocessing(data):
     # check missing values
     null_val = data.isnull().sum()
     #print(null_val)
+
     # 55 missing values in CustomerNo
     #print(sales_data[sales_data['CustomerNo'].isnull()])
+
     # missing values include both completed and canceled orders - keep
 
     return data
@@ -36,22 +38,30 @@ data transformation:
 splitting columns as needed
 date into year/month,day
 new column to display non-negative quantity bought
+new column for final price of quantity * price
 """
 def transforming(data):
 
     # split Date into Year, Month, and Day columns
+    index = data.columns.get_loc('Date')
     temp = data['Date'].str.split("-", expand=True).astype('int')
     temp.columns = ['Year', 'Month', 'Day']
-    data.insert(2, 'Year', temp['Year'])
-    data.insert(3, 'Month', temp['Month'])
-    data.insert(4, 'Day', temp['Day'])
+    data.insert(index+1, 'Year', temp['Year'])
+    data.insert(index+2, 'Month', temp['Month'])
+    data.insert(index+3, 'Day', temp['Day'])
 
     # add new column for items actually bought -> canceled items as 0
+    index = data.columns.get_loc('Quantity')
     temp = data[['TransactionNo', 'Quantity']]
     temp.insert(2, 'QuantitySold', temp['Quantity'])
     temp.loc[temp['TransactionNo'].str[0] == 'C', 'QuantitySold'] = 0
-    data.insert(9, 'QuantitySold', temp['QuantitySold'])
+    data.insert(index+1, 'QuantitySold', temp['QuantitySold'])
 
+    # add column for quantity x price
+    index = data.columns.get_loc('QuantitySold')
+    data.insert(index+1, 'FinalPrice', data['Price']*data['QuantitySold'])
+    print(data)
+    
     return data
 
 
@@ -96,9 +106,14 @@ def analysis(data):
 
 
     """customer stats - CustomerNo/ProductNo/Quantity"""
-    customers = data
-    # total orders made in a year?
+    customers = data.groupby(['CustomerNo'])
+
+    # total orders (made in a year)?
+    #print(customers.aggregate({'TransactionNo':'count'}))
+
     # number of times purchasing an item
+    customerProduct = data.groupby(['CustomerNo', 'ProductNo'])
+    #print(customerProduct.aggregate({'ProductNo':'count'}))
 
 if __name__ == '__main__':
     main()
