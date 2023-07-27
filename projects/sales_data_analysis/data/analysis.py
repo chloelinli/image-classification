@@ -1,7 +1,7 @@
 # import statements
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+import plotly.express as px
+
 
 def main():
     path = 'projects/sales_data_analysis/data'
@@ -124,7 +124,7 @@ def productSales(data):
     # total sales/quantity sold in a year
 
     yearMonth = data.groupby(['Year', 'Month'])
-    sales = data.groupby(['Year-Month', 'ProductNo'])
+    sales = data.groupby(['Year-Month', 'ProductNo', 'ProductName'])
 
     # what is the average sales per month?
     avgSales = yearMonth.aggregate({'FinalPrice':'mean'})
@@ -133,17 +133,13 @@ def productSales(data):
     # time of month/year of most purchases
     # sales per item per month?
     monthlySales = sales.aggregate({'Quantity':'sum'}).reset_index()
-    print(monthlySales)
     # graph
 
-    """
-    # graph month vs total quantity of products sold
-    year2018 = monthlySales[monthlySales['Year'] == 2018]
-    year2019 = monthlySales[monthlySales['Year'] == 2019]
-    graph = sns.FacetGrid(year2019, col='ProductNo', row='Month')
-    graph.map(sns.scatterplot, 'Quantity')
-    plt.show()
-    """
+    maxQuantity = monthlySales['Quantity'].max()
+    fig = px.bar(monthlySales, x='Year-Month', y='Quantity',
+                 range_x=['2018-12', '2019-12'], animation_frame='ProductNo',
+                 hover_name='Year-Month', range_y=[0, maxQuantity])
+    fig.show()
 
 
 def m2():
