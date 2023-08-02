@@ -1,6 +1,7 @@
 # import statements
 import pandas as pd
 import plotly.express as px
+import numpy as np
 
 
 def main():
@@ -20,6 +21,8 @@ def main():
 """
 data preprocessing:
 check missing values
+"""
+"""
 def preprocessing(data):
 
     # check missing values
@@ -111,9 +114,55 @@ def analysis(data):
 this method contains the analysis of product sales
 focusing on time of month/year and total sales"""
 def productSales(data):
-    x = 1
+
     # group and aggregate data
+    daily = data.groupby(['Date', 'ProductNo', 'Price'])
+    sales = data.groupby(['Year-Month', 'ProductNo', 'ProductName'])
     products = data.groupby(['ProductNo'])
+
+    """
+    time of year of most purchases
+    sales per item per month?
+
+    ->
+    total sales per month
+    interactive for products
+    best month for sales?
+    """
+    monthlySales = sales.aggregate({'Quantity':'sum'}).reset_index()
+
+    maxQuantity = monthlySales['Quantity'].max()
+    msPlot = px.bar(monthlySales, x='Year-Month', y='Quantity',
+                 range_x=['2018-12', '2019-12'], animation_frame='ProductNo',
+                 hover_name='Year-Month', range_y=[0, maxQuantity])
+    #msPlot.show()
+
+
+    """
+    best time of month for product sales and discounts
+
+    ->
+    product sales every day of month
+    different color for different price - drop down menu for price
+    quantity vs price
+    """
+    dailyPurchases = daily.aggregate({'Quantity':'sum'}).reset_index()
+
+    # boolean column for price comparison
+    prices = products.aggregate(maxPrice=('Price', 'max'), minPrice=('Price', 'min')).reset_index()
+    prices['discounted'] = np.where(prices['maxPrice'] == prices['minPrice'], False, True)
+    # add boolean to daily purchases
+    dailyPurchases['discounted'] = np.where(dailyPurchases['Price'] > 7, True, False)
+    for i, r in dailyPurchases.iterrows():
+        pn = r['ProductNo']
+        p = r['Price']
+
+        mp = prices.loc[prices['ProductNo'] == pn, 'maxPrice']
+        
+        dailyPurchases.at[i, 'discounted'] = (p != mp)            
+
+    """
+    """
 
     # which products sell best?
     # which products should the company order more or less of?
@@ -124,22 +173,10 @@ def productSales(data):
     # total sales/quantity sold in a year
 
     yearMonth = data.groupby(['Year', 'Month'])
-    sales = data.groupby(['Year-Month', 'ProductNo', 'ProductName'])
 
     # what is the average sales per month?
     avgSales = yearMonth.aggregate({'FinalPrice':'mean'})
     #print(avgSales['FinalPrice'].round(decimals=2))
-    
-    # time of month/year of most purchases
-    # sales per item per month?
-    monthlySales = sales.aggregate({'Quantity':'sum'}).reset_index()
-    # graph
-
-    maxQuantity = monthlySales['Quantity'].max()
-    fig = px.bar(monthlySales, x='Year-Month', y='Quantity',
-                 range_x=['2018-12', '2019-12'], animation_frame='ProductNo',
-                 hover_name='Year-Month', range_y=[0, maxQuantity])
-    fig.show()
 
 
 def m2():
