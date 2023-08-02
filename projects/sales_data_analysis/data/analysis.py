@@ -116,9 +116,9 @@ focusing on time of month/year and total sales"""
 def productSales(data):
 
     # group and aggregate data
-    daily = data.groupby(['Date', 'ProductNo', 'Price'])
+    daily = data.groupby(['Date', 'ProductNo', 'ProductName', 'Price'])
     sales = data.groupby(['Year-Month', 'ProductNo', 'ProductName'])
-    products = data.groupby(['ProductNo'])
+    products = data.groupby(['ProductNo', 'ProductName'])
 
     """
     time of year of most purchases
@@ -150,17 +150,19 @@ def productSales(data):
 
     # boolean column for price comparison
     prices = products.aggregate(maxPrice=('Price', 'max'), minPrice=('Price', 'min')).reset_index()
-    prices['discounted'] = np.where(prices['maxPrice'] == prices['minPrice'], False, True)
+    prices['Discounted'] = np.where(prices['maxPrice'] == prices['minPrice'], False, True)
     # add boolean to daily purchases
-    dailyPurchases['discounted'] = np.where(dailyPurchases['Price'] > 7, True, False)
-    for i, r in dailyPurchases.iterrows():
-        pn = r['ProductNo']
-        p = r['Price']
+    dailyPurchases['Discounted'] = np.where(dailyPurchases['Price'] > 7, True, False)
+    for r in dailyPurchases.itertuples():
+        pn = r.ProductNo
+        p = r.Price
 
         mp = prices.loc[prices['ProductNo'] == pn, 'maxPrice']
         
-        dailyPurchases.at[i, 'discounted'] = (p != mp)            
-
+        dailyPurchases['Discounted'].at[r.Index] = (p != mp)
+    
+    #dpPlot = px.line(dailyPurchases, x='Date', y='Quantity', animation_frame='ProductNo', color='Discounted', range_x=['2018-12-01', '2019-12-31'])
+    #dpPlot.show()
     """
     """
 
