@@ -130,7 +130,6 @@ def productSales(data):
     best month for sales?
     """
     monthlySales = sales.aggregate({'Quantity':'sum'}).reset_index()
-
     maxQuantity = monthlySales['Quantity'].max()
     msPlot = px.bar(monthlySales, x='Year-Month', y='Quantity',
                  range_x=['2018-12', '2019-12'], animation_frame='ProductNo',
@@ -161,8 +160,38 @@ def productSales(data):
         
         dailyPurchases['Discounted'].at[r.Index] = (p != mp)
     
-    #dpPlot = px.line(dailyPurchases, x='Date', y='Quantity', animation_frame='ProductNo', color='Discounted', range_x=['2018-12-01', '2019-12-31'])
-    #dpPlot.show()
+    # add column for different prices
+    dailyPurchases['PriceChange'] = 0
+    # if not discounted, 0, else +1 for each discount
+    # loop through prices
+    for r in prices.itertuples():
+        # for each ProductNo in prices
+        pn = r.ProductNo
+        # new dataframe containing individual ProductNo
+        temp = dailyPurchases.loc[dailyPurchases['ProductNo'] == pn]
+        # group by Price, aggregate count, sort by descending Price, reset index
+        temp = temp.groupby(['Price'])
+        temp = temp.aggregate({'Quantity':'count'})
+        temp = temp.sort_values('Price', ascending=False).reset_index()
+        # for each row in aggregate, +1 to previous in dailyPurchases
+        # loop through aggregate
+        temp['PriceChange'] = 0
+        for i in temp.itertuples():
+            index = i.Index
+            temp['PriceChange'].at[i.Index] = index
+        
+        for i in dailyPurchases.itertuples():
+            if i.ProductNo != pn:
+                continue
+
+            p = i.Price
+
+            pc = temp.loc[temp['Price'] == p, 'PriceChange']
+
+            dailyPurchases['PriceChange'].at[i.Index] = pc
+    
+    dpPlot = px.line(dailyPurchases, x='Date', y='Quantity', animation_frame='ProductNo', color='PriceChange', range_x=['2018-12-01', '2019-12-31'])
+    dpPlot.show()
     """
     """
 
