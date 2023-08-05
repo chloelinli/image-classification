@@ -182,23 +182,7 @@ def dailyPurchasesHelper(dpDf, pDf):
 
     # boolean column for price comparison
     dpDf = discounted(dpDf, prices)
-    return dpDf
 
-
-"""
-add boolean for Discounted to dailyPurchases
-"""
-def discounted(dpDf, pDf):
-    # add boolean to daily purchases
-    dpDf['Discounted'] = np.where(dpDf['Price'] > 7, False, True)
-    for r in dpDf.itertuples():
-        pn = r.ProductNo
-        p = r.Price
-
-        mp = pDf.loc[pDf['ProductNo'] == pn, 'maxPrice']
-        
-        dpDf['Discounted'].at[r.Index] = (p != mp)
-    
     """
     # add column for different prices
     dailyPurchases['PriceChange'] = 0
@@ -230,6 +214,24 @@ def discounted(dpDf, pDf):
 
             dailyPurchases['PriceChange'].at[i.Index] = pc
     """
+    
+    return dpDf
+
+
+"""
+add boolean for Discounted to dailyPurchases
+"""
+def discounted(dpDf, pDf):
+    # add boolean to daily purchases
+    dpDf['Discounted'] = np.where(dpDf['Price'] > 7, False, True)
+    for r in dpDf.itertuples():
+        pn = r.ProductNo
+        p = r.Price
+
+        mp = pDf.loc[pDf['ProductNo'] == pn, 'maxPrice']
+        
+        dpDf['Discounted'].at[r.Index] = (p != mp)
+    
     return dpDf
 
 
