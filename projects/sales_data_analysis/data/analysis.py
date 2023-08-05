@@ -112,8 +112,10 @@ def analysis(data):
 
 """
 this method contains the analysis of product sales
-focusing on time of month/year and total sales"""
+focusing on time of month/year and total sales
+"""
 def productSales(data):
+    global prices
 
     # group and aggregate data
     daily = data.groupby(['Date', 'ProductNo', 'ProductName', 'Price'])
@@ -147,19 +149,57 @@ def productSales(data):
     """
     dailyPurchases = daily.aggregate({'Quantity':'sum'}).reset_index()
 
+    dailyPurchases = dailyPurchasesHelper(dailyPurchases, products)
+    
+    dpPlot = px.line(dailyPurchases, x='Date', y='Quantity', animation_frame='ProductNo', color='PriceChange', range_x=['2018-12-01', '2019-12-31'])
+    dpPlot.show()
+    #print(dailyPurchases[dailyPurchases['ProductNo'] == '22784'])
+
+
+    # which products sell best?
+    # which products should the company order more or less of?
+    productsSold = products.aggregate({
+        'QuantitySold':'sum'}).reset_index().sort_values([
+            'QuantitySold'], ascending=False)
+    
+    # total sales/quantity sold in a year
+
+    yearMonth = data.groupby(['Year', 'Month'])
+
+    # what is the average sales per month?
+    avgSales = yearMonth.aggregate({'FinalPrice':'mean'})
+    #print(avgSales['FinalPrice'].round(decimals=2))
+
+
+"""
+dailyPurchases helper function for necessary iterations and transformation
+arguments:
+    dpDf - dailyPurchases dataframe
+    pDf - products groupby object
+"""
+def dailyPurchasesHelper(dpDf, pDf):
+    prices = pDf.aggregate(maxPrice=('Price', 'max'), minPrice=('Price', 'min')).reset_index()
+
     # boolean column for price comparison
-    prices = products.aggregate(maxPrice=('Price', 'max'), minPrice=('Price', 'min')).reset_index()
-    prices['Discounted'] = np.where(prices['maxPrice'] == prices['minPrice'], False, True)
+    dpDf = discounted(dpDf, prices)
+    return dpDf
+
+
+"""
+add boolean for Discounted to dailyPurchases
+"""
+def discounted(dpDf, pDf):
     # add boolean to daily purchases
-    dailyPurchases['Discounted'] = np.where(dailyPurchases['Price'] > 7, True, False)
-    for r in dailyPurchases.itertuples():
+    dpDf['Discounted'] = np.where(dpDf['Price'] > 7, False, True)
+    for r in dpDf.itertuples():
         pn = r.ProductNo
         p = r.Price
 
-        mp = prices.loc[prices['ProductNo'] == pn, 'maxPrice']
+        mp = pDf.loc[pDf['ProductNo'] == pn, 'maxPrice']
         
-        dailyPurchases['Discounted'].at[r.Index] = (p != mp)
+        dpDf['Discounted'].at[r.Index] = (p != mp)
     
+    """
     # add column for different prices
     dailyPurchases['PriceChange'] = 0
     # if not discounted, 0, else +1 for each discount
@@ -189,38 +229,29 @@ def productSales(data):
             pc = temp.loc[temp['Price'] == p, 'PriceChange']
 
             dailyPurchases['PriceChange'].at[i.Index] = pc
-    
-    dpPlot = px.line(dailyPurchases, x='Date', y='Quantity', animation_frame='ProductNo', color='PriceChange', range_x=['2018-12-01', '2019-12-31'])
-    dpPlot.show()
     """
-    """
-
-    # which products sell best?
-    # which products should the company order more or less of?
-    productsSold = products.aggregate({
-        'QuantitySold':'sum'}).reset_index().sort_values([
-            'QuantitySold'], ascending=False)
-    
-    # total sales/quantity sold in a year
-
-    yearMonth = data.groupby(['Year', 'Month'])
-
-    # what is the average sales per month?
-    avgSales = yearMonth.aggregate({'FinalPrice':'mean'})
-    #print(avgSales['FinalPrice'].round(decimals=2))
+    return dpDf
 
 
+"""
+desc
+"""
 def m2():
     y = 2
     # group and aggregate data
 
     # graph
 
+
+"""
+desc
+"""
 def m3():
     z = 3
     # group and aggregate data
 
     # graph
+
 
 if __name__ == '__main__':
     main()
