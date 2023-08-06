@@ -78,7 +78,7 @@ questions:
 def analysis(data):
 
     # 23204 total transactions, 19790 completed transactions
-    #   3414 canceled, math and code checks out -> unneeded now
+    #   3414 canceled (math and code checks out -> unneeded now)
     noncanceled = data[data['QuantitySold'] > 0]
 
     
@@ -115,7 +115,6 @@ this method contains the analysis of product sales
 focusing on time of month/year and total sales
 """
 def productSales(data):
-    global prices
 
     # group and aggregate data
     daily = data.groupby(['Date', 'ProductNo', 'ProductName', 'Price'])
@@ -147,15 +146,14 @@ def productSales(data):
     different color for different price - drop down menu for price
     quantity vs price
     """
+    prices = products.aggregate(maxPrice=('Price', 'max'), minPrice=('Price', 'min')).reset_index()
     dailyPurchases = daily.aggregate({'Quantity':'sum'}).reset_index()
 
-    dailyPurchases = dailyPurchasesHelper(dailyPurchases, products)
+    dailyPurchases = dailyPurchasesHelper(dailyPurchases, prices)
     
-    dpPlot = px.line(dailyPurchases, x='Date', y='Quantity', animation_frame='ProductNo', color='PriceChange', range_x=['2018-12-01', '2019-12-31'])
-    dpPlot.show()
-    #print(dailyPurchases[dailyPurchases['ProductNo'] == '22784'])
-
-
+    #dpPlot = px.line(dailyPurchases, x='Date', y='Quantity', animation_frame='ProductNo', animation_group='PriceChange', color='PriceChange', range_x=['2018-12-01', '2019-12-31'])
+    #dpPlot.show()
+    
     # which products sell best?
     # which products should the company order more or less of?
     productsSold = products.aggregate({
@@ -175,62 +173,30 @@ def productSales(data):
 dailyPurchases helper function for necessary iterations and transformation
 arguments:
     dpDf - dailyPurchases dataframe
-    pDf - products groupby object
+    prices - prices per products
 """
-def dailyPurchasesHelper(dpDf, pDf):
-    prices = pDf.aggregate(maxPrice=('Price', 'max'), minPrice=('Price', 'min')).reset_index()
+def dailyPurchasesHelper(dpDf, prices):    
 
-    # boolean column for price comparison
-    dpDf = discounted(dpDf, prices)
-
-    """
-    # add column for different prices
-    dailyPurchases['PriceChange'] = 0
-    # if not discounted, 0, else +1 for each discount
-    # loop through prices
+    # add column for price changes
+    dpDf['PriceChange'] = 0
+    # loop through each product
     for r in prices.itertuples():
-        # for each ProductNo in prices
         pn = r.ProductNo
-        # new dataframe containing individual ProductNo
-        temp = dailyPurchases.loc[dailyPurchases['ProductNo'] == pn]
-        # group by Price, aggregate count, sort by descending Price, reset index
+
+        # order from highest to lowest -> highest is no discount
+        temp = dpDf.loc[dpDf['ProductNo'] == pn]
         temp = temp.groupby(['Price'])
         temp = temp.aggregate({'Quantity':'count'})
         temp = temp.sort_values('Price', ascending=False).reset_index()
-        # for each row in aggregate, +1 to previous in dailyPurchases
-        # loop through aggregate
+
         temp['PriceChange'] = 0
+
+        # take index of price change and set as value in dailyPurchases
         for i in temp.itertuples():
             index = i.Index
-            temp['PriceChange'].at[i.Index] = index
-        
-        for i in dailyPurchases.itertuples():
-            if i.ProductNo != pn:
-                continue
-
             p = i.Price
-
-            pc = temp.loc[temp['Price'] == p, 'PriceChange']
-
-            dailyPurchases['PriceChange'].at[i.Index] = pc
-    """
-    
-    return dpDf
-
-
-"""
-add boolean for Discounted to dailyPurchases
-"""
-def discounted(dpDf, pDf):
-    # add boolean to daily purchases
-    dpDf['Discounted'] = np.where(dpDf['Price'] > 7, False, True)
-    for r in dpDf.itertuples():
-        pn = r.ProductNo
-        p = r.Price
-
-        mp = pDf.loc[pDf['ProductNo'] == pn, 'maxPrice']
-        
-        dpDf['Discounted'].at[r.Index] = (p != mp)
+            temp['PriceChange'].at[i.Index] = index
+            dpDf.loc[(dpDf['ProductNo'] == pn) & (dpDf['Price'] == p), 'PriceChange'] = index
     
     return dpDf
 
