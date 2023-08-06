@@ -6,3 +6,6 @@
 * Grouping attributes for focused analyses -> sorted quantity of products sold in descending order [#deb91da](https://github.com/chloelinli/chloelinli.github.io/commit/deb91da864cd1085b1c1ab4a0a046ab774d2864c)
 * Added new column to show final price of quantity * price for actual price [#81332ee](https://github.com/chloelinli/chloelinli.github.io/commit/81332ee6cb7b4fcddd482cf33225a55431b93b96)
 * Added new column to concatenate Year and Month as one attribute [#d0cd178](https://github.com/chloelinli/chloelinli.github.io/commit/d0cd17838dcbd7e1ce686facb2d81357c431e933)
+* Added new column to indicate when a product was discounted [#1a5ad37](https://github.com/chloelinli/chloelinli.github.io/commit/1a5ad374eb10cb3fb8a83fc0630ae891847ae23b), [#4892177](https://github.com/chloelinli/chloelinli.github.io/commit/4892177d183e58244adf39162c2963791cc2d7a0), [#5836726](https://github.com/chloelinli/chloelinli.github.io/commit/58367266fe615ebf540a8b328fbda146b8344a47)
+* Added new column to indicate price changes per product [#0d63e13](https://github.com/chloelinli/chloelinli.github.io/commit/0d63e135d05dbe76aa042ed9793916628b2f8d1d)
+* Removed iterations of dailyPurchases to increase efficiency [#dff4c1f](https://github.com/chloelinli/chloelinli.github.io/commit/dff4c1f36d0b1f1955cc062e31c399b71dce903b)
