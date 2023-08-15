@@ -2,6 +2,7 @@
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 
 def main():
@@ -82,8 +83,9 @@ def analysis(data):
     noncanceled = data[data['QuantitySold'] > 0]
 
     
-    """product quantity and sales - ProductNo/Quantity/Date"""
-    """time of purchases - total lines/Date/ProductNo"""
+    """
+    monthly sales and best/worst selling products
+    """
     productSales(noncanceled)
     
 
@@ -118,8 +120,7 @@ focusing on time of month/year and total sales
 def productSales(data):
 
     # group and aggregate data
-    sales = data.groupby(['Year-Month', 'ProductNo', 'ProductName'])
-    salesPerMonth = data.groupby(['Year-Month'])
+    sales = data.groupby(['Year-Month'])
     products = data.groupby(['ProductNo', 'ProductName'])
 
 
@@ -135,8 +136,9 @@ def productSales(data):
     rename axes
     change colors?
     show ticks for all x-axis values
+    add title
     """
-    monthlySales = salesPerMonth.aggregate(
+    monthlySales = sales.aggregate(
         {'Quantity':'sum', 'FinalPrice':'sum'}).sort_values(
         ['Year-Month']).reset_index()
     maxSales = monthlySales['FinalPrice'].max()
@@ -147,21 +149,29 @@ def productSales(data):
     #msPlot.show()
 
     
-    # which products sell best?
-    # which products should the company order more or less of?
-    # top 10 best/worst selling products
+    """
+    best and worst selling products by quantity and transactions
+
+    top selling product had only 1 transaction
+    worst selling products sold 1 time with a quantity of 1 - one-time gift?
+    ---
+    fix axes labels, colors
+    add title
+    hover data for add trace?
+    """
     productsSold = products.aggregate({
-        'QuantitySold':'sum'}).reset_index().sort_values([
+        'QuantitySold':'sum', 'TransactionNo':'count'}).sort_values([
             'QuantitySold'], ascending=False)
+    bestWorst = productsSold.head(10).append(
+        productsSold.tail(10)).reset_index()
+
+    bwSellPlot = px.bar(bestWorst, x='ProductName',
+                        y='QuantitySold', log_y=True)
+    bwSellPlot.add_trace(go.Line(x=bestWorst['ProductName'],
+                                 y=bestWorst['TransactionNo']))
+    bwSellPlot.update_xaxes(tickangle=270)
+    #bwSellPlot.show()
     
-    # total sales/quantity sold in a year
-
-    yearMonth = data.groupby(['Year', 'Month'])
-
-    # what is the average sales per month?
-    avgSales = yearMonth.aggregate({'FinalPrice':'mean'})
-    #print(avgSales['FinalPrice'].round(decimals=2))
-
 
 """
 desc
