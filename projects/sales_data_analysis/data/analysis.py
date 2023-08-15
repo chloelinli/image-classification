@@ -136,15 +136,20 @@ def productSales(data):
     change colors?
     show ticks for all x-axis values
     """
-    monthlySales = salesPerMonth.aggregate({'Quantity':'sum', 'FinalPrice':'sum'}).sort_values(['Year-Month']).reset_index()
+    monthlySales = salesPerMonth.aggregate(
+        {'Quantity':'sum', 'FinalPrice':'sum'}).sort_values(
+        ['Year-Month']).reset_index()
     maxSales = monthlySales['FinalPrice'].max()
-    msPlot = px.bar(monthlySales, x='Year-Month', y='FinalPrice', range_x=['2018-12', '2019-12'], range_y=[0, maxSales])
-    msPlot.add_trace(go.Line(x=monthlySales['Year-Month'], y=monthlySales['Quantity']))
-    msPlot.show()
+    msPlot = px.bar(monthlySales, x='Year-Month', y='FinalPrice',
+                    range_x=['2018-12', '2019-12'], range_y=[0, maxSales])
+    msPlot.add_trace(go.Line(x=monthlySales['Year-Month'],
+                             y=monthlySales['Quantity']))
+    #msPlot.show()
 
     
     # which products sell best?
     # which products should the company order more or less of?
+    # top 10 best/worst selling products
     productsSold = products.aggregate({
         'QuantitySold':'sum'}).reset_index().sort_values([
             'QuantitySold'], ascending=False)
