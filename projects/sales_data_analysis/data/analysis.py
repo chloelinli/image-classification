@@ -1,7 +1,7 @@
 # import statements
 import pandas as pd
 import plotly.express as px
-import numpy as np
+import plotly.graph_objects as go
 
 
 def main():
@@ -95,7 +95,8 @@ def analysis(data):
 
     # total spent per transaction
     # what is the total number of sales?
-    transacSpent = transac.aggregate({'Price':'sum','QuantitySold':'sum'}).reset_index()
+    transacSpent = transac.aggregate({
+        'Price':'sum', 'QuantitySold':'sum'}).reset_index()
     #print(transacSpent)
 
 
@@ -117,42 +118,30 @@ focusing on time of month/year and total sales
 def productSales(data):
 
     # group and aggregate data
-    daily = data.groupby(['Date', 'ProductNo', 'ProductName', 'Price'])
     sales = data.groupby(['Year-Month', 'ProductNo', 'ProductName'])
+    salesPerMonth = data.groupby(['Year-Month'])
     products = data.groupby(['ProductNo', 'ProductName'])
 
-    """
-    time of year of most purchases
-    sales per item per month?
-
-    ->
-    total sales per month
-    interactive for products
-    best month for sales?
-    """
-    monthlySales = sales.aggregate({'Quantity':'sum'}).reset_index()
-    maxQuantity = monthlySales['Quantity'].max()
-    msPlot = px.bar(monthlySales, x='Year-Month', y='Quantity',
-                 range_x=['2018-12', '2019-12'], animation_frame='ProductNo',
-                 hover_name='Year-Month', range_y=[0, maxQuantity])
-    #msPlot.show()
-
 
     """
-    best time of month for product sales and discounts
+    best time of year for sales/purchases
+    line to show quantity of items purchases
 
-    ->
-    product sales every day of month
-    different color for different price - drop down menu for price
-    quantity vs price
+    most sales and income september-november -> leading to holiday season
+    least sales december 2019 -> not enough data? compared to december 2018
+    least sales february and april -> not around or leading to anything?
+    ---
+    rename line trace to Quantity
+    rename axes
+    change colors?
+    show ticks for all x-axis values
     """
-    prices = products.aggregate(maxPrice=('Price', 'max'), minPrice=('Price', 'min')).reset_index()
-    dailyPurchases = daily.aggregate({'Quantity':'sum'}).reset_index()
+    monthlySales = salesPerMonth.aggregate({'Quantity':'sum', 'FinalPrice':'sum'}).sort_values(['Year-Month']).reset_index()
+    maxSales = monthlySales['FinalPrice'].max()
+    msPlot = px.bar(monthlySales, x='Year-Month', y='FinalPrice', range_x=['2018-12', '2019-12'], range_y=[0, maxSales])
+    msPlot.add_trace(go.Line(x=monthlySales['Year-Month'], y=monthlySales['Quantity']))
+    msPlot.show()
 
-    dailyPurchases = dailyPurchasesHelper(dailyPurchases, prices)
-    
-    #dpPlot = px.line(dailyPurchases, x='Date', y='Quantity', animation_frame='ProductNo', animation_group='PriceChange', color='PriceChange', range_x=['2018-12-01', '2019-12-31'])
-    #dpPlot.show()
     
     # which products sell best?
     # which products should the company order more or less of?
@@ -167,38 +156,6 @@ def productSales(data):
     # what is the average sales per month?
     avgSales = yearMonth.aggregate({'FinalPrice':'mean'})
     #print(avgSales['FinalPrice'].round(decimals=2))
-
-
-"""
-dailyPurchases helper function for necessary iterations and transformation
-arguments:
-    dpDf - dailyPurchases dataframe
-    prices - prices per products
-"""
-def dailyPurchasesHelper(dpDf, prices):    
-
-    # add column for price changes
-    dpDf['PriceChange'] = 0
-    # loop through each product
-    for r in prices.itertuples():
-        pn = r.ProductNo
-
-        # order from highest to lowest -> highest is no discount
-        temp = dpDf.loc[dpDf['ProductNo'] == pn]
-        temp = temp.groupby(['Price'])
-        temp = temp.aggregate({'Quantity':'count'})
-        temp = temp.sort_values('Price', ascending=False).reset_index()
-
-        temp['PriceChange'] = 0
-
-        # take index of price change and set as value in dailyPurchases
-        for i in temp.itertuples():
-            index = i.Index
-            p = i.Price
-            temp['PriceChange'].at[i.Index] = index
-            dpDf.loc[(dpDf['ProductNo'] == pn) & (dpDf['Price'] == p), 'PriceChange'] = index
-    
-    return dpDf
 
 
 """
