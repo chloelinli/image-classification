@@ -68,6 +68,9 @@ def transforming(data):
     # add column for quantity x price
     index = data.columns.get_loc('QuantitySold')
     data.insert(index+1, 'FinalPrice', data['Price']*data['QuantitySold'])
+
+    # sort by date, transaction no
+    data = data.sort_values(['Date', 'TransactionNo'], ascending=True).reset_index()
     
     return data
 
@@ -86,20 +89,11 @@ def analysis(data):
     """
     monthly sales and best/worst selling products
     """
-    productSales(noncanceled)
+    #productSales(noncanceled)
     
 
     """group transactions - TransactionNo/total lines"""
-    transac = noncanceled.groupby(['TransactionNo'])
-
-    # total number of transactions
-    #print(transac.count())
-
-    # total spent per transaction
-    # what is the total number of sales?
-    transacSpent = transac.aggregate({
-        'Price':'sum', 'QuantitySold':'sum'}).reset_index()
-    #print(transacSpent)
+    transactions(noncanceled)
 
 
     """customer stats - CustomerNo/ProductNo/Quantity"""
@@ -115,7 +109,7 @@ def analysis(data):
 
 """
 this method contains the analysis of product sales
-focusing on time of month/year and total sales
+focuses on time of month/year and total sales
 """
 def productSales(data):
 
@@ -174,13 +168,51 @@ def productSales(data):
     
 
 """
-desc
+this method contains the analysis regarding transactions
+includes location, 
 """
-def m2():
-    y = 2
-    # group and aggregate data
+def transactions(data):
 
-    # graph
+    transac = data.groupby(['TransactionNo'])
+    # total number of transactions
+    #print(transac.aggregate(NumItemsPerTransaction=('Quantity', 'count')))
+
+    # total spent per transaction
+    # what is the total number of sales?
+    transacSpent = data.aggregate({
+        'Price':'sum', 'QuantitySold':'sum'}).reset_index()
+    #print(transacSpent)
+
+    """
+    graph transactions and customers each month
+        group by transactionno
+        - data contains several lines for different items in same transaction
+        group by customerno
+        - customers can make different transactions each month
+        group by month
+        - horizontal axis for plot
+    ---
+    rename labels
+    fix colors     
+    """
+    monthlyTransac = data.groupby(['Year-Month', 'CustomerNo',
+                                   'TransactionNo'])
+    monthlyTransac = monthlyTransac.aggregate({
+        'FinalPrice':'sum'}).reset_index()
+    # group and count transactions for each customer
+    monthlyTransac  = monthlyTransac.groupby(['Year-Month', 'CustomerNo'])
+    monthlyTransac = monthlyTransac.aggregate(
+        TotalTransactions=('TransactionNo', 'count')).reset_index()
+    # group customers and count transactions for each month
+    monthlyTransac = monthlyTransac.groupby(['Year-Month'])
+    monthlyTransac = monthlyTransac.aggregate(
+        TotalCustomers=('CustomerNo','count'),
+        TotalTransactions=('TotalTransactions', 'sum')).reset_index()
+
+    transacPlot = px.line(monthlyTransac, x='Year-Month',
+                          y=['TotalCustomers', 'TotalTransactions'],
+                          range_x=['2018-12', '2019-12'], range_y=[0, 3000])
+    transacPlot.show()
 
 
 """
