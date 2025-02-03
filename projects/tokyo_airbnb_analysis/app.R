@@ -1,30 +1,22 @@
-# NOTE: must run in R interactive terminal or IDE, otherwise will not work
+# NOTE: may need to run in R Studio
+# currently not working in VS Code
 
 # clear global environment using rm(list = ls())
 
 
 # install and load package to use R in VS Code
-install.packages("languageserver")
 library("languageserver")
 
 # install and load packages for code
 # comment out install.packages for shinyapp
-install.packages("tidyverse")
-install.packages("ggplot2")
-install.packages("ggiraph")
-install.packages("dplyr")
-install.packages("pillar")
-install.packages("patchwork")
 library("tidyverse") # cleaning
 library("ggplot2") # visualization
 library("ggiraph") # interaction
 library("dplyr") # manipulation
 library("pillar") # because arrange is not working
 library("patchwork") # plot layout
-
-# shiny dashboard
-install.packages("shiny")
-install.packages("shinydashboard")
+library("shiny")
+library("shinydashboard")
 
 
 # use read_csv if using kaggle - change path if in different folder
@@ -55,8 +47,8 @@ popularity <- popularity %>%
 # plot
 p1 <- ggplot(data = popularity) +
   geom_col_interactive(mapping = aes(x = reorder(host_name, -total_reviews),
-                         y = total_reviews, tooltip = tooltip_text,
-                         data_id = host_name), fill = "#3296ed", size = 0.5) +
+                                     y = total_reviews, tooltip = tooltip_text,
+                                     data_id = host_name), fill = "#3296ed", size = 0.5) +
   labs(title = "Top Hosts and Reviews",
        subtitle = "(sorted by Total Airbnb Reviews)", x = "", y = "Total\n") +
   theme(axis.text.x = element_blank(), axis.text.y = element_text(size = 20),
@@ -68,9 +60,9 @@ p1 <- ggplot(data = popularity) +
 
 p2 <- ggplot(data = popularity) +
   geom_col_interactive(mapping = aes(x = reorder(host_name, -total_reviews),
-                         y = avg_monthly_reviews, tooltip = tooltip_text,
-                         data_id = host_name), fill = "#77b9f2",
-           size = 0.5) + labs(x = "", y = "Average Monthly\n\n") +
+                                     y = avg_monthly_reviews, tooltip = tooltip_text,
+                                     data_id = host_name), fill = "#77b9f2",
+                       size = 0.5) + labs(x = "", y = "Average Monthly\n\n") +
   theme(axis.text.x = element_blank(), axis.text.y = element_text(size = 20),
         axis.title = element_text(size = 24, face = "bold"),
         aspect.ratio = 1 / 6,
@@ -78,10 +70,10 @@ p2 <- ggplot(data = popularity) +
 
 p3 <- ggplot(data = popularity) +
   geom_col_interactive(mapping = aes(x = reorder(host_name, -total_reviews),
-                         y = reviews_per_airbnb, tooltip = tooltip_text,
-                         data_id = host_name), fill = "#9d53f2",
-           size = 0.5) + labs(x = "\nHost Name",
-                              y = "Ratio of Reviews to Airbnbs\n") +
+                                     y = reviews_per_airbnb, tooltip = tooltip_text,
+                                     data_id = host_name), fill = "#9d53f2",
+                       size = 0.5) + labs(x = "\nHost Name",
+                                          y = "Ratio of Reviews to Airbnbs\n") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 20),
         axis.text.y = element_text(size = 20),
         axis.title = element_text(size = 24, face = "bold"),
@@ -136,7 +128,7 @@ t1 <- ggplot(data = ten_night_hosts, aes(x = reorder(host_name, -avg_duration),
         plot.title = element_text(size = 30, face = "bold"),
         plot.subtitle = element_text(size = 24, face = "bold"),
         panel.background = element_rect(fill = "#1B1B1B")) +
-        scale_y_continuous(limits = c(0, 10))
+  scale_y_continuous(limits = c(0, 10))
 
 t2 <- ggplot(data = ten_night_neighbor,
              aes(x = reorder(neighbourhood, -avg_duration),
@@ -199,9 +191,6 @@ c1 <- ggplot(data = cheap_neighbor, aes(neighbourhood, avg_price,
 
 
 # create interactive shiny dashboard
-library("shiny")
-library("shinydashboard")
-
 ui <- dashboardPage(dashboardHeader(disable = TRUE),
                     dashboardSidebar(disable = TRUE),
                     dashboardBody(
@@ -215,9 +204,9 @@ ui <- dashboardPage(dashboardHeader(disable = TRUE),
 server <- function(input, output) {
   output$reviewsPlot <- renderGirafe({
     plot1
-    })
+  })
   output$durationPlot <- renderGirafe({
     plot2
-    })
+  })
 }
 shinyApp(ui, server)
