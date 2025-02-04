@@ -3,13 +3,14 @@ import numpy as np
 
 def main():
     path = 'projects/art_facial_recognition/final'
+    eigen = path + '/eigen'
 
     # remove last column in csvs
-    scores = reshaping(path+'/scores.csv')
+    scores = reshaping(eigen+'/scores.csv')
     test_easy = reshaping(path+'/testingE_images.csv')
     test_medi = reshaping(path+'/testingM_images.csv')
     test_hard = reshaping(path+'/testingH_images.csv')
-    v_val = reshaping(path+'/V_values.csv')
+    v_val = reshaping(eigen+'/V_values.csv')
 
     # recognition
     

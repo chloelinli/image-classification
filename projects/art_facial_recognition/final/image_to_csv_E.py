@@ -2,6 +2,8 @@
 This script is a direct copy of image_to_csv.py but
 only converts easy difficulty test images due to previous
 unknown complications when running recognize_images.py.
+
+This script converts the easy difficulty testing data.
 """
 
 
@@ -15,10 +17,10 @@ import os
 def main():
     path = 'projects/art_facial_recognition/final'
 
-    # get total images for each conversion
+    # get total images
     testE_count = count_img(path+'/testing/rgb/easy')
 
-    # convert each directory of images
+    # convert
     rgb_to_gray(path+'/testing/rgb/easy/test_rgb', testE_count, path+'/testing/gray/easy/test_gray', path+'/testingE_images.csv')
 
 

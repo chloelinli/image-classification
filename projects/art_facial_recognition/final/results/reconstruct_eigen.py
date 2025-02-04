@@ -13,15 +13,16 @@ import os
 
 def main():
     path = 'projects/art_facial_recognition/final'
+    eigen = path + '/eigen'
 
     # get total training images
     num = count_img(path+'/training/gray')
 
     # reshape data and calculate average
-    data, avg = reshaping(path, num)
+    data, avg = reshaping(path, eigen, num)
 
     # reconstruction
-    k_90, k_99, v = reconstruct(data, avg, path+'/scores.csv', path, num, path+'/reconstructed/k_9')
+    k_90, k_99, v = reconstruct(data, avg, eigen+'/scores.csv', eigen, num, eigen+'/reconstructed/k_9')
 
     # calculate accuracies
     # comment out one call if printing to help differentiate
@@ -29,7 +30,7 @@ def main():
     accuracy(data, k_99, num)
 
     # adds V values from SVDs to csv to use later
-    v_csv(v, path+'/V_values.csv')
+    v_csv(v, eigen+'/V_values.csv')
 
 
 """
@@ -49,9 +50,10 @@ reshapes data from csv to remove last empty column and use for comparison later
 returns data and average
 arguments:
     path: directory to save to
+    eigen: eigen specific directory
     count: number of images
 """
-def reshaping(path, count):
+def reshaping(path, eigen, count):
     """
     load and reshape data to be able to work with as pixels;
     need to have each array 300x300 with 3 rgb values for each entry
@@ -78,7 +80,7 @@ def reshaping(path, count):
     # uncomment to view
     #plt.imshow(np.reshape(avg, (h, w)), cmap='gray')
     #plt.show()
-    plt.imsave(path+'/average.jpg', np.reshape(avg, (h, w)), cmap='gray')
+    plt.imsave(eigen+'/average.jpg', np.reshape(avg, (h, w)), cmap='gray')
 
     return data_reshaped, avg
 
