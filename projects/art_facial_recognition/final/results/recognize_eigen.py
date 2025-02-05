@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 
 def main():
@@ -36,26 +37,11 @@ def main():
     testM_reco = recognition(test_medi, scores, v_val)
     testH_reco = recognition(test_hard, scores, v_val)
 
-    # check accuracy for each character
-    # initial character
-    accu(testE_reco, 0, 30, 0, 10, 10)
-    accu(testM_reco, 0, 30, 0, 10, 10)
-    accu(testH_reco, 0, 30, 0, 10, 10)
+    # check accuracy for each character, save values
+    [init, unrel] = check_tuple(testE_reco, testM_reco, testH_reco)
 
-    # unrelated 1
-    accu(testE_reco, 30, 35, 10, 15, 5)
-    # unrelated 2
-    accu(testE_reco, 35, 40, 15, 20, 5)
-
-    # unrelated 3
-    accu(testM_reco, 40, 45, 10, 15, 5)
-    # unrelated 4
-    accu(testM_reco, 45, 50, 15, 20, 5)
-
-    # unrelated 5
-    accu(testH_reco, 50, 55, 10, 15, 5)
-    # unrelated 6
-    accu(testH_reco, 55, 60, 15, 20, 5)
+    # export to csv
+    to_csv(path+'/results', init, unrel)
 
 
 """
@@ -119,18 +105,64 @@ def recognition(test_data, scores, V):
 
 
 """
+this method passes in tuples containg values for comparison
+returns list of counts of actual image matches
+arguments:
+    testE_reco: easy smallest difference index
+    testM_reco: medium smallest difference index
+    testH_reco: hard smallest difference index
+"""
+def check_tuple(testE_reco, testM_reco, testH_reco):
+    # initial character
+    e_init = (testE_reco, 0, 30, 0, 10)
+    m_init = (testM_reco, 0, 30, 0, 10)
+    h_init = (testH_reco, 0, 30, 0, 10)
+    init = [e_init, m_init, h_init]
+    init_actual = []
+
+    for i in range(len(init)):
+        init_actual.append(accu(init[i]))
+    
+    # unrelated characters, e/m/h
+    e_1 = (testE_reco, 30, 35, 10, 15)
+    e_2 = (testE_reco, 35, 40, 15, 20)
+
+    m_1 = (testM_reco, 40, 45, 10, 15)
+    m_2 = (testM_reco, 45, 50, 15, 20)
+
+    h_1 = (testH_reco, 50, 55, 10, 15)
+    h_2 = (testH_reco, 55, 60, 15, 20)
+
+    unrelated = [e_1, e_2, m_1, m_2, h_1, h_2]
+    unrel_actual = []
+
+    for j in range(len(unrelated)):
+        unrel_actual.append(accu(unrelated[j]))
+    
+    return [init_actual, unrel_actual]
+
+
+"""
 this method compares the expected and actual results of the
 recognition method
+returns percentage of actual matches
 arguments:
-    indicies: array holding estimated indicies from recognition
-    start: expected starting index for checking
-    end: expected ending index for checking
-        [start, end)
-    in_start: starting index for estimated indicies
-    in_end: ending index for estimated indicies
-    expected: expected amount of images to be matched
+    temp tuple containing the following values that we will index
+        indicies: array holding estimated indicies from recognition
+        start: expected starting index for checking
+        end: expected ending index for checking
+            [start, end)
+        in_start: starting index for estimated indicies
+        in_end: ending index for estimated indicies
 """
-def accu(indicies, start, end, in_start, in_end, expected):
+def accu(temp):
+
+    indicies = temp[0]
+    start = temp[1]
+    end = temp[2]
+    in_start = temp[3]
+    in_end = temp[4]
+
     actual = 0
 
     for i in range(in_start, in_end):
@@ -139,8 +171,23 @@ def accu(indicies, start, end, in_start, in_end, expected):
     
     accuracy = actual / len(indicies[in_start:in_end])
 
-    # uncomment to view success
-    #print(f"expected: {expected}, actual: {actual}, success rate: {accuracy:.2%}")
+    return accuracy
+
+
+"""
+this method converts the actual count lists to dataframes and exports to csv
+arguments:
+    path: path to save csvs
+    init: list holding results from initial comparison
+    unrel: list holding results from unrelated comparison
+"""
+def to_csv(path, init, unrel):
+     
+     init_df = pd.DataFrame(init)
+     unrel_df = pd.DataFrame(unrel)
+
+     init_df.to_csv(path+'/initial.csv', index=False, header=None)
+     unrel_df.to_csv(path+'/unrelated.csv', index=False, header=None)
 
 
 if __name__ == '__main__':
