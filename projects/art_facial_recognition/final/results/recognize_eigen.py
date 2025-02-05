@@ -137,10 +137,10 @@ def accu(indicies, start, end, in_start, in_end, expected):
         if indicies[i] >= start and indicies[i] < end:
             actual += 1
     
-    accuracy = actual / len(indicies[in_start:in_end]) * 100
+    accuracy = actual / len(indicies[in_start:in_end])
 
     # uncomment to view success
-    #print("expected: " + str(expected) + ", actual: " + str(actual) + ", success rate: " + str(accuracy) + "%")
+    #print(f"expected: {expected}, actual: {actual}, success rate: {accuracy:.2%}")
 
 
 if __name__ == '__main__':
