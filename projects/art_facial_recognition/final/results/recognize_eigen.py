@@ -186,8 +186,8 @@ def to_csv(path, init, unrel):
      init_df = pd.DataFrame(init)
      unrel_df = pd.DataFrame(unrel)
 
-     init_df.to_csv(path+'/initial.csv', index=False, header=['eigen'])
-     unrel_df.to_csv(path+'/unrelated.csv', index=False, header=['eigen'])
+     init_df.to_csv(path+'/initial.csv', index=False, header=['SVDs'])
+     unrel_df.to_csv(path+'/unrelated.csv', index=False, header=['SVDs'])
 
 
 if __name__ == '__main__':
