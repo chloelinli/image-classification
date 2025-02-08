@@ -69,7 +69,7 @@ def plot(method, data, difficulty):
     ax.set_xticks(x_axis, difficulty)
     ax.set_xlabel("Difficulty of Recognition")
     ax.set_ylabel("Accuracy (%)")
-    ax.set_ylim([0, 1])
+    ax.set_ylim([0, 1.1])
     ax.set_title("Recognition Accuracy of Machine Learning Algorithms", y=1.1)
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, ncol=len(method))
     plt.show()
