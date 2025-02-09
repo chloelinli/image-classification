@@ -74,7 +74,6 @@ def reshaping(path, eigen, count):
     # list to array to use for plotting
     data_reshaped = np.array(data_reshaped)
 
-
     # find average of data
     avg = np.mean(data_reshaped, axis=0)
     # uncomment to view
