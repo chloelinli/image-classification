@@ -280,8 +280,8 @@ def to_csv(p_init, p_unrel, init, unrel):
     unrel_df = pd.read_csv(p_unrel)
 
     # add column for xgboost
-    init_df['Xgboost'] = init
-    unrel_df['Xgboost'] = unrel
+    init_df['XGBoost'] = init
+    unrel_df['XGBoost'] = unrel
 
     init_df.to_csv(p_init, index=False)
     unrel_df.to_csv(p_unrel, index=False)
