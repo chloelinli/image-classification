@@ -18,3 +18,6 @@ image recognition
 """
 # eigen
 os.system('python3 projects/art_facial_recognition/final/results/recognize_eigen.py')
+
+# xgboost
+os.system('python3 projects/art_facial_recognition/final/results/recognize_xgboost.py')
