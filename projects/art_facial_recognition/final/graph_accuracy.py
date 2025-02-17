@@ -71,7 +71,8 @@ def plot(method, data, difficulty):
         mult += 1
 
     # tune and format plot
-    ax.set_xticks(x_axis, difficulty)
+    ax.set_xticks(x_axis+(width/len(method)), difficulty)
+    ax.tick_params(bottom=False, left=False)
     ax.set_xlabel('Difficulty of Recognition')
     ax.set_ylabel('Accuracy (%)')
     ax.set_ylim([0, 100])
@@ -142,9 +143,11 @@ def subplot(method, data, difficulty):
     """
     ax1.set_ylim([0, 100])
     ax2.set_ylim([0, 100])
+    ax1.tick_params(bottom=False, left=False)
+    ax2.tick_params(bottom=False, left=False)
 
     # full plot - 2nd plot is on bottom
-    ax2.set_xticks(x_axis, difficulty)
+    ax2.set_xticks(x_axis+(width/len(method)), difficulty)
     ax2.set_xlabel('Difficulty of Recognition')
     ax2.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=len(method), frameon=False, fontsize=8)
     fig.text(0.01, 0.5, 'Accuracy (%)', va='center', rotation='vertical')
