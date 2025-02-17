@@ -38,7 +38,10 @@ def prep(path):
     lst = []
 
     for i,r in df.iterrows():
-        lst.append(r.to_list())
+
+        # multiply for percentage format later
+        temp = r*100
+        lst.append(temp.to_list())
 
     return [header, lst]
 
@@ -58,21 +61,21 @@ def plot(method, data, difficulty):
     for i in range(len(method)):
         groups[method[i]] = data[i]
     
-    fig, ax = plt.subplots(layout='constrained', figsize=(7, 6))
+    fig, ax = plt.subplots(layout='constrained')
 
     # place bars in chart
     for att, mea in groups.items():
         offset = width * mult
         bars = ax.bar(x_axis + offset, mea, width, label=att)
-        ax.bar_label(bars, padding=3)
+        ax.bar_label(bars, padding=3, label_type='center', fmt='%.0f%%')
         mult += 1
 
     # tune and format plot
     ax.set_xticks(x_axis, difficulty)
     ax.set_xlabel('Difficulty of Recognition')
     ax.set_ylabel('Accuracy (%)')
-    ax.set_ylim([0, 1.1])
-    ax.set_title('Recognition Accuracy of Machine Learning Algorithms', y=1.1)
+    ax.set_ylim([0, 100])
+    ax.set_title('Recognition Accuracy of Machine Learning Algorithms', pad=10)
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=len(method), frameon=False, fontsize=8)
     plt.show()
 
@@ -117,13 +120,13 @@ def subplot(method, data, difficulty):
     width = 0.25
     mult = 0
 
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(7, 6), sharex=True)
+    fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
 
     # place bars in chart
     for att, mea in g1.items():
         offset = width * mult
         bars = ax1.bar(x_axis + offset, mea, width, label=att)
-        ax1.bar_label(bars, padding=3)
+        ax1.bar_label(bars, padding=3, label_type='center', fmt='%.0f%%')
         mult += 1
     
     # reset multiplier for subplot
@@ -131,14 +134,14 @@ def subplot(method, data, difficulty):
     for att, mea in g2.items():
         offset = width * mult
         bars = ax2.bar(x_axis + offset, mea, width, label=att)
-        ax2.bar_label(bars, padding=3)
+        ax2.bar_label(bars, padding=3, label_type='center', fmt='%.0f%%')
         mult += 1
 
     """
     tune and format plot
     """
-    ax1.set_ylim([0, 1.2])
-    ax2.set_ylim([0, 1.2])
+    ax1.set_ylim([0, 100])
+    ax2.set_ylim([0, 100])
 
     # full plot - 2nd plot is on bottom
     ax2.set_xticks(x_axis, difficulty)
