@@ -15,6 +15,7 @@ import os
 
 
 def main():
+
     path = 'projects/art_facial_recognition/final'
 
     # get total images
@@ -30,6 +31,7 @@ arguments:
     dir_path: directory containing images to count
 """
 def count_img(dir_path):
+
     num = 0
     for root_dir, cur_dir, files in os.walk(dir_path):
         num += len(files)
@@ -44,7 +46,8 @@ arguments:
     gray_path: relative path to directory to save images to
     csv_name: name of csv to write to
 """
-def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):    
+def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
+
     #initialize dimensions
     h = 300
     w = 300
@@ -77,6 +80,7 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
         # new line if not last image
         if i < (num_img-1):
             csv_path.write('\n')
+
 
 
 if __name__ == '__main__':

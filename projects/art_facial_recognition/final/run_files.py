@@ -21,3 +21,8 @@ os.system('python3 projects/art_facial_recognition/final/results/recognize_eigen
 
 # xgboost
 os.system('python3 projects/art_facial_recognition/final/results/recognize_xgboost.py')
+
+"""
+graphing analysis
+"""
+#os.system('python3 projects/art_facial_recognition/final/graph_accuracy.py')

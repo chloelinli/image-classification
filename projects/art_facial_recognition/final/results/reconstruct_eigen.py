@@ -12,6 +12,7 @@ import os
 
 
 def main():
+
     path = 'projects/art_facial_recognition/final'
     eigen = path + '/eigen'
 
@@ -39,6 +40,7 @@ arguments:
     dir_path: directory containing images to count
 """
 def count_img(dir_path):
+
     num = 0
     for root_dir, cur_dir, files in os.walk(dir_path):
         num += len(files)
@@ -47,18 +49,18 @@ def count_img(dir_path):
 
 """
 reshapes data from csv to remove last empty column and use for comparison later
-returns data and average
 arguments:
     path: directory to save to
     eigen: eigen specific directory
     count: number of images
+returns data and average
 """
 def reshaping(path, eigen, count):
+
     """
     load and reshape data to be able to work with as pixels;
     need to have each array 300x300 with 3 rgb values for each entry
     """
-
     # load data
     data = np.genfromtxt(path+'/training_images.csv', delimiter=',')
     h = w = 300
@@ -76,6 +78,7 @@ def reshaping(path, eigen, count):
 
     # find average of data
     avg = np.mean(data_reshaped, axis=0)
+
     # uncomment to view
     #plt.imshow(np.reshape(avg, (h, w)), cmap='gray')
     #plt.show()
@@ -86,7 +89,6 @@ def reshaping(path, eigen, count):
 
 """
 reconstructs images using (data - avg of data) and returns reconstructed data and V values
-returns reconstructed data
 arguments:
     data: array of data pulled from csv
     avg: average of data
@@ -94,13 +96,14 @@ arguments:
     path: outermost directory to save to
     count: number of images
     reconstructed_path: directory to hold reconstructed images
+returns reconstructed data
 """
 def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
+    
     """
     observe how pictures deviate from average;
     study data by finding the reduced SVD of data - average
     """
-
     # subtract average from data
     X = data - np.ones((count, 1)) @ avg.reshape((1, -1))
 
@@ -120,7 +123,6 @@ def reconstruct(data, avg, scores_path, path, count, reconstructed_path):
     training: best values to get highest accuracy in reconstruction;
     different diagonal of s? different singular values?
     """
-
     # find, plot, and save rescaled energies
     E = np.cumsum(S**2) / np.sum(S**2)
 
@@ -200,6 +202,7 @@ arguments:
     count: number of images
 """
 def accuracy(original, reconstructed, count):
+
     h = w = 300
     err = []
     avg = []
@@ -232,6 +235,7 @@ arguments:
     csv_name: csv to write to
 """
 def v_csv(v_val, csv_name):
+
     l = len(v_val)
     csv_path = open(csv_name, 'w', encoding='utf8')
     
@@ -239,6 +243,7 @@ def v_csv(v_val, csv_name):
         np.savetxt(csv_path, v_val[i], delimiter=',', newline=',') # remove last column later
         if i < (l-1):
             csv_path.write('\n')
+
 
 
 if __name__ == '__main__':

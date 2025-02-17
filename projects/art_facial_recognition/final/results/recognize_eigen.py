@@ -3,6 +3,7 @@ import pandas as pd
 
 
 def main():
+
     path = 'projects/art_facial_recognition/final'
     eigen = path + '/eigen'
 
@@ -14,7 +15,6 @@ def main():
     v_val = reshaping(eigen+'/V_values.csv')
 
     # recognition
-    
     """
     given:
         train[0:30], testE[0:10], testM[0:10], testH[0:10] = initial character
@@ -46,11 +46,12 @@ def main():
 
 """
 this method is similar to the reshaping method in reconstruct_images.py but we are are only reshaping the data
-returns data
 arguments:
     path: path to file
+returns data
 """
 def reshaping(path):
+
     # load data
     data = np.genfromtxt(path, delimiter=',')
     l = len(data)
@@ -74,13 +75,14 @@ this method compares testing and training scores
     last 30 are split evenly among six unrelated characters;
     first 10 of each set of test images are initial character
     last 10 of each set are split evenly among two unrelated characters
-returns index of shortest distance between scores corresponding to image with smallest difference
 arguments:
     test_data: testing data of each difficulty
     scores: scores of training data
     V: V values from training SVD
+returns index of shortest distance between scores corresponding to image with smallest difference
 """
 def recognition(test_data, scores, V):
+
     avg = np.mean(test_data)
     Y = test_data - np.ones((len(test_data), 1)) @ avg.reshape((1, -1))
     scores_test = Y @ V
@@ -106,13 +108,14 @@ def recognition(test_data, scores, V):
 
 """
 this method passes in tuples containg values for comparison
-returns list of counts of actual image matches
 arguments:
     testE_reco: easy smallest difference index
     testM_reco: medium smallest difference index
     testH_reco: hard smallest difference index
+returns list of counts of actual image matches
 """
 def check_tuple(testE_reco, testM_reco, testH_reco):
+
     # initial character
     e_init = (testE_reco, 0, 30, 0, 10)
     m_init = (testM_reco, 0, 30, 0, 10)
@@ -145,7 +148,6 @@ def check_tuple(testE_reco, testM_reco, testH_reco):
 """
 this method compares the expected and actual results of the
 recognition method
-returns percentage of actual matches
 arguments:
     temp tuple containing the following values that we will index
         indicies: array holding estimated indicies from recognition
@@ -154,6 +156,7 @@ arguments:
             [start, end)
         in_start: starting index for estimated indicies
         in_end: ending index for estimated indicies
+returns percentage of actual matches
 """
 def accu(temp):
 
@@ -188,6 +191,7 @@ def to_csv(path, init, unrel):
 
      init_df.to_csv(path+'/initial.csv', index=False, header=['SVDs'])
      unrel_df.to_csv(path+'/unrelated.csv', index=False, header=['SVDs'])
+
 
 
 if __name__ == '__main__':
