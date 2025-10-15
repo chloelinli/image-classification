@@ -1,18 +1,17 @@
 """
-This script converts images into usable data in csv format.
+chloe rushing
 
-NOTE: Although converting images to CSV is not necessary, it is useful
-to know how to implement reconstruction and recognition when data is
-originally given in CSV format with no image reference. Images are expected
-to be 300x300 pixels.
+this script converts images into usable pixel data in csv format.
+by utilizing a global variable and random sample variable, we are able
+to allow randomization and reproducibility. this test uses a sample size of 6.
 
-Information found to extract data from images:
-- https://matplotlib.org/stable/tutorials/introductory/images.html
-Added loop for multiple images.
-"""
+although originally the assignment did not call for converting images to csv,
+it is useful for me to know how to implement the reconstruction and recognition
+of images when the data is originally given in csv format without image reference.
+the images are expected to be 300x300 pixels.
 
-"""
-file description and disclaimer?
+source for extracting data from images (i added a loop for multiple images!):
+https://matplotlib.org/stable/tutorials/introductory/images.html
 """
 
 # import statements
