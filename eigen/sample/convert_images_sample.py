@@ -1,13 +1,13 @@
 """
 chloe rushing
 
-this script converts images into usable pixel data in csv format.
-by utilizing a global variable and random sample variable, we are able
+this script converts images into usable pixel data in csv format. 
+by utilizing a global variable and random sample variable, we are able 
 to allow randomization and reproducibility. this test uses a sample size of 6.
 
-although originally the assignment did not call for converting images to csv,
-it is useful for me to know how to implement the reconstruction and recognition
-of images when the data is originally given in csv format without image reference.
+although originally the assignment did not call for converting images to csv, 
+it is useful for me to know how to implement the reconstruction and recognition 
+of images when the data is originally given in csv format without image reference. 
 the images are expected to be 300x300 pixels.
 
 source for extracting data from images (i added a loop for multiple images!):
@@ -29,6 +29,12 @@ NUM_IMG = 6
 random.seed(7)
 
 def main():
+
+    """
+    this function is the sole executor of the image conversion. based on the 
+    sample, it looks for and flattens the pixels from a 2d tuple to a 1d value. 
+    it then saves the converted data as a grey image and writes the pixels to csv
+    """
 
     # paths
     img_path = 'data/rgb'
