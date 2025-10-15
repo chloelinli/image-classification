@@ -20,7 +20,6 @@ import matplotlib.image as im
 import numpy as np
 import random
 import os
-import pandas as pd
 
 # global var for image sample size
 NUM_IMG = 6
