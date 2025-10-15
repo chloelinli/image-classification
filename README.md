@@ -9,4 +9,4 @@ this project was originally a previous MATLAB assignment that asked how accurate
 ### data
 the data is a bunch of pictures off of google images :) hoping to try web scraping in the future!
 
-**Skills**: Python (pandas, NumPy, matplotlib), Microsoft Excel/Google Sheets
+**skills**: python (pandas, numpy, matplotlib), excel/google sheets
