@@ -1,5 +1,5 @@
-eigen/V_values.csv filter=lfs diff=lfs merge=lfs -text
+data/training_images.csv filter=lfs diff=lfs merge=lfs -text
 data/testingE_images.csv filter=lfs diff=lfs merge=lfs -text
 data/testingH_images.csv filter=lfs diff=lfs merge=lfs -text
 data/testingM_images.csv filter=lfs diff=lfs merge=lfs -text
-data/training_images.csv filter=lfs diff=lfs merge=lfs -text
+results/V_values.csv filter=lfs diff=lfs merge=lfs -text
