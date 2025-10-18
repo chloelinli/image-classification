@@ -29,15 +29,12 @@ def main():
     sample = random.sample(list(num_arr), NUM_IMG)
     #print(sample) # [21, 10, 26, 42, 4, 5]
 
-    #load and reshape data to be able to work with as pixels;
-    #need to have each array 300x300 with 3 rgb values for each entry
-
     # load data
     data = np.genfromtxt(path+'/train_images_sample.csv', delimiter=',')
     h = 300
     w = 300
-"""
-    # remove last column of data -> empty from newline in pixel data
+
+    # reshape data to work with as pixels, remove last empty column in pixel data
     data_reshaped = []
     for i in range(6):
         tmp = data[i]
@@ -45,21 +42,18 @@ def main():
         tmp = tmp[0:length-1]
         data_reshaped.append(tmp)
 
-    # list to array to use for plotting
+    # find and save average of sample data pixels
     data_reshaped = np.array(data_reshaped)
-
-    # find average of data
     avg = np.mean(data_reshaped, axis=0)
-    # uncomment to view
     #plt.imshow(np.reshape(avg, (h, w)), cmap='gray')
     #plt.show()
-    # cannot save reshape unless temp var because we're using the original shape later
-    plt.imsave(path+'/average_gray.jpg', np.reshape(avg, (h, w)), cmap='gray')
 
+    # cannot save reshape unless temp var because we're using the original shape later
+    plt.imsave(path+'/avg_sample.jpg', np.reshape(avg, (h, w)), cmap='gray')
 
     # observe how pictures deviate from average;
     # study data by finding the reduced SVD of data - average
-
+"""
     # subtract average from data
     X = data_reshaped - np.ones((6, 1)) @ avg.reshape((1, -1))
 
