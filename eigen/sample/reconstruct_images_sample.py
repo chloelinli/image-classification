@@ -19,6 +19,13 @@ NUM_IMG = 6
 random.seed(7)
 
 def main():
+    
+    """
+    this function is the sole executor of the image reconstruction. it reshapes 
+    the sample pixel data to work with and reconstruct as images of size 300x300 
+    by utilizing svds, looking for the smallest singular values containing 
+    as much dataset information as possible
+    """
 
     # paths
     img_path = 'data/rgb'
