@@ -53,7 +53,7 @@ def main():
 
     # observe how pictures deviate from average;
     # study data by finding the reduced SVD of data - average
-"""
+
     # subtract average from data
     X = data_reshaped - np.ones((6, 1)) @ avg.reshape((1, -1))
 
@@ -62,13 +62,10 @@ def main():
     V = VT.T
     #V = abs(V) # has negative numbers, must be nonnegative floating point between 0-1
 
-
-
     # training: best values to get highest accuracy in reconstruction;
     # different diagonal of s? different singular values?
 
-    # find, plot, and save rescaled energies
-    # # what is largest k such that E_k > 0.90? (90% of information) what about 0.99?
+    # find, plot, and save rescaled energies: what is largest k such that E_k > 0.90? (90% of information) what about 0.99?
     E = np.cumsum(S**2) / np.sum(S**2)
 
     k_90 = 0
@@ -100,7 +97,7 @@ def main():
     for i in range(6):
         img = reconstructed_3[i, :] + avg
         img = np.reshape(img, (h, w))
-        plt.imsave(reconstruct_path+'3/gray3_'+str(i+1)+'.jpg', img, cmap='gray')
+        plt.imsave(reconstruct_path+'3/gray'+str(sample[i])+'_3.jpg', img, cmap='gray')
 
     U_4 = U[:, 0:5]
     S_4 = np.diag(S[0:5])
@@ -111,8 +108,8 @@ def main():
     for i in range(6):
         img = reconstructed_4[i, :] + avg
         img = np.reshape(img, (h, w))
-        plt.imsave(reconstruct_path+'4/gray4_'+str(i+1)+'.jpg', img, cmap='gray')
-"""
+        plt.imsave(reconstruct_path+'4/gray'+str(sample[i])+'_4.jpg', img, cmap='gray')
+
 
 def count_img(dir_path):
 
