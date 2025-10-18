@@ -44,7 +44,7 @@ def main():
     total_img = count_img(img_path)
     num_arr = np.arange(1, total_img+1)
     sample = random.sample(list(num_arr), NUM_IMG)
-    #print(sample_6) -> [21, 10, 26, 42, 4, 5]
+    #print(sample) # [21, 10, 26, 42, 4, 5]
 
     # loop through sample image numbers, convert to grey and save image and pixel values
     for i in range (NUM_IMG):
