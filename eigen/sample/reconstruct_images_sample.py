@@ -73,7 +73,7 @@ def main():
     # training: best values to get highest accuracy in reconstruction;
     # different diagonal of s? different singular values?
 
-    # find, plot, and save rescaled energies: what is largest k such that E_k > 0.90? (90% of information) what about 0.99?
+    # find, plot, and save rescaled energies: what is smallest k such that E_k > 0.90? (90% of information) what about 0.99?
     E = np.cumsum(S**2) / np.sum(S**2)
 
     k_90 = 0
