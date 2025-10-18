@@ -23,13 +23,13 @@ import os
 
 def main():
 
-    path = 'projects/art_facial_recognition/final'
+    path = 'data'
 
     # get total images
-    train_count = count_img(path+'/training/rgb')
+    train_count = count_img(path+'/rgb')
 
     # convert
-    rgb_to_gray(path+'/training/rgb/train_rgb', train_count, path+'/training/gray/train_gray', path+'/training_images.csv')
+    rgb_to_gray(path+'/rgb/rgb', train_count, path+'/gray/gray', path+'/converted_dataset.csv')
 
 
 """
