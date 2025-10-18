@@ -21,25 +21,23 @@ def main():
 
     # paths
     img_path = 'data/rgb'
+    path = 'eigen/sample'
 
     # get sample data of 6 images by creating an array the length of the number of total images and taking a sample of those numbers as a list
     total_img = count_img(img_path)
     num_arr = np.arange(1, total_img+1)
     sample = random.sample(list(num_arr), NUM_IMG)
     #print(sample) # [21, 10, 26, 42, 4, 5]
-"""
-    path = 'projects/art_facial_recognition/small_test'
-
 
     #load and reshape data to be able to work with as pixels;
     #need to have each array 300x300 with 3 rgb values for each entry
 
     # load data
-    data = np.genfromtxt(path+'/train_images_small_test.csv', delimiter=',')
+    data = np.genfromtxt(path+'/train_images_sample.csv', delimiter=',')
     h = 300
     w = 300
-
-    # remove last column of data -> empty from newline in image_to_csv
+"""
+    # remove last column of data -> empty from newline in pixel data
     data_reshaped = []
     for i in range(6):
         tmp = data[i]
