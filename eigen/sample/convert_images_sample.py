@@ -20,6 +20,7 @@ import matplotlib.image as im
 import numpy as np
 import random
 import os
+import pandas as pd
 
 # global var for image sample size
 NUM_IMG = 6
@@ -38,13 +39,15 @@ def main():
     # paths
     img_path = 'data/rgb'
     sample_path = 'eigen/sample'
-    csv_path = open(sample_path+'/train_images_sample.csv', 'w', encoding='utf8')
     
     # get sample data of 6 images by creating an array the length of the number of total images and taking a sample of those numbers as a list
     total_img = count_img(img_path)
     num_arr = np.arange(1, total_img+1)
     sample = random.sample(list(num_arr), NUM_IMG)
     #print(sample) # [21, 10, 26, 42, 4, 5]
+
+    # empty array to save data to
+    converted_data = np.empty((NUM_IMG, 90000))
 
     # loop through sample image numbers, convert to grey and save image and pixel values
     for i in range (NUM_IMG):
@@ -64,15 +67,16 @@ def main():
             rgb_gray = (0.2989*pixels[0]) + (0.5870*pixels[1]) + (0.1140*pixels[2])
             img_reshaped.append(rgb_gray)
 
-        # save as images, append pixel data to array
+        # replace empty position in converted array with data, save as images
         img_reshaped = np.array(img_reshaped)
+        converted_data[i] = img_reshaped
+        
         gray_path = sample_path + '/gray/gray' + str(sample[i]) + '.jpg'
         plt.imsave(gray_path, np.reshape(img_reshaped,  (300, 300)), cmap='gray')
-        np.savetxt(csv_path, img_reshaped, delimiter=',', newline=',')
-
-        # new line if not last image
-        if i < (NUM_IMG-1):
-            csv_path.write('\n')
+        
+    # turn converted data into dataframe and export
+    converted_data_df = pd.DataFrame(converted_data)
+    converted_data_df.to_csv(sample_path+'/train_images_sample.csv', index=False, header=False)
 
 
 def count_img(dir_path):

@@ -13,13 +13,12 @@ Information found to extract data from images:
 Added loop for multiple images.
 """
 
-
 # import statements
 import matplotlib.pyplot as plt
 import matplotlib.image as im # read data as numpy array
 import numpy as np
 import os
-
+import pandas as pd
 
 def main():
 
@@ -29,7 +28,7 @@ def main():
     train_count = count_img(path+'/rgb')
 
     # convert
-    rgb_to_gray(path+'/rgb/rgb', train_count, path+'/gray/gray', path+'/converted_dataset.csv')
+    data = rgb_to_gray(path+'/rgb/rgb', train_count, path+'/gray/gray', path+'/converted_dataset.csv')
 
 
 """
@@ -59,9 +58,9 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
     h = 300
     w = 300
 
-    # open csv to write to
-    csv_path = open(csv_name, 'w', encoding='utf8')
-    
+    # empty array to save data to
+    converted_data = np.empty((num_img, 90000))
+
     # loop - conversion
     for i in range(num_img):
         # current image name
@@ -79,15 +78,15 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
             rgb_gray = (0.2989*pixels[0]) + (0.5870*pixels[1]) + (0.1140*pixels[2])
             img_reshaped.append(rgb_gray)
 
-        # save pictures to folder and csv
+        # replace empty position in converted array with data, save pictures
         img_reshaped = np.array(img_reshaped)
-        plt.imsave(img_gray, np.reshape(img_reshaped,  (h, w)), cmap='gray')
-        np.savetxt(csv_path, img_reshaped, delimiter=',', newline=',')
-        
-        # new line if not last image
-        if i < (num_img-1):
-            csv_path.write('\n')
+        converted_data[i] = img_reshaped
 
+        plt.imsave(img_gray, np.reshape(img_reshaped,  (h, w)), cmap='gray')
+
+    # turn converted data into dataframe and export
+    converted_data_df = pd.DataFrame(converted_data)
+    converted_data_df.to_csv(csv_name, index=False, header=False)
 
 
 if __name__ == '__main__':
