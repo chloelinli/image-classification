@@ -28,12 +28,13 @@ def main():
     train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
 
     # reconstruct training data
-    k_90, k_99 = reconstruct('eigen', train, train_ind)
+    k_90, data_k90, k_99, data_k99 = reconstruct('eigen', train, train_ind)
 
     # calculate accuracies
-    # comment out one call if printing to help differentiate
-    #accuracy(data, k_90, num)
-    #accuracy(data, k_99, num)
+    #print(f"average for k_90 energy: {k_90}")
+    #accuracy(train, data_k90)
+    #print(f"average for k_99: {k_99}")
+    #accuracy(train, data_k99)
 
 
 def train_test_split(arr, test_size, data_size):
@@ -85,7 +86,9 @@ def reconstruct(path, data, ind):
 
     ### returns
     k_90: energy with > 90% info\n
-    k_99: energy with > 99% info
+    data_k90: reconstructed images using > 90% info\n
+    k_99: energy with > 99% info\n
+    data_k99: reconstructed images using > 99% info
     """
 
     size = len(ind)
@@ -197,41 +200,42 @@ def reconstruct(path, data, ind):
         plt.imsave(path+'/reconstructed/k_99/k99_'+str(img_num+1)+'.jpg', img, cmap='gray')
     data_k99 = np.array(data_k99)
 
-    return data_k90, data_k99
+    return k_90, data_k90, k_99, data_k99
 
 
-"""
-calculates average accuracy of reconstructed grayscale pixels
-arguments:
-    original: original data
-    reconstructed: reconstructed data
-    count: number of images
-"""
-def accuracy(original, reconstructed, count):
+def accuracy(original, reconstructed):
 
-    h = w = 300
+    """
+    calculates average accuracy of reconstructed grayscale pixel
+
+    ### arguments:
+    original: training data\n
+    reconstructed: reconstructed data based on passed-in k-value
+    """
+
     err = []
     avg = []
+    size = len(original)
 
     # calculate error (without percent)
-    for i in range(count):
+    for i in range(size):
         o = original[i]
         r = reconstructed[i]
         err.append(abs(o-r)/r)
 
     # calulate accuracy
     err = np.array(err)
-    acc = np.ones((count, h*w)) - err
+    acc = np.ones((size, HEIGHT*WIDTH)) - err
 
     # calculate average accuracy per image
-    for i in range(count):
+    for i in range(size):
         tmp = acc[i]
         avg.append(np.sum(tmp)/len(tmp))
     
     avg = np.array(avg)
 
     # uncomment for manual input into separate csv - want to compile different accuracies in the future
-    #print(avg)
+    print(avg)
 
 
 if __name__ == '__main__':
