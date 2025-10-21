@@ -12,12 +12,18 @@ source for extracting data from images (i added a loop for multiple images!):
 https://matplotlib.org/stable/tutorials/introductory/images.html
 """
 
+
 # import statements
 import matplotlib.pyplot as plt
 import matplotlib.image as im # read data as numpy array
 import numpy as np
 import os
 import pandas as pd
+
+# global variables
+HEIGHT = 300
+WIDTH = 300
+
 
 def main():
 
@@ -64,12 +70,8 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
     csv_name: name of csv to create/write to
     """
 
-    #initialize dimensions
-    h = 300
-    w = 300
-
     # empty array to save data to
-    converted_data = np.empty((num_img, 90000))
+    converted_data = np.empty((num_img, HEIGHT*WIDTH))
 
     # loop - conversion
     for i in range(num_img):
@@ -81,7 +83,7 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
         img_fp = img/255 # to floating point between 0 and 1
         
         # reshape from 3d to 2d to convert from rgb to gray, which will convert from 2d to 1d
-        tmp_reshaped = np.reshape(img_fp, (h*w, 3))
+        tmp_reshaped = np.reshape(img_fp, (HEIGHT*WIDTH, 3))
         img_reshaped = []
         for j in range(len(tmp_reshaped)):
             pixels = tmp_reshaped[j]
@@ -92,7 +94,7 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
         img_reshaped = np.array(img_reshaped)
         converted_data[i] = img_reshaped
 
-        plt.imsave(img_gray, np.reshape(img_reshaped,  (h, w)), cmap='gray')
+        plt.imsave(img_gray, np.reshape(img_reshaped,  (HEIGHT, WIDTH)), cmap='gray')
 
     # turn converted data into dataframe and export
     converted_data_df = pd.DataFrame(converted_data)
