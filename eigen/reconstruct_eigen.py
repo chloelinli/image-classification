@@ -23,16 +23,12 @@ random.seed(7)
 
 def main():
 
-    # paths
-    data_path = 'data/converted_dataset.csv'
-    eigen_path = 'eigen'
-
     # get full data and split into train and test sets
-    data = np.genfromtxt(data_path, delimiter=',')
+    data = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
 
     # reconstruct training data
-    k_90, k_99 = reconstruct(eigen_path, train, train_ind)
+    k_90, k_99 = reconstruct('eigen', train, train_ind)
 
     # calculate accuracies
     # comment out one call if printing to help differentiate
@@ -66,6 +62,13 @@ def train_test_split(arr, test_size, data_size):
     # split indicies based on split sizes then use indicies to split data to return
     train_ind, test_ind = indicies[:train_p], indicies[train_p:]
     train, test = arr[train_ind,:], arr[test_ind,:]
+
+    # export training and test data
+    train_df = pd.DataFrame(train)
+    test_df = pd.DataFrame(test)
+
+    train_df.to_csv('eigen/training.csv', index=False, header=False)
+    test_df.to_csv('eigen/testing.csv', index=False, header=False)
 
     return train, test, train_ind, test_ind
 
@@ -108,7 +111,7 @@ def reconstruct(path, data, ind):
     v_df.to_csv(path+'/V_values.csv', index=False, header=False)
 
     # empty array to save scores to
-    scores_arr = np.empty((size, HEIGHT*WIDTH))
+    scores_arr = np.empty((size, size))
 
     # calculate scores for training images and replace empty position in array
     scores = X @ V
@@ -118,7 +121,7 @@ def reconstruct(path, data, ind):
     
     # export v values
     scores_df = pd.DataFrame(scores_arr)
-    scores_df.to_csv(path+'/scores,csv', index=False, header=False)
+    scores_df.to_csv('results/scores_eigen.csv', index=False, header=False)
 
     # training: best values to get highest accuracy in reconstruction;
     # different diagonal of s? different singular values?
@@ -174,7 +177,7 @@ def reconstruct(path, data, ind):
         data_k90.append(img)
 
         img = np.reshape(img, (HEIGHT, WIDTH))
-        plt.imsave(path+'/reconstructed/k90_'+str(img_num)+'.jpg', img, cmap='gray')
+        plt.imsave(path+'/reconstructed/k_90/k90_'+str(img_num+1)+'.jpg', img, cmap='gray')
     data_k90 = np.array(data_k90)
 
     # svd containing > 99% information
@@ -191,7 +194,7 @@ def reconstruct(path, data, ind):
         data_k99.append(img)
 
         img = np.reshape(img, (HEIGHT, WIDTH))
-        plt.imsave(path+'reconstructed/k99_'+str(img_num)+'.jpg', img, cmap='gray')
+        plt.imsave(path+'/reconstructed/k_99/k99_'+str(img_num+1)+'.jpg', img, cmap='gray')
     data_k99 = np.array(data_k99)
 
     return data_k90, data_k99
