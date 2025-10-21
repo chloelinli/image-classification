@@ -42,17 +42,9 @@ def main():
     h = 300
     w = 300
 
-    # reshape data to work with as pixels, remove last empty column in pixel data
-    data_reshaped = []
-    for i in range(6):
-        tmp = data[i]
-        length = len(tmp)
-        tmp = tmp[0:length-1]
-        data_reshaped.append(tmp)
-
     # find and save average of sample data pixels
-    data_reshaped = np.array(data_reshaped)
-    avg = np.mean(data_reshaped, axis=0)
+    data = np.array(data)
+    avg = np.mean(data, axis=0)
     #plt.imshow(np.reshape(avg, (h, w)), cmap='gray')
     #plt.show()
 
@@ -63,7 +55,7 @@ def main():
     # study data by finding the reduced SVD of data - average
 
     # subtract average from data
-    X = data_reshaped - np.ones((6, 1)) @ avg.reshape((1, -1))
+    X = data - np.ones((6, 1)) @ avg.reshape((1, -1))
 
     # reduced svd
     U, S, VT = np.linalg.svd(X, full_matrices=False)
