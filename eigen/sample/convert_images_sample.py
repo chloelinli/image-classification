@@ -7,12 +7,12 @@ to allow randomization and reproducibility. this test uses a sample size of 6.
 
 although originally the assignment did not call for converting images to csv, 
 it is useful for me to know how to implement the reconstruction and recognition 
-of images when the data is originally given in csv format without image reference. 
-the images are expected to be 300x300 pixels.
+of images when the data is originally given in csv format without image reference.
 
 source for extracting data from images (i added a loop for multiple images!):
 https://matplotlib.org/stable/tutorials/introductory/images.html
 """
+
 
 # import statements
 import matplotlib.pyplot as plt
@@ -22,11 +22,14 @@ import random
 import os
 import pandas as pd
 
-# global var for image sample size
+# global variables
 NUM_IMG = 6
+HEIGHT = 300
+WIDTH = 300
 
 # reproducibility
 random.seed(7)
+
 
 def main():
 
@@ -47,7 +50,7 @@ def main():
     #print(sample) # [21, 10, 26, 42, 4, 5]
 
     # empty array to save data to
-    converted_data = np.empty((NUM_IMG, 90000))
+    converted_data = np.empty((NUM_IMG, HEIGHT*WIDTH))
 
     # loop through sample image numbers, convert to grey and save image and pixel values
     for i in range (NUM_IMG):
@@ -59,7 +62,7 @@ def main():
         img_fp = img/255 # to floating point between 0 and 1
 
         # reshape from 3d to 2d to convert from rgb to grey, converting from 2d to 1d
-        tmp_reshaped = np.reshape(img_fp, (90000, 3))
+        tmp_reshaped = np.reshape(img_fp, (HEIGHT*WIDTH, 3))
         img_reshaped = []
 
         for j in range(len(tmp_reshaped)):

@@ -12,8 +12,10 @@ import numpy as np
 import random
 import os
 
-# global var for image sample size
+# global variables
 NUM_IMG = 6
+HEIGHT = 300
+WIDTH = 300
 
 # reproducibility
 random.seed(7)
@@ -39,17 +41,15 @@ def main():
 
     # load data
     data = np.genfromtxt(path+'/train_images_sample.csv', delimiter=',')
-    h = 300
-    w = 300
 
     # find and save average of sample data pixels
     data = np.array(data)
     avg = np.mean(data, axis=0)
-    #plt.imshow(np.reshape(avg, (h, w)), cmap='gray')
+    #plt.imshow(np.reshape(avg, (HEIGHT, WIDTH)), cmap='gray')
     #plt.show()
 
     # cannot save reshape unless temp var because we're using the original shape later
-    plt.imsave(path+'/avg_sample.jpg', np.reshape(avg, (h, w)), cmap='gray')
+    plt.imsave(path+'/avg_sample.jpg', np.reshape(avg, (HEIGHT, WIDTH)), cmap='gray')
 
     # observe how pictures deviate from average;
     # study data by finding the reduced SVD of data - average
@@ -96,7 +96,7 @@ def main():
 
     for i in range(6):
         img = reconstructed_3[i, :] + avg
-        img = np.reshape(img, (h, w))
+        img = np.reshape(img, (HEIGHT, WIDTH))
         plt.imsave(reconstruct_path+'3/gray'+str(sample[i])+'_3.jpg', img, cmap='gray')
 
     U_4 = U[:, 0:5]
@@ -107,7 +107,7 @@ def main():
 
     for i in range(6):
         img = reconstructed_4[i, :] + avg
-        img = np.reshape(img, (h, w))
+        img = np.reshape(img, (HEIGHT, WIDTH))
         plt.imsave(reconstruct_path+'4/gray'+str(sample[i])+'_4.jpg', img, cmap='gray')
 
 
