@@ -1,16 +1,15 @@
 """
-This script converts images into usable data in csv format.
+chloe rushing
 
-NOTE: Although converting images to CSV is not necessary, it is useful
-to know how to implement reconstruction and recognition when data is
-originally given in CSV format with no image reference. Images are expected
-to be 300x300 pixels.
+this script converts images into usable pixel data in csv format. 
 
-This file converts the training data.
+although originally the assignment did not call for converting images to csv, 
+it is useful for me to know how to implement the reconstruction and recognition 
+of images when the data is originally given in csv format without image reference. 
+the images are expected to be 300x300 pixels.
 
-Information found to extract data from images:
-- https://matplotlib.org/stable/tutorials/introductory/images.html
-Added loop for multiple images.
+source for extracting data from images (i added a loop for multiple images!):
+https://matplotlib.org/stable/tutorials/introductory/images.html
 """
 
 # import statements
@@ -22,6 +21,10 @@ import pandas as pd
 
 def main():
 
+    """
+    main function launching functions to count and convert data
+    """
+
     path = 'data'
 
     # get total images
@@ -31,12 +34,14 @@ def main():
     data = rgb_to_gray(path+'/rgb/rgb', train_count, path+'/gray/gray', path+'/converted_dataset.csv')
 
 
-"""
-counts and returns total files/images contained in directory
-arguments:
-    dir_path: directory containing images to count
-"""
 def count_img(dir_path):
+
+    """
+    counts and returns total files/images contained in directory
+    
+    ### arguments:
+    dir_path: directory containing images to count
+    """
 
     num = 0
     for root_dir, cur_dir, files in os.walk(dir_path):
@@ -44,15 +49,17 @@ def count_img(dir_path):
     return num
 
 
-"""
-converts and saves pictures from rgb to grayscale, and outputs data into csv
-arguments:
-    rgb_path: relative path to directory containing images
-    num_img: total images within given directory
-    gray_path: relative path to directory to save images to
-    csv_name: name of csv to write to
-"""
 def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
+    
+    """
+    converts and saves pictures from rgb to grayscale, and outputs data into csv
+    
+    ### arguments:
+    rgb_path: relative path to dir containing images\n
+    num_img: total images in given dir\n
+    gray_path: relative path to dir to save images to\n
+    csv_name: name of csv to create/write to
+    """
 
     #initialize dimensions
     h = 300
