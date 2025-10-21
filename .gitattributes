@@ -1,2 +1,4 @@
 data/converted_dataset.csv filter=lfs diff=lfs merge=lfs -text
 eigen/V_values.csv filter=lfs diff=lfs merge=lfs -text
+eigen/training.csv filter=lfs diff=lfs merge=lfs -text
+eigen/testing.csv filter=lfs diff=lfs merge=lfs -text
