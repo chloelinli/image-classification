@@ -86,6 +86,9 @@ def count_img(dir_path):
     
     ### arguments:
     dir_path: directory containing images to count
+
+    ### returns
+    num: total file count
     """
 
     num = 0
