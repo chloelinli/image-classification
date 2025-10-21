@@ -3,8 +3,9 @@ chloe rushing
 
 this script reconstructs images using the mean of all the images 
 and singular value decomposition (svds). it allows randomization 
-and reproducibility with a sample size of 6.
+and reproducibility using a seed and global variables.
 """
+
 
 # import statements
 import matplotlib.pyplot as plt
@@ -20,6 +21,7 @@ WIDTH = 300
 # reproducibility
 random.seed(7)
 
+
 def main():
     
     """
@@ -33,7 +35,7 @@ def main():
     img_path = 'data/rgb'
     path = 'eigen/sample'
 
-    # get sample data of 6 images by creating an array the length of the number of total images and taking a sample of those numbers as a list
+    # get sample data by creating an array the length of the number of total images and taking a sample of those numbers as a list
     total_img = count_img(img_path)
     num_arr = np.arange(1, total_img+1)
     sample = random.sample(list(num_arr), NUM_IMG)
@@ -55,7 +57,7 @@ def main():
     # study data by finding the reduced SVD of data - average
 
     # subtract average from data
-    X = data - np.ones((6, 1)) @ avg.reshape((1, -1))
+    X = data - np.ones((NUM_IMG, 1)) @ avg.reshape((1, -1))
 
     # reduced svd
     U, S, VT = np.linalg.svd(X, full_matrices=False)
@@ -80,7 +82,7 @@ def main():
             k_99 = i
             break
 
-    # index 3 (svd 4), index 4 (svd 5), size 6 (index 5)
+    # index 3 (svd 4), index 4 (svd 5), size NUM_IMG (index NUM_IMG-1)
     # not a very small k value so cannot meaningfully compress data (most likely due to small dataset)
     # uncomment to see indices and length
     #print(k_90, k_99, len(E)) 
@@ -94,7 +96,7 @@ def main():
     V_3 = V[:, 0:4]
     reconstructed_3 = scores_3 @ V_3.T
 
-    for i in range(6):
+    for i in range(NUM_IMG):
         img = reconstructed_3[i, :] + avg
         img = np.reshape(img, (HEIGHT, WIDTH))
         plt.imsave(reconstruct_path+'3/gray'+str(sample[i])+'_3.jpg', img, cmap='gray')
@@ -105,7 +107,7 @@ def main():
     V_4 = V[:, 0:5]
     reconstructed_4 = scores_4 @ V_4.T
 
-    for i in range(6):
+    for i in range(NUM_IMG):
         img = reconstructed_4[i, :] + avg
         img = np.reshape(img, (HEIGHT, WIDTH))
         plt.imsave(reconstruct_path+'4/gray'+str(sample[i])+'_4.jpg', img, cmap='gray')
