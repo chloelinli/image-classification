@@ -8,43 +8,69 @@ as well as the pixels being in grayscale.
 # import statements
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 import os
+
+# global var for split size
+TEST_SIZE = 0.2
+
+# reproducibility
+random.seed(7)
 
 
 def main():
 
-    path = 'projects/art_facial_recognition/final'
-    eigen = path + '/eigen'
+    # paths
+    data_path = 'data/converted_dataset.csv'
+    proj_path = 'projects/art_facial_recognition/final'
+    #eigen = path + '/eigen'
 
-    # get total training images
-    num = count_img(path+'/training/gray')
+     # get full data and split into train and test sets
+    data = np.genfromtxt(data_path, delimiter=',')
+    train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
 
     # reshape data and calculate average
-    data, avg = reshaping(path, eigen, num)
+    #data, avg = reshaping(path, eigen, num)
 
     # reconstruction
-    k_90, k_99, v = reconstruct(data, avg, eigen+'/scores.csv', eigen, num, eigen+'/reconstructed/k_9')
+    #k_90, k_99, v = reconstruct(data, avg, eigen+'/scores.csv', eigen, num, eigen+'/reconstructed/k_9')
 
     # calculate accuracies
     # comment out one call if printing to help differentiate
-    accuracy(data, k_90, num)
-    accuracy(data, k_99, num)
+    #accuracy(data, k_90, num)
+    #accuracy(data, k_99, num)
 
     # adds V values from SVDs to csv to use later
-    v_csv(v, eigen+'/V_values.csv')
+    #v_csv(v, eigen+'/V_values.csv')
 
+def train_test_split(arr, test_size, data_size):
 
-"""
-counts and returns total files/images contained in directory
-arguments:
-    dir_path: directory containing images to count
-"""
-def count_img(dir_path):
+    """
+    splits data array based on test set size and dataset size
+    
+    ### arguments:
+    arr: numpy array of dataset\n
+    test_size: percentage of dataset to create as test set\n
+    data_size: size of dataset
 
-    num = 0
-    for root_dir, cur_dir, files in os.walk(dir_path):
-        num += len(files)
-    return num
+    ### returns
+    train: training data\n
+    test: test data\n
+    train_ind: indicies of training data\n
+    test_ind: indicies of test data
+    """
+
+    # store mixed up indicies of array and save split sizes
+    indicies = np.random.permutation(data_size)
+    
+    test_p = int(data_size * test_size)
+    train_p = int(data_size - test_p)
+
+    # split indicies based on split sizes then use indicies to split data to return
+    train_ind, test_ind = indicies[:train_p], indicies[train_p:]
+    train, test = arr[train_ind,:], arr[test_ind,:]
+
+    return train, test, train_ind, test_ind
 
 
 """
