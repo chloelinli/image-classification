@@ -40,7 +40,6 @@ def main():
     #accuracy(data, k_99, num)
 
 
-
 def train_test_split(arr, test_size, data_size):
 
     """
@@ -74,17 +73,16 @@ def train_test_split(arr, test_size, data_size):
 def reconstruct(path, data, ind):
     
     """
-    reconstructs images using (data - avg of data) and returns reconstructed data and V values
+    reconstructs and saves SVD V values and images using (data - avg of data), returns energy containing over 90 and 99% of information
     
-    arguments:
-        data: array of data pulled from csv
-        avg: average of data
-        scores_path: path containing scores of data
-        path: outermost directory to save to
-        count: number of images
-        reconstructed_path: directory to hold reconstructed images
-    returns reconstructed data
-    # return avg and v vals
+    ### arguments:
+    path: path to eigen project folder\n
+    data: training data set\n
+    ind: indicies corresponding to images in training data set
+
+    ### returns
+    k_90: energy with > 90% info\n
+    k_99: energy with > 99% info
     """
 
     size = len(ind)
@@ -231,24 +229,6 @@ def accuracy(original, reconstructed, count):
 
     # uncomment for manual input into separate csv - want to compile different accuracies in the future
     #print(avg)
-
-
-"""
-this method writes the V values to their own csv to be used later
-arguments:
-    v_val: V values from training data SVD
-    csv_name: csv to write to
-"""
-def v_csv(v_val, csv_name):
-
-    l = len(v_val)
-    csv_path = open(csv_name, 'w', encoding='utf8')
-    
-    for i in range(l):
-        np.savetxt(csv_path, v_val[i], delimiter=',', newline=',') # remove last column later
-        if i < (l-1):
-            csv_path.write('\n')
-
 
 
 if __name__ == '__main__':
