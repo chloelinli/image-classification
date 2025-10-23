@@ -4,15 +4,15 @@ import pandas as pd
 
 def main():
 
-    path = 'projects/art_facial_recognition/final'
-    eigen = path + '/eigen'
-
-    # remove last column in csvs
-    scores = reshaping(eigen+'/scores.csv')
-    test_easy = reshaping(path+'/testingE_images.csv')
-    test_medi = reshaping(path+'/testingM_images.csv')
-    test_hard = reshaping(path+'/testingH_images.csv')
-    v_val = reshaping(eigen+'/V_values.csv')
+    # get data
+    avg_data = np.genfromtxt('eigen/avg_data.csv', delimiter=',')
+    V_vals = np.genfromtxt('eigen/V_values.csv', delimiter=',')
+    test_data = np.genfromtxt('eigen/testing.csv', delimiter=',')
+    scores = np.genfromtxt('results/scores_eigen.csv', delimiter=',')
+    print(avg_data.shape)
+    print(V_vals.shape)
+    print(test_data.shape)
+    print(scores.shape)
 
     # recognition
     """
@@ -33,40 +33,15 @@ def main():
         indH[10:15] = 50 to 54
         undH[15:]   = 55 to 59
     """
-    testE_reco = recognition(test_easy, scores, v_val)
-    testM_reco = recognition(test_medi, scores, v_val)
-    testH_reco = recognition(test_hard, scores, v_val)
+    #testE_reco = recognition(test_easy, scores, v_val)
+    #testM_reco = recognition(test_medi, scores, v_val)
+    #testH_reco = recognition(test_hard, scores, v_val)
 
     # check accuracy for each character, save values
-    [init, unrel] = check_tuple(testE_reco, testM_reco, testH_reco)
+    #[init, unrel] = check_tuple(testE_reco, testM_reco, testH_reco)
 
     # export to csv
-    to_csv(path+'/results', init, unrel)
-
-
-"""
-this method is similar to the reshaping method in reconstruct_images.py but we are are only reshaping the data
-arguments:
-    path: path to file
-returns data
-"""
-def reshaping(path):
-
-    # load data
-    data = np.genfromtxt(path, delimiter=',')
-    l = len(data)
-
-    # remove last column
-    data_reshaped = []
-    for i in range(l):
-        tmp = data[i]
-        length = len(tmp)
-        tmp = tmp[:length-1]
-        data_reshaped.append(tmp)
-    
-    # list to array
-    data_reshaped = np.array(data_reshaped)
-    return data_reshaped
+    #to_csv(path+'/results', init, unrel)
 
 
 """
@@ -191,7 +166,6 @@ def to_csv(path, init, unrel):
 
      init_df.to_csv(path+'/initial.csv', index=False, header=['SVDs'])
      unrel_df.to_csv(path+'/unrelated.csv', index=False, header=['SVDs'])
-
 
 
 if __name__ == '__main__':
