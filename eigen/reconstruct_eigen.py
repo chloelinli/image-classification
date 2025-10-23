@@ -30,13 +30,17 @@ def main():
     train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
 
     # reconstruct training data
-    k_90, data_k90, k_99, data_k99 = reconstruct('eigen', train, train_ind)
+    k_90, data_k90, k_99, data_k99, avg, V, scores = reconstruct('eigen', train, train_ind)
 
     # calculate accuracies
     #print(f"average for k_90 energy: {k_90}")
     #accuracy(train, data_k90)
     #print(f"average for k_99: {k_99}")
     #accuracy(train, data_k99)
+
+    # recognition
+    recog = recognition(test, avg, V, scores)
+    print(recog)
 
 
 def train_test_split(arr, test_size, data_size):
@@ -102,8 +106,8 @@ def reconstruct(path, data, ind):
     #plt.imshow(np.reshape(avg, (HEIGHT, WIDTH)), cmap='gray')
     #plt.show()
     plt.imsave(path+'/avg.jpg', np.reshape(avg, (HEIGHT, WIDTH)), cmap='gray')
-    avg_df = pd.DataFrame(avg)
-    avg_df.to_csv(path+'/avg_data.csv', index=False, header=False)
+    #avg_df = pd.DataFrame(avg)
+    #avg_df.to_csv(path+'/avg_data.csv', index=False, header=False)
 
     # observe how pictures deviate from average;
     # study data by finding the reduced SVD of data - average
@@ -204,7 +208,7 @@ def reconstruct(path, data, ind):
         plt.imsave(path+'/reconstructed/k_99/k99_'+str(img_num+1)+'.jpg', img, cmap='gray')
     data_k99 = np.array(data_k99)
 
-    return k_90, data_k90, k_99, data_k99
+    return k_90, data_k90, k_99, data_k99, avg, V, scores
 
 
 def accuracy(original, reconstructed):
@@ -240,6 +244,43 @@ def accuracy(original, reconstructed):
 
     # uncomment for manual input into separate csv - want to compile different accuracies in the future
     print(avg)
+
+
+def recognition(test_data, avg, V, scores):
+
+    """
+    this function compares training and test data scores
+
+    ### arguments:
+    test_data: array of test split\n
+    avg: average of training data\n
+    V: V values from SVD of training data\n
+    scores: scores calculated from training data
+
+    ### returns:
+    min_ind: array of indicies with shortest distance between scores
+    """
+
+    # calculate scores for test data using average of training data
+    Y = test_data - np.ones((len(test_data), 1)) @ avg.reshape((1, -1))
+    scores_test = Y @ V
+
+    # data length for loops
+    scores_len = len(scores)
+    scores_test_len = len(scores_test)
+
+    # initialize placeholder arrays
+    min_ind = np.zeros(scores_test_len)
+    dist = np.zeros(scores_len)
+
+    # find smallest distance between each row of scores_test and scores
+    for i in range(scores_test_len):
+        for j in range(scores_len):
+            dist[j] = np.linalg.norm(scores_test[i] - scores[j], 2)
+        ind = np.argmin(dist)
+        min_ind[i] = ind
+    
+    return min_ind
 
 
 if __name__ == '__main__':
