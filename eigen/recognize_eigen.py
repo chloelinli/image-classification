@@ -9,10 +9,6 @@ def main():
     V_vals = np.genfromtxt('eigen/V_values.csv', delimiter=',')
     test_data = np.genfromtxt('eigen/testing.csv', delimiter=',')
     scores = np.genfromtxt('results/scores_eigen.csv', delimiter=',')
-    print(avg_data.shape)
-    print(V_vals.shape)
-    print(test_data.shape)
-    print(scores.shape)
 
     # recognition
     """
@@ -33,9 +29,8 @@ def main():
         indH[10:15] = 50 to 54
         undH[15:]   = 55 to 59
     """
-    #testE_reco = recognition(test_easy, scores, v_val)
-    #testM_reco = recognition(test_medi, scores, v_val)
-    #testH_reco = recognition(test_hard, scores, v_val)
+    recog = recognition(test_data, avg_data, V_vals, scores)
+    print(recog)
 
     # check accuracy for each character, save values
     #[init, unrel] = check_tuple(testE_reco, testM_reco, testH_reco)
@@ -56,22 +51,21 @@ arguments:
     V: V values from training SVD
 returns index of shortest distance between scores corresponding to image with smallest difference
 """
-def recognition(test_data, scores, V):
+def recognition(test_data, avg, V, scores):
 
-    avg = np.mean(test_data)
+    # calculate scores for test data using average of training data
     Y = test_data - np.ones((len(test_data), 1)) @ avg.reshape((1, -1))
     scores_test = Y @ V
 
+    # data length for loops
     scores_len = len(scores)
     scores_test_len = len(scores_test)
 
+    # initialize placeholder arrays
     min_ind = np.zeros(scores_test_len)
     dist = np.zeros(scores_len)
 
-    """
-    find difference between each row of scores_test and scores
-    smallest distance correctly identifies each character?
-    """
+    # find smallest distance between each row of scores_test and scores
     for i in range(scores_test_len):
         for j in range(scores_len):
             dist[j] = np.linalg.norm(scores_test[i] - scores[j], 2)
