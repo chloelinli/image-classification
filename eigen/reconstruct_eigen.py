@@ -40,7 +40,6 @@ def main():
 
     # recognition
     recog = recognition(test, avg, V, scores)
-    print(recog)
 
 
 def train_test_split(arr, test_size, data_size):
@@ -94,7 +93,10 @@ def reconstruct(path, data, ind):
     k_90: energy with > 90% info\n
     data_k90: reconstructed images using > 90% info\n
     k_99: energy with > 99% info\n
-    data_k99: reconstructed images using > 99% info
+    data_k99: reconstructed images using > 99% info\n
+    avg: average of training data\n
+    V: V values from training SVD\n
+    scores: scores calculated from training data
     """
 
     size = len(ind)
