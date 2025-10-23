@@ -1,9 +1,11 @@
 """
-This script attempts to reconstruct image through the mean of all
-images and singular values. Data is expected to be in CSV format
-with each row representing an image and its 300x300=90000 pixels,
-as well as the pixels being in grayscale.
+chloe rushing
+
+this script reconstructs images using the mean of all the images 
+and singular value decomposition (svds). it allows randomization 
+and reproducibility using a seed and global variables.
 """
+
 
 # import statements
 import matplotlib.pyplot as plt
