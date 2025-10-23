@@ -11,26 +11,7 @@ def main():
     scores = np.genfromtxt('results/scores_eigen.csv', delimiter=',')
 
     # recognition
-    """
-    given:
-        train[0:30], testE[0:10], testM[0:10], testH[0:10] = initial character
-        train[30:35], testE[10:15] = unrelated 1
-        train[35:40], testE[15:]   = unrelated 2
-        train[40:45], testM[10:15] = unrelated 3
-        train[45:50], testM[15:]   = unrelated 4
-        train[50:55], testH[10:15] = unrelated 5
-        train[55:],   testH[15:]   = unrelated 6
-    expected:
-        indE[0:10], indM[0:10], indH[0:10] = 0 to 29
-        indE[10:15] = 30 to 34
-        indE[15:]   = 35 to 39
-        indM[10:15] = 40 to 44
-        indM[15:]   = 45 to 49
-        indH[10:15] = 50 to 54
-        undH[15:]   = 55 to 59
-    """
     recog = recognition(test_data, avg_data, V_vals, scores)
-    print(recog)
 
     # check accuracy for each character, save values
     #[init, unrel] = check_tuple(testE_reco, testM_reco, testH_reco)
@@ -39,19 +20,20 @@ def main():
     #to_csv(path+'/results', init, unrel)
 
 
-"""
-this method compares testing and training scores
-    first 30 of training images are initial character
-    last 30 are split evenly among six unrelated characters;
-    first 10 of each set of test images are initial character
-    last 10 of each set are split evenly among two unrelated characters
-arguments:
-    test_data: testing data of each difficulty
-    scores: scores of training data
-    V: V values from training SVD
-returns index of shortest distance between scores corresponding to image with smallest difference
-"""
 def recognition(test_data, avg, V, scores):
+
+    """
+    this function compares training and test data scores
+
+    ### arguments:
+    test_data: array of test split\n
+    avg: average of training data\n
+    V: V values from SVD of training data\n
+    scores: scores calculated from training data
+
+    ### returns:
+    min_ind: array of indicies with shortest distance between scores
+    """
 
     # calculate scores for test data using average of training data
     Y = test_data - np.ones((len(test_data), 1)) @ avg.reshape((1, -1))
