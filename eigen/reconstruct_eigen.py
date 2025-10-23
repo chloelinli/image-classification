@@ -116,8 +116,6 @@ def reconstruct(path, data, ind):
     #plt.imshow(np.reshape(avg, (HEIGHT, WIDTH)), cmap='gray')
     #plt.show()
     plt.imsave(path+'/avg.jpg', np.reshape(avg, (HEIGHT, WIDTH)), cmap='gray')
-    #avg_df = pd.DataFrame(avg)
-    #avg_df.to_csv(path+'/avg_data.csv', index=False, header=False)
 
     # observe how pictures deviate from average;
     # study data by finding the reduced SVD of data - average
