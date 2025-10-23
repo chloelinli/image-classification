@@ -1,9 +1,10 @@
 """
 chloe rushing
 
-this script reconstructs images using the mean of all the images 
-and singular value decomposition (svds). it allows randomization 
-and reproducibility using a seed and global variables.
+this script attempts classification of image by reconstructing 
+and calculating SVD values to compare scores between training 
+and test data split. it allows randomization and reproducibility 
+using a seed and global variables.
 """
 
 
