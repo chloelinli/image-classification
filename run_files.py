@@ -3,10 +3,7 @@ import os
 # image conversion
 #os.system('python3 convert_images.py')
 
-# eigen - image reconstruction
-os.system('python3 eigen/reconstruct_eigen.py')
-
-# eigen - image recognition
+# eigennvalues
 os.system('python3 eigen/recognize_eigen.py')
 
 # xgboost
