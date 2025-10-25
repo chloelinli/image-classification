@@ -45,10 +45,6 @@ def main():
     # check accuracy for each character, save values
     accu = check_accuracy(pred, test_ind)
     print(accu)
-    #[init, unrel] = check_tuple(testE_reco, testM_reco, testH_reco)
-
-    # export to csv
-    #to_csv(path+'/results', init, unrel)
 
 
 def train_test_split(arr, test_size, data_size):
@@ -314,25 +310,8 @@ def check_accuracy(pred, actual):
     for i in range(size):
         if int(actual[i]) == int(pred[i]):
             correct += 1
-    
 
     return abs(correct-size)/size * 100
-
-
-"""
-this method converts the actual count lists to dataframes and exports to csv
-arguments:
-    path: path to save csvs
-    init: list holding results from initial comparison
-    unrel: list holding results from unrelated comparison
-"""
-def to_csv(path, init, unrel):
-     
-     init_df = pd.DataFrame(init)
-     unrel_df = pd.DataFrame(unrel)
-
-     init_df.to_csv(path+'/initial.csv', index=False, header=['SVDs'])
-     unrel_df.to_csv(path+'/unrelated.csv', index=False, header=['SVDs'])
 
 
 if __name__ == '__main__':
