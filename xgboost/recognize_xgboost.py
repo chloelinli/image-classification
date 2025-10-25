@@ -77,16 +77,19 @@ def train_test_split(arr, test_size, data_size):
     return train, test, train_ind, test_ind
 
 
-"""
-this method initializes the prediction with the average of the training data
-and updates the prediction with the prediction, data, and number of iterations, 
-and then saves the final prediction as a csv
-argument:
-    path: folder to save data to
-    data: training data to compute initial prediction score
-returns final prediction
-"""
 def fit(data, ind):
+
+    """
+    initializes prediction with average of training data indicies and updates 
+    using tree of prediction, data, and iterations, returning the fitted predictions
+        
+    ### arguments:
+    data: training data\n
+    ind: training data indicies
+
+    ### returns
+    prediction: fitted predictions
+    """
 
     # initialize predictions with average
     prediction = np.mean(ind)
