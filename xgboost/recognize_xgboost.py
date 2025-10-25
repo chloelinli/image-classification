@@ -4,6 +4,7 @@ import pandas as pd
 
 # global variables
 TEST_SIZE = 0.2
+NUM_LOOPS = 5
 
 # reproducibility
 np.random.seed(7)
@@ -14,12 +15,6 @@ def main():
     # get full data and split into train test sets
     data = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
-
-    # import and reshape data
-    #training = reshape(path+'/training_images.csv')
-    #test_easy = reshape(path+'/testingE_images.csv')
-    #test_medi = reshape(path+'/testingM_images.csv')
-    #test_hard = reshape(path+'/testingH_images.csv')
 
     # compute training scores
     #scores = train(path+'/xgboost', training)
@@ -42,31 +37,6 @@ def main():
 
 
 """
-this method is a direct copy from recognize_eigen
-arguments:
-    path: path to csv
-returns data
-"""
-def reshape(path):
-    
-    # load data
-    data = np.genfromtxt(path, delimiter=',')
-    l = len(data)
-    
-    # remove last column
-    data_reshaped = []
-    for i in range(l):
-        tmp = data[i]
-        length = len(tmp)
-        tmp = tmp[:length-1]
-        data_reshaped.append(tmp)
-
-    # list to array
-    data_reshaped = np.array(data_reshaped)
-    return data_reshaped
-
-
-"""
 this method initializes the prediction with the average of the training data
 and updates the prediction with the prediction, data, and number of iterations, 
 and then saves the final prediction as a csv
@@ -82,7 +52,7 @@ def train(path, data):
     prediction = np.full_like(data, prediction)
 
     # update predictions
-    prediction = update_predictions(prediction, data, 5)
+    prediction = update_predictions(prediction, data, NUM_LOOPS)
 
     # save to csv
     df = pd.DataFrame(prediction)
@@ -146,7 +116,7 @@ returns final testing prediction scores
 def test_scores(pred, data):
 
     temp = pred[:data.shape[0]]
-    model_prediction = update_predictions(temp, data, 10)
+    model_prediction = update_predictions(temp, data, NUM_LOOPS)
 
     return model_prediction
 
