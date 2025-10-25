@@ -16,6 +16,10 @@ def main():
     data = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
 
+    # fit training data
+    model = fit(train, train_ind)
+    print(model)
+
     # compute training scores
     #scores = train(path+'/xgboost', training)
 
@@ -36,6 +40,43 @@ def main():
     #to_csv(path+'/results/initial.csv', path+'/results/unrelated.csv', init, unrel)
 
 
+def train_test_split(arr, test_size, data_size):
+
+    """
+    splits data array based on test set size and dataset size
+    
+    ### arguments:
+    arr: numpy array of dataset\n
+    test_size: percentage of dataset to create as test set\n
+    data_size: size of dataset
+
+    ### returns
+    train: training data\n
+    test: test data\n
+    train_ind: indicies of training data\n
+    test_ind: indicies of test data
+    """
+
+    # store mixed up indicies of array and save split sizes
+    indicies = np.random.permutation(data_size)
+    
+    test_p = int(data_size * test_size)
+    train_p = int(data_size - test_p)
+
+    # split indicies based on split sizes then use indicies to split data to return
+    train_ind, test_ind = indicies[:train_p], indicies[train_p:]
+    train, test = arr[train_ind,:], arr[test_ind,:]
+
+    # export training and test data
+    train_df = pd.DataFrame(train)
+    test_df = pd.DataFrame(test)
+
+    train_df.to_csv('eigen/training.csv', index=False, header=False)
+    test_df.to_csv('eigen/testing.csv', index=False, header=False)
+
+    return train, test, train_ind, test_ind
+
+
 """
 this method initializes the prediction with the average of the training data
 and updates the prediction with the prediction, data, and number of iterations, 
@@ -45,18 +86,18 @@ argument:
     data: training data to compute initial prediction score
 returns final prediction
 """
-def train(path, data):
+def fit(data, ind):
 
     # initialize predictions with average
-    prediction = np.mean(data)
+    prediction = np.mean(ind)
     prediction = np.full_like(data, prediction)
 
     # update predictions
     prediction = update_predictions(prediction, data, NUM_LOOPS)
 
     # save to csv
-    df = pd.DataFrame(prediction)
-    df.to_csv(path+'/scores.csv', index=False)
+    #df = pd.DataFrame(prediction)
+    #f.to_csv(path+'/scores.csv', index=False)
 
     return prediction
 
@@ -263,43 +304,6 @@ def to_csv(p_init, p_unrel, init, unrel):
 
     init_df.to_csv(p_init, index=False)
     unrel_df.to_csv(p_unrel, index=False)
-
-
-def train_test_split(arr, test_size, data_size):
-
-    """
-    splits data array based on test set size and dataset size
-    
-    ### arguments:
-    arr: numpy array of dataset\n
-    test_size: percentage of dataset to create as test set\n
-    data_size: size of dataset
-
-    ### returns
-    train: training data\n
-    test: test data\n
-    train_ind: indicies of training data\n
-    test_ind: indicies of test data
-    """
-
-    # store mixed up indicies of array and save split sizes
-    indicies = np.random.permutation(data_size)
-    
-    test_p = int(data_size * test_size)
-    train_p = int(data_size - test_p)
-
-    # split indicies based on split sizes then use indicies to split data to return
-    train_ind, test_ind = indicies[:train_p], indicies[train_p:]
-    train, test = arr[train_ind,:], arr[test_ind,:]
-
-    # export training and test data
-    train_df = pd.DataFrame(train)
-    test_df = pd.DataFrame(test)
-
-    train_df.to_csv('eigen/training.csv', index=False, header=False)
-    test_df.to_csv('eigen/testing.csv', index=False, header=False)
-
-    return train, test, train_ind, test_ind
 
 
 if __name__ == '__main__':
