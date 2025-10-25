@@ -288,20 +288,19 @@ def recognition(test_data, avg, V, scores):
     return min_ind
 
 
-"""
-this method compares the expected and actual results of the
-recognition method
-arguments:
-    temp tuple containing the following values that we will index
-        indicies: array holding estimated indicies from recognition
-        start: expected starting index for checking
-        end: expected ending index for checking
-            [start, end)
-        in_start: starting index for estimated indicies
-        in_end: ending index for estimated indicies
-returns percentage of actual matches
-"""
 def check_accuracy(pred, actual):
+
+    """
+    this function the expected and actual image positions generated 
+    from the recognitino method
+    
+    ### arguments:
+    pred: expected image indicies\n
+    actual: actual image indicies
+
+    ### returns:
+    error rate of exact classification using formula (measured - given) / given * 100
+    """
 
     correct = 0
 
