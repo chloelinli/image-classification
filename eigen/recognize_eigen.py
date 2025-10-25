@@ -55,7 +55,7 @@ def train_test_split(arr, test_size, data_size):
     test_size: percentage of dataset to create as test set\n
     data_size: size of dataset
 
-    ### returns
+    ### returns:
     train: training data\n
     test: test data\n
     train_ind: indicies of training data\n
@@ -92,7 +92,7 @@ def reconstruct(path, data, ind):
     data: training data set\n
     ind: indicies corresponding to images in training data set
 
-    ### returns
+    ### returns:
     k_90: energy with > 90% info\n
     data_k90: reconstructed images using > 90% info\n
     k_99: energy with > 99% info\n
@@ -133,7 +133,7 @@ def reconstruct(path, data, ind):
         s = np.array(scores[i])
         scores_arr[i] = s
     
-    # export v values
+    # export scores
     scores_df = pd.DataFrame(scores_arr)
     scores_df.to_csv('results/scores_eigen.csv', index=False, header=False)
 
