@@ -11,7 +11,6 @@ using a seed and global variables.
 # import statements
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 import pandas as pd
 
 # global variables
@@ -20,7 +19,7 @@ HEIGHT = 300
 WIDTH = 300
 
 # reproducibility
-random.seed(7)
+np.random.seed(7)
 
 
 def main():
