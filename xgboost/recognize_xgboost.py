@@ -1,36 +1,44 @@
+# import statements
 import numpy as np
 import pandas as pd
+
+# global variables
+TEST_SIZE = 0.2
+
+# reproducibility
+np.random.seed(7)
 
 
 def main():
 
-    # paths
-    path = 'projects/art_facial_recognition/final'
+    # get full data and split into train test sets
+    data = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
+    train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
 
     # import and reshape data
-    training = reshape(path+'/training_images.csv')
-    test_easy = reshape(path+'/testingE_images.csv')
-    test_medi = reshape(path+'/testingM_images.csv')
-    test_hard = reshape(path+'/testingH_images.csv')
+    #training = reshape(path+'/training_images.csv')
+    #test_easy = reshape(path+'/testingE_images.csv')
+    #test_medi = reshape(path+'/testingM_images.csv')
+    #test_hard = reshape(path+'/testingH_images.csv')
 
     # compute training scores
-    scores = train(path+'/xgboost', training)
+    #scores = train(path+'/xgboost', training)
 
     # compute test scores
-    score_e = test_scores(scores, test_easy)
-    score_m = test_scores(scores, test_medi)
-    score_h = test_scores(scores, test_hard)
+    #score_e = test_scores(scores, test_easy)
+    #score_m = test_scores(scores, test_medi)
+    #score_h = test_scores(scores, test_hard)
 
     # recognition
-    reco_e = recognize(scores, score_e)
-    reco_m = recognize(scores, score_m)
-    reco_h = recognize(scores, score_h)
+    #reco_e = recognize(scores, score_e)
+    #reco_m = recognize(scores, score_m)
+    #reco_h = recognize(scores, score_h)
 
     # check accuracy for each character, save values
-    [init, unrel] = check_tuple(reco_e, reco_m, reco_h)
+    #[init, unrel] = check_tuple(reco_e, reco_m, reco_h)
 
     # to csv, as xgboost
-    to_csv(path+'/results/initial.csv', path+'/results/unrelated.csv', init, unrel)
+    #to_csv(path+'/results/initial.csv', path+'/results/unrelated.csv', init, unrel)
 
 
 """
