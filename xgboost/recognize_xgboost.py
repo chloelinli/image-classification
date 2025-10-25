@@ -18,10 +18,6 @@ def main():
 
     # fit training data
     model = fit(train, train_ind)
-    print(model)
-
-    # compute training scores
-    #scores = train(path+'/xgboost', training)
 
     # compute test scores
     #score_e = test_scores(scores, test_easy)
@@ -98,9 +94,9 @@ def fit(data, ind):
     # update predictions
     prediction = update_predictions(prediction, data, NUM_LOOPS)
 
-    # save to csv
-    #df = pd.DataFrame(prediction)
-    #f.to_csv(path+'/scores.csv', index=False)
+    # export scores
+    scores_df = pd.DataFrame(prediction)
+    scores_df.to_csv('results/scores_xgboost.csv', index=False, header=False)    
 
     return prediction
 
