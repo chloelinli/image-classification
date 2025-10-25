@@ -50,7 +50,7 @@ def train_test_split(arr, test_size, data_size):
     test_size: percentage of dataset to create as test set\n
     data_size: size of dataset
 
-    ### returns
+    ### returns:
     train: training data\n
     test: test data\n
     train_ind: indicies of training data\n
@@ -87,7 +87,7 @@ def fit(data, ind):
     data: training data\n
     ind: training data indicies
 
-    ### returns
+    ### returns:
     prediction: fitted predictions
     """
 
@@ -105,15 +105,19 @@ def fit(data, ind):
     return prediction
 
 
-"""
-this method updates prediction scores using xgboost from scratch
-arguments:
-    prediction: predicted values to update
-    data: data representing true values
-    num_iterations: number of times to update prediction
-returns final prediction scores
-"""
 def update_predictions(prediction, data, num_iterations):
+    
+    """
+    updates prediction scores with gradient and hessian
+
+    ### arguments:
+    prediction: predicted values to update\n
+    data: data representing true values\n
+    num_iterations: number of times to update prediction
+
+    ### returns:
+    prediction: final prediction scores
+    """
 
     # for each iteration, compute gradient and hessian, update predictions
     for i in range(num_iterations):
@@ -130,15 +134,19 @@ def update_predictions(prediction, data, num_iterations):
     return prediction
 
 
-"""
-this method computes the gradient boosting and hessian values
-for the current prediction
-arguments:
-    data: data containing true values
-    pred: current prediction values
-returns gradient and hessian
-"""
 def gradient_hessian_helper(data, pred):
+
+    """
+    computes gradient boosting and hessian values for current prediction
+
+    ### arguments:
+    data: data containing true values\n
+    pred: current prediction values
+
+    ### returns
+    grad: gradient\n
+    hess: hessian
+    """
 
     grad = pred - data
 
