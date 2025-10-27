@@ -110,27 +110,6 @@ def fit(data, ind):
     return gradients, steps
 
 
-def gradient_hessian_helper(pred, data):
-
-    """
-    computes gradient boosting and hessian values for current prediction
-
-    ### arguments:
-    pred: current prediction values\n
-    data: data containing true values
-
-    ### returns
-    grad: gradient\n
-    hess: hessian
-    """
-
-    grad = pred - data
-
-    # hessian is always 1 for mean squared error (2nd derivative)
-    hess = np.ones_like(pred)
-
-    return grad, hess
-
 
 """
 this method computes testing scores with the test data and training 
