@@ -107,16 +107,21 @@ def fit(data, ind):
 
 
 
-"""
-this method computes testing scores with the test data and training 
-prediction scores. to avoid any issues with array broadcasting, we 
-can cut off part of the prediction values to the same size of the data
-arguments:
-    pred: final prediction from training data
-    data: test data
-returns final testing prediction scores
-"""
+
 def predict(data, gradients, steps):
+
+    """
+    predicts testing image indicies using tree of iterations, vector gradients, 
+    and step size scalars computed from training data
+
+    ### arguments:
+    data: test data\n
+    gradients: feature-wise update vectors\n
+    steps: scalar weights for each update
+
+    ### returns:
+    prediction: array of indicies predicted to map to test data pixels
+    """
 
     # initialize prediction
     prediction = np.zeros(len(data))
