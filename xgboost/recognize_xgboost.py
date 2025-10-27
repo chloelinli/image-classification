@@ -107,10 +107,6 @@ def fit(data, ind):
         step = np.dot(predict, error) / np.dot(predict, predict) + 1e-8
         steps.append(step)
 
-    # export scores
-    #scores_df = pd.DataFrame(prediction)
-    #scores_df.to_csv('results/scores_xgboost.csv', index=False, header=False)
-
     return gradients, steps
 
 
