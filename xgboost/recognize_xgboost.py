@@ -17,11 +17,11 @@ def main():
     train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
 
     # fit training data
-    base_pred, steps, scores = fit(train, train_ind)
+    gradients, steps = fit(train, train_ind)
 
     # compute test scores
-    scores_test = predict(test, base_pred, steps)
-    print(scores_test)
+    #scores_test = predict(test, base_pred, steps)
+    #print(scores_test)
     #score_e = test_scores(scores, test_easy)
     #score_m = test_scores(scores, test_medi)
     #score_h = test_scores(scores, test_hard)
@@ -91,21 +91,25 @@ def fit(data, ind):
 
     # initialize predictions
     base_pred = np.mean(ind)
-    prediction = np.full_like(data, base_pred, dtype=np.float64)
+    error = ind - base_pred
+    gradients = []
     steps = []
 
     # update predictions using gradient, hessian, steps
     for i in range(NUM_LOOPS):
-        grad, hess = gradient_hessian_helper(prediction, data)
-        step = np.sum(grad) / np.sum(hess)
-        prediction -= step * grad
+        grad = np.mean(data*error[:,None], axis=0)
+        gradients.append(grad)
+
+        predict = data @ grad
+
+        step = np.dot(predict, error) / np.dot(predict, predict) + 1e-8
         steps.append(step)
 
     # export scores
-    scores_df = pd.DataFrame(prediction)
-    scores_df.to_csv('results/scores_xgboost.csv', index=False, header=False)
+    #scores_df = pd.DataFrame(prediction)
+    #scores_df.to_csv('results/scores_xgboost.csv', index=False, header=False)
 
-    return base_pred, steps, prediction
+    return gradients, steps
 
 
 def gradient_hessian_helper(pred, data):
@@ -142,12 +146,12 @@ returns final testing prediction scores
 def predict(data, pred, steps):
 
     # initialize prediction
-    prediction = np.full_like(data, pred)
+    prediction = np.mean(data)
+    prediction = np.full_like(data, prediction, dtype=np.float64)
 
     # use trained steps to update predictions for test data
     for step in steps:
-        grad = np.ones_like(prediction)
-        prediction -= step * grad
+        prediction -= step * prediction
 
     return prediction
 
