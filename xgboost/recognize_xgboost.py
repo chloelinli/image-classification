@@ -22,7 +22,8 @@ def main():
     # compute test scores
     test_preds = predict(test, gradients, steps)
 
-    # recognition
+    # check accuracy of predictions
+    accu = check_accuracy(test_preds, test_ind)
     #reco_e = recognize(scores, score_e)
     #reco_m = recognize(scores, score_m)
     #reco_h = recognize(scores, score_h)
@@ -131,6 +132,30 @@ def predict(data, gradients, steps):
         prediction += steps[i] * update
 
     return np.round(prediction).astype(int)
+
+def check_accuracy(pred, actual):
+
+    """
+    this function the expected and actual image positions generated 
+    from the predictions tree
+    
+    ### arguments:
+    pred: expected image indicies\n
+    actual: actual image indicies
+
+    ### returns:
+    error rate of exact classification using formula (measured - given) / given * 100
+    """
+
+    correct = 0
+
+    size = len(actual)
+    
+    for i in range(size):
+        if int(actual[i]) == int(pred[i]):
+            correct += 1
+
+    return 100 - (abs(correct-size)/size * 100)
 
 
 """
