@@ -17,9 +17,11 @@ def main():
     train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
 
     # fit training data
-    model = fit(train, train_ind)
+    base_pred, steps, model = fit(train, train_ind)
 
     # compute test scores
+    #scores_test = predict(test, model)
+    #predict(test, model)
     #score_e = test_scores(scores, test_easy)
     #score_m = test_scores(scores, test_medi)
     #score_h = test_scores(scores, test_hard)
@@ -87,18 +89,23 @@ def fit(data, ind):
     prediction: fitted predictions
     """
 
-    # initialize predictions with average
-    prediction = np.mean(ind)
-    prediction = np.full_like(data, prediction)
+    # initialize predictions
+    base_pred = np.mean(ind)
+    prediction = np.full_like(data, base_pred, dtype=np.float64)
+    steps = []
 
-    # update predictions
-    prediction = update_predictions(prediction, data, NUM_LOOPS)
+    # update predictions using gradient, hessian, steps
+    for i in range(NUM_LOOPS):
+        grad, hess = gradient_hessian_helper(prediction, data)
+        step = np.sum(grad) / np.sum(hess)
+        prediction -= step * grad
+        steps.append(step)
 
     # export scores
     scores_df = pd.DataFrame(prediction)
-    scores_df.to_csv('results/scores_xgboost.csv', index=False, header=False)    
+    scores_df.to_csv('results/scores_xgboost.csv', index=False, header=False)
 
-    return prediction
+    return base_pred, steps, prediction
 
 
 def update_predictions(prediction, data, num_iterations):
@@ -130,14 +137,14 @@ def update_predictions(prediction, data, num_iterations):
     return prediction
 
 
-def gradient_hessian_helper(data, pred):
+def gradient_hessian_helper(pred, data):
 
     """
     computes gradient boosting and hessian values for current prediction
 
     ### arguments:
-    data: data containing true values\n
-    pred: current prediction values
+    pred: current prediction values\n
+    data: data containing true values
 
     ### returns
     grad: gradient\n
@@ -161,12 +168,13 @@ arguments:
     data: test data
 returns final testing prediction scores
 """
-def test_scores(pred, data):
+def predict(data, pred):
 
-    temp = pred[:data.shape[0]]
-    model_prediction = update_predictions(temp, data, NUM_LOOPS)
+    print(len(data), len(pred))
 
-    return model_prediction
+    #model_prediction = update_predictions(pred, data, NUM_LOOPS)
+
+    #return model_prediction
 
 
 """
