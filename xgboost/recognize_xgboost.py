@@ -79,14 +79,16 @@ def fit(data, ind):
 
     """
     initializes prediction with average of training data indicies and updates 
-    using tree of prediction, data, and iterations, returning the fitted predictions
+    using tree of iterations, update vector gradients, and step size scalers, 
+    returning the fitted predictions
         
     ### arguments:
     data: training data\n
     ind: training data indicies
 
     ### returns:
-    prediction: fitted predictions
+    gradients: feature-wise update vectors\n
+    steps: scalar weights for each update
     """
 
     # initialize predictions
