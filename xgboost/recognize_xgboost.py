@@ -108,35 +108,6 @@ def fit(data, ind):
     return base_pred, steps, prediction
 
 
-def update_predictions(prediction, data, num_iterations):
-    
-    """
-    updates prediction scores with gradient and hessian
-
-    ### arguments:
-    prediction: predicted values to update\n
-    data: data representing true values\n
-    num_iterations: number of times to update prediction
-
-    ### returns:
-    prediction: final prediction scores
-    """
-
-    # for each iteration, compute gradient and hessian, update predictions
-    for i in range(num_iterations):
-
-        # compute gradient and hessian
-        grad, hess = gradient_hessian_helper(data, prediction)
-
-        # compute optimal step size to update predictions
-        step = np.sum(grad) / np.sum(hess)
-
-        # update predictions
-        prediction = prediction - step * grad
-        
-    return prediction
-
-
 def gradient_hessian_helper(pred, data):
 
     """
