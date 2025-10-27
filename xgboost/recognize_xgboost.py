@@ -17,11 +17,11 @@ def main():
     train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
 
     # fit training data
-    base_pred, steps, model = fit(train, train_ind)
+    base_pred, steps, scores = fit(train, train_ind)
 
     # compute test scores
-    #scores_test = predict(test, model)
-    #predict(test, model)
+    scores_test = predict(test, base_pred, steps)
+    print(scores_test)
     #score_e = test_scores(scores, test_easy)
     #score_m = test_scores(scores, test_medi)
     #score_h = test_scores(scores, test_hard)
@@ -139,13 +139,17 @@ arguments:
     data: test data
 returns final testing prediction scores
 """
-def predict(data, pred):
+def predict(data, pred, steps):
 
-    print(len(data), len(pred))
+    # initialize prediction
+    prediction = np.full_like(data, pred)
 
-    #model_prediction = update_predictions(pred, data, NUM_LOOPS)
+    # use trained steps to update predictions for test data
+    for step in steps:
+        grad = np.ones_like(prediction)
+        prediction -= step * grad
 
-    #return model_prediction
+    return prediction
 
 
 """
