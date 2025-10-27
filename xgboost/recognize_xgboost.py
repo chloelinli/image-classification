@@ -20,8 +20,8 @@ def main():
     gradients, steps = fit(train, train_ind)
 
     # compute test scores
-    #scores_test = predict(test, base_pred, steps)
-    #print(scores_test)
+    scores_test = predict(test, gradients, steps)
+    print(scores_test)
     #score_e = test_scores(scores, test_easy)
     #score_m = test_scores(scores, test_medi)
     #score_h = test_scores(scores, test_hard)
@@ -120,17 +120,18 @@ arguments:
     data: test data
 returns final testing prediction scores
 """
-def predict(data, pred, steps):
+def predict(data, gradients, steps):
 
     # initialize prediction
-    prediction = np.mean(data)
-    prediction = np.full_like(data, prediction, dtype=np.float64)
+    prediction = np.zeros(len(data))
 
-    # use trained steps to update predictions for test data
-    for step in steps:
-        prediction -= step * prediction
+    # use trained steps and gradients to update predictions for test data
+    for i in range(NUM_LOOPS):
 
-    return prediction
+        update = data @ gradients[i]
+        prediction += steps[i] * update
+
+    return np.round(prediction).astype(int)
 
 
 """
