@@ -290,7 +290,7 @@ def check_accuracy(pred, actual):
 
     """
     this function the expected and actual image positions generated 
-    from the recognitino method
+    from the recognition method
     
     ### arguments:
     pred: expected image indicies\n
