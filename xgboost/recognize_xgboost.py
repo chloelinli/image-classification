@@ -106,8 +106,6 @@ def fit(data, ind):
     return gradients, steps
 
 
-
-
 def predict(data, gradients, steps):
 
     """
