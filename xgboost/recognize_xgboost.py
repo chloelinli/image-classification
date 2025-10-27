@@ -20,11 +20,7 @@ def main():
     gradients, steps = fit(train, train_ind)
 
     # compute test scores
-    scores_test = predict(test, gradients, steps)
-    print(scores_test)
-    #score_e = test_scores(scores, test_easy)
-    #score_m = test_scores(scores, test_medi)
-    #score_h = test_scores(scores, test_hard)
+    test_preds = predict(test, gradients, steps)
 
     # recognition
     #reco_e = recognize(scores, score_e)
