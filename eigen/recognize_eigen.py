@@ -42,7 +42,10 @@ def main():
 
     # check accuracy for each character, save values
     accu = check_accuracy(pred, test_ind)
-    print(accu)
+    print(f'recognition accuracy: {accu:.2f}%')
+
+    # export predicted vs actual values
+
 
 
 def train_test_split(arr, test_size, data_size):
@@ -308,7 +311,7 @@ def check_accuracy(pred, actual):
         if int(actual[i]) == int(pred[i]):
             correct += 1
 
-    return abs(correct-size)/size * 100
+    return 100 - (abs(correct-size)/size * 100)
 
 
 if __name__ == '__main__':
