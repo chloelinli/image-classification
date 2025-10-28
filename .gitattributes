@@ -3,4 +3,3 @@ eigen/V_values.csv filter=lfs diff=lfs merge=lfs -text
 eigen/training.csv filter=lfs diff=lfs merge=lfs -text
 eigen/testing.csv filter=lfs diff=lfs merge=lfs -text
 results/scores_eigen.csv filter=lfs diff=lfs merge=lfs -text
-results/scores_xgboost.csv filter=lfs diff=lfs merge=lfs -text
