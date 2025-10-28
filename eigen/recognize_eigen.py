@@ -42,7 +42,7 @@ def main():
 
     # check accuracy for each character, save values
     accu = check_accuracy(pred, test_ind)
-    print(f'recognition accuracy: {accu:.2f}%')
+    print(f"recognition accuracy using svds: {accu:.2f}%")
 
     # export predicted vs actual values
     df = pd.DataFrame({'predicted':pred, 'actual':test_ind})
