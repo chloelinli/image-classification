@@ -7,9 +7,7 @@ import os
 os.system('python3 eigen/recognize_eigen.py')
 
 # xgboost
-"""
-os.system('python3 projects/art_facial_recognition/final/results/recognize_xgboost.py')
-"""
+os.system('python3 xgboost/recognize_xgboost.py')
 
 """
 graphing analysis
