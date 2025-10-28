@@ -45,7 +45,8 @@ def main():
     print(f'recognition accuracy: {accu:.2f}%')
 
     # export predicted vs actual values
-
+    df = pd.DataFrame({'predicted':pred, 'actual':test_ind})
+    df.to_csv('results/eigen.csv', index=False)
 
 
 def train_test_split(arr, test_size, data_size):
@@ -276,7 +277,7 @@ def recognition(test_data, avg, V, scores):
     scores_test_len = len(scores_test)
 
     # initialize placeholder arrays
-    min_ind = np.zeros(scores_test_len)
+    min_ind = np.zeros(scores_test_len).astype(int)
     dist = np.zeros(scores_len)
 
     # find smallest distance between each row of scores_test and scores
@@ -284,7 +285,7 @@ def recognition(test_data, avg, V, scores):
         for j in range(scores_len):
             dist[j] = np.linalg.norm(scores_test[i] - scores[j], 2)
         ind = np.argmin(dist)
-        min_ind[i] = ind
+        min_ind[i] = int(ind)
     
     return min_ind
 
@@ -308,7 +309,7 @@ def check_accuracy(pred, actual):
     size = len(actual)
     
     for i in range(size):
-        if int(actual[i]) == int(pred[i]):
+        if actual[i] == pred[i]:
             correct += 1
 
     return 100 - (abs(correct-size)/size * 100)
