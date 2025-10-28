@@ -35,7 +35,7 @@ def main():
 
     # check accuracy of predictions
     accu = check_accuracy(test_preds, test_ind)
-    print(f"recognition accuracy using xgboost: {accu:.2f}%")
+    print(f"recognition accuracy: {accu:.2f}%")
 
     # export predicted vs actual values
     df = pd.DataFrame({'predicted':test_preds, 'actual':test_ind})
