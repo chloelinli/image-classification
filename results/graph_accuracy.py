@@ -6,17 +6,28 @@ import pandas as pd
 
 def main():
 
-    path = 'projects/art_facial_recognition/final/results/'
+    methods = [
+        'eigen',
+        'xgboost'
+    ]
+
+    plt.figure(figsize=(5,5))
+    plt.plot([0,60], [0,60], 'g-')
+    plt.xlabel('True Values')
+    plt.ylabel('Predicted Values')
+    plt.axis('equal')
+    plt.show()
+
 
     # grab headers and data as list
-    [init_methods, init_rows] = prep(path+'initial.csv')
-    [unrel_methods, unrel_rows] = prep(path+'unrelated.csv')
+    #[init_methods, init_rows] = prep(path+'initial.csv')
+    #[unrel_methods, unrel_rows] = prep(path+'unrelated.csv')
 
     # plot initial character as normal
-    plot(init_methods, init_rows, ['Easy', 'Medium', 'Hard'])
+    #plot(init_methods, init_rows, ['Easy', 'Medium', 'Hard'])
 
     # subplot unrelated character
-    subplot(unrel_methods, unrel_rows, ['Easy', 'Medium', 'Hard'])
+    #subplot(unrel_methods, unrel_rows, ['Easy', 'Medium', 'Hard'])
 
 
 """
