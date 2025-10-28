@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import os
 
 
 def main():
@@ -11,8 +12,10 @@ def main():
         'xgboost'
     ]
 
+    total_img = count_img('data/gray')
+
     plt.figure(figsize=(5,5))
-    plt.plot([0,60], [0,60], 'g-')
+    plt.plot([0,total_img], [0,total_img], 'g-')
     plt.xlabel('True Values')
     plt.ylabel('Predicted Values')
     plt.axis('equal')
@@ -55,6 +58,24 @@ def prep(path):
         lst.append(temp.to_list())
 
     return [header, lst]
+
+
+def count_img(dir_path):
+
+    """
+    counts and returns total files/images contained in directory
+    
+    ### arguments:
+    dir_path: directory containing images to count
+
+    ### returns
+    num: total file count
+    """
+
+    num = 0
+    for root_dir, cur_dir, files in os.walk(dir_path):
+        num += len(files)
+    return num
 
 
 """
