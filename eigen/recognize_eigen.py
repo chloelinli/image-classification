@@ -45,7 +45,7 @@ def main():
     print(f"recognition accuracy: {accu:.2f}%")
 
     # export predicted vs actual values
-    df = pd.DataFrame({'predicted':pred, 'actual':test_ind})
+    df = pd.DataFrame({'actual':test_ind, 'predicted':pred})
     df.to_csv('results/eigen.csv', index=False)
 
 

@@ -38,7 +38,7 @@ def main():
     print(f"recognition accuracy: {accu:.2f}%")
 
     # export predicted vs actual values
-    df = pd.DataFrame({'predicted':test_preds, 'actual':test_ind})
+    df = pd.DataFrame({'actual':test_ind, 'predicted':test_preds})
     df.to_csv('results/xgboost.csv', index=False)
 
 
