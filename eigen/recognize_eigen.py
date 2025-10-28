@@ -139,7 +139,7 @@ def reconstruct(path, data, ind):
     
     # export scores
     scores_df = pd.DataFrame(scores_arr)
-    scores_df.to_csv('results/scores_eigen.csv', index=False, header=False)
+    scores_df.to_csv('eigen/scores_eigen.csv', index=False, header=False)
 
     # training: best values to get highest accuracy in reconstruction;
     # different diagonal of s? different singular values?
