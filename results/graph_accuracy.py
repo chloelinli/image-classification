@@ -7,26 +7,30 @@ import os
 
 def main():
 
-    methods = [
-        'eigen',
-        'xgboost'
-    ]
+
+
+    methods = ['eigen', 'xgboost']
+    colors = ['r', 'b']
 
     total_img = count_img('data/gray')
 
-    # test
-    eigen_ind = np.genfromtxt('results/eigen.csv', delimiter=',', skip_header=1).astype(int)
-    true_val = eigen_ind[:, 0]
-    pred_val = eigen_ind[:, 1]
+    # initialize plot
+    fig = plt.figure(figsize=(5,5))
 
-    plt.figure(figsize=(5,5))
+    # y=x line for true=prediction
     plt.plot([0,total_img], [0,total_img], 'g-')
 
-    plt.scatter(true_val, pred_val, color='r', label='eigen')
+    # set axes and title
     plt.xlabel('True Values')
     plt.ylabel('Predicted Values')
+    plt.title('Image Classification With Various Machine Learning Methods')
     plt.axis('equal')
 
+    # loop through methods and plot
+    length = len(methods)
+    for i in range(length):
+        fig = plot(fig, methods[i], colors[i])
+    
     plt.legend()
     plt.show()
 
@@ -42,6 +46,14 @@ def main():
     #subplot(unrel_methods, unrel_rows, ['Easy', 'Medium', 'Hard'])
 
 
+
+def plot(fig, method, color):
+
+    # get actual and predicted indicies
+    indicies = np.genfromtxt('results/'+method+'.csv', delimiter=',', skip_header=1).astype(int)
+    true_val = indicies[:, 0]
+    pred_val = indicies[:, 1]
+    plt.scatter(true_val, pred_val, color=color, label=method)
 """
 path to data
 imports as dataframe
@@ -90,6 +102,8 @@ def count_img(dir_path):
 """
 method and data and difficulty
 """
+
+"""
 def plot(method, data, difficulty):
     
     # prepare plot variables
@@ -120,7 +134,7 @@ def plot(method, data, difficulty):
     ax.set_title('Recognition Accuracy of Machine Learning Algorithms', pad=10)
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=len(method), frameon=False, fontsize=8)
     plt.show()
-
+"""
 
 """
 plot unrel char - unable to split without extra work (i'm lazy)
