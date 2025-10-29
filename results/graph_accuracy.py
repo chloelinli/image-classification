@@ -27,13 +27,23 @@ def main():
     # loop through methods and plot
     length = len(methods)
     for i in range(length):
-        fig = plot(fig, methods[i], colors[i])
+        plot(methods[i], colors[i])
     
     plt.legend()
     plt.show()
 
 
-def plot(fig, method, color):
+def plot(method, color):
+
+    """
+    plots predicted vs. true image index position in directory 
+    by machine learning method
+
+    ### arguments:
+    fig: figure to plot to\n
+    method: current classification method\n
+    color: corresponding color to method
+    """
 
     # get actual and predicted indicies
     indicies = np.genfromtxt('results/'+method+'.csv', delimiter=',', skip_header=1).astype(int)
