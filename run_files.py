@@ -22,9 +22,5 @@ os.system('python3 xgboost/recognize_xgboost.py')
 end = time.perf_counter()
 print(f"time elapsed: {end-start:.3f} seconds")
 
-"""
-graphing analysis
-"""
-"""
-#os.system('python3 projects/art_facial_recognition/final/graph_accuracy.py')
-"""
+# graph analysis
+os.system('python3 results/graph_accuracy.py')
