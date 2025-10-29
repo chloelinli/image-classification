@@ -7,8 +7,6 @@ import os
 
 def main():
 
-
-
     methods = ['eigen', 'xgboost']
     colors = ['r', 'b']
 
@@ -33,18 +31,6 @@ def main():
     
     plt.legend()
     plt.show()
-
-
-    # grab headers and data as list
-    #[init_methods, init_rows] = prep(path+'initial.csv')
-    #[unrel_methods, unrel_rows] = prep(path+'unrelated.csv')
-
-    # plot initial character as normal
-    #plot(init_methods, init_rows, ['Easy', 'Medium', 'Hard'])
-
-    # subplot unrelated character
-    #subplot(unrel_methods, unrel_rows, ['Easy', 'Medium', 'Hard'])
-
 
 
 def plot(fig, method, color):
