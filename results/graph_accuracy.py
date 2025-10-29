@@ -19,12 +19,15 @@ def main():
     true_val = eigen_ind[:, 0]
     pred_val = eigen_ind[:, 1]
 
-
     plt.figure(figsize=(5,5))
     plt.plot([0,total_img], [0,total_img], 'g-')
+
+    plt.scatter(true_val, pred_val, color='r', label='eigen')
     plt.xlabel('True Values')
     plt.ylabel('Predicted Values')
     plt.axis('equal')
+
+    plt.legend()
     plt.show()
 
 
