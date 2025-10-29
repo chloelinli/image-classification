@@ -14,6 +14,12 @@ def main():
 
     total_img = count_img('data/gray')
 
+    # test
+    eigen_ind = np.genfromtxt('results/eigen.csv', delimiter=',', skip_header=1).astype(int)
+    true_val = eigen_ind[:, 0]
+    pred_val = eigen_ind[:, 1]
+
+
     plt.figure(figsize=(5,5))
     plt.plot([0,total_img], [0,total_img], 'g-')
     plt.xlabel('True Values')
