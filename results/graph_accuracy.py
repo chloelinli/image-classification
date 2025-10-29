@@ -1,3 +1,12 @@
+"""
+chloe rushing
+
+this script takes each predicted vs actual indicies results 
+and graphs the values to compare to a y=x line representing 
+perfect predictions.
+"""
+
+
 # imports
 import matplotlib.pyplot as plt
 import numpy as np
