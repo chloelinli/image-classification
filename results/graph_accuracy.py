@@ -30,7 +30,10 @@ def main():
         plot(methods[i], colors[i])
     
     plt.legend()
-    plt.show()
+    #plt.show()
+
+    # export graph
+    fig.savefig('results/prediction_results.jpg')
 
 
 def plot(method, color):
