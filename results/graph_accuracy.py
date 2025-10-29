@@ -40,7 +40,6 @@ def plot(method, color):
     by machine learning method
 
     ### arguments:
-    fig: figure to plot to\n
     method: current classification method\n
     color: corresponding color to method
     """
