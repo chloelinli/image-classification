@@ -28,10 +28,10 @@ def main():
     X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     y = get_labels(len(X))
 
-    train_X, test_X, train_y, test_y, train_ind, test_ind = train_test_split(X, y, TEST_SIZE, len(X))
+    train_X, test_X, train_y, test_y, train_ind = train_test_split(X, y, TEST_SIZE, len(X))
 
     # reconstruct training data
-    #k_90, data_k90, k_99, data_k99, avg, V, scores = reconstruct('eigen', train_X, train_ind)
+    k_90, data_k90, k_99, data_k99, avg, V, scores = reconstruct('eigen', train_X, train_ind)
 
     # calculate accuracies
     #print(f"average for k_90 energy: {k_90}")
@@ -53,11 +53,22 @@ def main():
 
 def get_labels(size):
 
+    """
+    creates array of labels corresponding to the character 
+    in each image
+    
+    ### arguments:
+    size: length of dataset
+
+    ### returns:
+    arr: numpy array containing integer labels
+    """
+
     arr = []
 
     for i in range(size):
         
-        # append label given img num
+        # append label given img num -1
         if (i >= 0) and (i < 30):
             arr.append(0)
         elif (i >= 30) and (i < 35):
@@ -111,7 +122,7 @@ def train_test_split(X, y, test_size, data_size):
     train_df.to_csv('eigen/training.csv', index=False, header=False)
     test_df.to_csv('eigen/testing.csv', index=False, header=False)
 
-    return train_X, test_X, train_y, test_y, train_ind, test_ind
+    return train_X, test_X, train_y, test_y, train_ind
 
 
 def reconstruct(path, data, ind):
@@ -277,7 +288,6 @@ def accuracy(original, reconstructed):
     
     avg = np.array(avg)
 
-    # uncomment for manual input into separate csv - want to compile different accuracies in the future
     print(avg)
 
 
