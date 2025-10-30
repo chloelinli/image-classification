@@ -25,11 +25,14 @@ np.random.seed(7)
 def main():
 
     # get full data and split into train and test sets
-    data = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
-    train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
+    X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
+    y = get_labels(len(X))
+
+    train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
+    print(train_y)
 
     # reconstruct training data
-    k_90, data_k90, k_99, data_k99, avg, V, scores = reconstruct('eigen', train, train_ind)
+    #k_90, data_k90, k_99, data_k99, avg, V, scores = reconstruct('eigen', train, train_ind)
 
     # calculate accuracies
     #print(f"average for k_90 energy: {k_90}")
@@ -38,18 +41,43 @@ def main():
     #accuracy(train, data_k99)
 
     # recognition
-    pred = recognition(test, avg, V, scores)
+    #pred = recognition(test, avg, V, scores)
 
     # check accuracy for each character, save values
-    accu = check_accuracy(pred, test_ind)
-    print(f"recognition accuracy: {accu:.2f}%")
+    #accu = check_accuracy(pred, test_ind)
+    #print(f"recognition accuracy: {accu:.2f}%")
 
     # export predicted vs actual values
-    df = pd.DataFrame({'actual':test_ind, 'predicted':pred})
-    df.to_csv('results/eigen.csv', index=False)
+    #df = pd.DataFrame({'actual':test_ind, 'predicted':pred})
+    #df.to_csv('results/eigen.csv', index=False)
 
 
-def train_test_split(arr, test_size, data_size):
+def get_labels(size):
+
+    arr = []
+
+    for i in range(size):
+        
+        # append label given img num
+        if (i >= 0) and (i < 30):
+            arr.append(0)
+        elif (i >= 30) and (i < 35):
+            arr.append(1)
+        elif (i >= 35) and (i < 40):
+            arr.append(2)
+        elif (i >= 40) and (i < 45):
+            arr.append(3)
+        elif (i >= 47) and (i < 50):
+            arr.append(4)
+        elif (i >= 50) and (i < 55):
+            arr.append(5)
+        else:
+            arr.append(6)
+
+    return np.array(arr)
+
+
+def train_test_split(X, y, test_size, data_size):
 
     """
     splits data array based on test set size and dataset size
@@ -74,16 +102,17 @@ def train_test_split(arr, test_size, data_size):
 
     # split indicies based on split sizes then use indicies to split data to return
     train_ind, test_ind = indicies[:train_p], indicies[train_p:]
-    train, test = arr[train_ind,:], arr[test_ind,:]
+    train_X, test_X = X[train_ind,:], X[test_ind,:]
+    train_y, test_y = y[train_ind], y[test_ind]
 
     # export training and test data
-    train_df = pd.DataFrame(train)
-    test_df = pd.DataFrame(test)
+    train_df = pd.DataFrame(train_X)
+    test_df = pd.DataFrame(test_X)
 
     train_df.to_csv('eigen/training.csv', index=False, header=False)
     test_df.to_csv('eigen/testing.csv', index=False, header=False)
 
-    return train, test, train_ind, test_ind
+    return train_X, test_X, train_y, train_y
 
 
 def reconstruct(path, data, ind):
