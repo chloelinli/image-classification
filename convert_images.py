@@ -71,7 +71,7 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
     """
 
     # empty array to save data to
-    converted_data = np.empty((num_img, HEIGHT*WIDTH+1))
+    converted_data = np.empty((num_img, HEIGHT*WIDTH))
 
     # loop - conversion
     for i in range(num_img):
@@ -93,22 +93,6 @@ def rgb_to_gray(rgb_path, num_img, gray_path, csv_name):
         # save pictures
         img_reshaped = np.array(img_reshaped)
         plt.imsave(img_gray, np.reshape(img_reshaped,  (HEIGHT, WIDTH)), cmap='gray')
-
-        # append label given img num
-        if (i >= 1) and (i <= 30):
-            img_reshaped = np.append(img_reshaped, 0)
-        elif (i >= 31) and (i <= 35):
-            img_reshaped = np.append(img_reshaped, 1)
-        elif (i >= 36) and (i <= 40):
-            img_reshaped = np.append(img_reshaped, 2)
-        elif (i >= 41) and (i <= 45):
-            img_reshaped = np.append(img_reshaped, 3)
-        elif (i >= 46) and (i <= 50):
-            img_reshaped = np.append(img_reshaped, 4)
-        elif (i >= 51) and (i <= 55):
-            img_reshaped = np.append(img_reshaped, 5)
-        else:
-            img_reshaped = np.append(img_reshaped, 6)
         
         # replace empty position in converted array with data
         converted_data[i] = img_reshaped
