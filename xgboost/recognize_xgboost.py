@@ -24,12 +24,13 @@ np.random.seed(7)
 def main():
 
     # get full data and split into train test sets
-    data = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
-    train, test, train_ind, test_ind = train_test_split(data, TEST_SIZE, len(data))
+    X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
+    y = get_labels(len(X))
+    train_X, test_X, train_y, test_y, train_ind, test_ind = train_test_split(X, y, TEST_SIZE, len(X))
 
     # fit training data
-    gradients, steps = fit(train, train_ind)
-
+    gradients, steps = fit(train_X, train_y)
+"""
     # compute test scores
     test_preds = predict(test, gradients, steps)
 
@@ -40,9 +41,35 @@ def main():
     # export predicted vs actual values
     df = pd.DataFrame({'actual':test_ind, 'predicted':test_preds})
     df.to_csv('results/xgboost.csv', index=False)
+"""
 
 
-def train_test_split(arr, test_size, data_size):
+def get_labels(size):
+
+    arr = []
+
+    for i in range(size):
+        
+        # append label given img num
+        if (i >= 0) and (i < 30):
+            arr.append(0)
+        elif (i >= 30) and (i < 35):
+            arr.append(1)
+        elif (i >= 35) and (i < 40):
+            arr.append(2)
+        elif (i >= 40) and (i < 45):
+            arr.append(3)
+        elif (i >= 47) and (i < 50):
+            arr.append(4)
+        elif (i >= 50) and (i < 55):
+            arr.append(5)
+        else:
+            arr.append(6)
+
+    return np.array(arr)
+
+
+def train_test_split(X, y, test_size, data_size):
 
     """
     splits data array based on test set size and dataset size
@@ -67,19 +94,20 @@ def train_test_split(arr, test_size, data_size):
 
     # split indicies based on split sizes then use indicies to split data to return
     train_ind, test_ind = indicies[:train_p], indicies[train_p:]
-    train, test = arr[train_ind,:], arr[test_ind,:]
+    train_X, test_X = X[train_ind,:], X[test_ind,:]
+    train_y, test_y = y[train_ind], y[test_ind]
 
     # export training and test data
-    train_df = pd.DataFrame(train)
-    test_df = pd.DataFrame(test)
+    train_df = pd.DataFrame(train_X)
+    test_df = pd.DataFrame(test_X)
 
     train_df.to_csv('eigen/training.csv', index=False, header=False)
     test_df.to_csv('eigen/testing.csv', index=False, header=False)
 
-    return train, test, train_ind, test_ind
+    return train_X, test_X, train_y, test_y, train_ind, test_ind
 
 
-def fit(data, ind):
+def fit(train_data, train_labels):
 
     """
     initializes prediction with average of training data indicies and updates 
@@ -96,20 +124,22 @@ def fit(data, ind):
     """
 
     # initialize predictions
-    base_pred = np.mean(ind)
-    error = ind - base_pred
+    base_pred = np.mean(train_labels)
+    error = train_labels - base_pred
     gradients = []
     steps = []
 
     # update predictions using gradient, hessian, steps
     for i in range(NUM_LOOPS):
-        grad = np.mean(data*error[:,None], axis=0)
+        grad = np.mean(train_data*error[:,None], axis=0)
         gradients.append(grad)
 
-        predict = data @ grad
+        predict = train_data @ grad
 
         step = np.dot(predict, error) / np.dot(predict, predict) + 1e-8
         steps.append(step)
+
+        error -= step * predict
 
     return gradients, steps
 
