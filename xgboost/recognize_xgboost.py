@@ -33,16 +33,14 @@ def main():
 
     # compute test scores
     test_preds = predict(test_X, gradients, steps)
-    print(test_preds)
-"""
+
     # check accuracy of predictions
-    accu = check_accuracy(test_preds, test_ind)
+    accu = check_accuracy(test_preds, test_y)
     print(f"recognition accuracy: {accu:.2f}%")
 
     # export predicted vs actual values
-    df = pd.DataFrame({'actual':test_ind, 'predicted':test_preds})
+    df = pd.DataFrame({'actual':test_y, 'predicted':test_preds})
     df.to_csv('results/xgboost.csv', index=False)
-"""
 
 
 def get_labels(size):
@@ -163,7 +161,7 @@ def predict(test_data, gradients, steps):
     and step size scalars computed from training data
 
     ### arguments:
-    data: test data\n
+    test_data: test data\n
     gradients: feature-wise update vectors\n
     steps: scalar weights for each update
 
@@ -182,15 +180,16 @@ def predict(test_data, gradients, steps):
 
     return np.round(prediction).astype(int)
 
+
 def check_accuracy(pred, actual):
 
     """
-    this function the expected and actual image positions generated 
+    this function the expected and actual image labels generated 
     from the predictions tree
     
     ### arguments:
-    pred: expected image indicies\n
-    actual: actual image indicies
+    pred: expected image labels\n
+    actual: actual image labels
 
     ### returns:
     error rate of exact classification using formula (measured - given) / given * 100
