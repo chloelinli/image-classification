@@ -42,11 +42,10 @@ def main():
     # recognition
     pred_ind = recognition(test_X, avg, V, scores)
     pred_label = indicies_to_labels(y, pred_ind)
-    print(pred_label)
 
     # check accuracy for each character, save values
-    #accu = check_accuracy(pred, test_ind)
-    #print(f"recognition accuracy: {accu:.2f}%")
+    accu = check_accuracy(pred_label, test_y)
+    print(f"recognition accuracy: {accu:.2f}%")
 
     # export predicted vs actual values
     #df = pd.DataFrame({'actual':test_ind, 'predicted':pred})
