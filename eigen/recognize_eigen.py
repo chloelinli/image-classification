@@ -40,7 +40,9 @@ def main():
     #accuracy(train, data_k99)
 
     # recognition
-    #pred = recognition(test, avg, V, scores)
+    pred_ind = recognition(test_X, avg, V, scores)
+    pred_label = indicies_to_labels(y, pred_ind)
+    print(pred_label)
 
     # check accuracy for each character, save values
     #accu = check_accuracy(pred, test_ind)
@@ -326,6 +328,19 @@ def recognition(test_data, avg, V, scores):
         min_ind[i] = int(ind)
     
     return min_ind
+
+
+def indicies_to_labels(y, pred_ind):
+
+    test_len = len(pred_ind)
+    prediction = np.zeros(test_len).astype(int)
+
+    for i in range(test_len):
+        ind = pred_ind[i]
+        pred = y[ind]
+        prediction[i] = pred
+    
+    return prediction
 
 
 def check_accuracy(pred, actual):
