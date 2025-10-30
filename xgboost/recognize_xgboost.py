@@ -26,7 +26,7 @@ def main():
     # get full data and split into train test sets
     X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     y = get_labels(len(X))
-    train_X, test_X, train_y, test_y, train_ind, test_ind = train_test_split(X, y, TEST_SIZE, len(X))
+    train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
 
     # fit training data
     gradients, steps = fit(train_X, train_y)
@@ -114,7 +114,7 @@ def train_test_split(X, y, test_size, data_size):
     train_df.to_csv('eigen/training.csv', index=False, header=False)
     test_df.to_csv('eigen/testing.csv', index=False, header=False)
 
-    return train_X, test_X, train_y, test_y, train_ind, test_ind
+    return train_X, test_X, train_y, test_y
 
 
 def fit(train_data, train_labels):
