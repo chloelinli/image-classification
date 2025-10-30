@@ -115,8 +115,8 @@ def fit(train_data, train_labels):
     returning the fitted predictions
         
     ### arguments:
-    data: training data\n
-    ind: training data indicies
+    train_data: training data\n
+    train_labels: training data labels
 
     ### returns:
     gradients: feature-wise update vectors\n
