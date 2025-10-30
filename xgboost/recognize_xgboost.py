@@ -30,10 +30,11 @@ def main():
 
     # fit training data
     gradients, steps = fit(train_X, train_y)
-"""
-    # compute test scores
-    test_preds = predict(test, gradients, steps)
 
+    # compute test scores
+    test_preds = predict(test_X, gradients, steps)
+    print(test_preds)
+"""
     # check accuracy of predictions
     accu = check_accuracy(test_preds, test_ind)
     print(f"recognition accuracy: {accu:.2f}%")
@@ -61,7 +62,7 @@ def get_labels(size):
 
     for i in range(size):
         
-        # append label given img num
+        # append label given img num -1
         if (i >= 0) and (i < 30):
             arr.append(0)
         elif (i >= 30) and (i < 35):
@@ -155,7 +156,7 @@ def fit(train_data, train_labels):
     return gradients, steps
 
 
-def predict(data, gradients, steps):
+def predict(test_data, gradients, steps):
 
     """
     predicts testing image indicies using tree of iterations, vector gradients, 
@@ -171,12 +172,12 @@ def predict(data, gradients, steps):
     """
 
     # initialize prediction
-    prediction = np.zeros(len(data))
+    prediction = np.zeros(len(test_data))
 
     # use trained steps and gradients to update predictions for test data
     for i in range(NUM_LOOPS):
 
-        update = data @ gradients[i]
+        update = test_data @ gradients[i]
         prediction += steps[i] * update
 
     return np.round(prediction).astype(int)
