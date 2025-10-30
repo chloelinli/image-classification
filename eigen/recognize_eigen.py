@@ -28,11 +28,10 @@ def main():
     X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     y = get_labels(len(X))
 
-    train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
-    print(train_y)
+    train_X, test_X, train_y, test_y, train_ind, test_ind = train_test_split(X, y, TEST_SIZE, len(X))
 
     # reconstruct training data
-    #k_90, data_k90, k_99, data_k99, avg, V, scores = reconstruct('eigen', train, train_ind)
+    #k_90, data_k90, k_99, data_k99, avg, V, scores = reconstruct('eigen', train_X, train_ind)
 
     # calculate accuracies
     #print(f"average for k_90 energy: {k_90}")
@@ -112,7 +111,7 @@ def train_test_split(X, y, test_size, data_size):
     train_df.to_csv('eigen/training.csv', index=False, header=False)
     test_df.to_csv('eigen/testing.csv', index=False, header=False)
 
-    return train_X, test_X, train_y, train_y
+    return train_X, test_X, train_y, test_y, train_ind, test_ind
 
 
 def reconstruct(path, data, ind):
