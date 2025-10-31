@@ -30,7 +30,7 @@ def main():
     fig = plt.figure(figsize=(6,6))
 
     # y=x line for true=prediction
-    plt.plot([0, CURR_MAX], [0, CURR_MAX], 'k--')
+    plt.plot([0, CURR_MAX], [0, CURR_MAX], 'k--', label='Perfect Prediction (y=x)')
     # set axes and title
     plt.xlabel('True Values')
     plt.ylabel('Predicted Values')
