@@ -1,3 +1,13 @@
+"""
+chloe rushing
+
+this script attempts classification of images by using a simple 
+k-nearest neighbors method to compare the test and training data 
+to make predictions. it allows randomization and reproducibility 
+using a seed and global variables.
+"""
+
+
 # import statements
 import matplotlib.pyplot as plt
 import numpy as np
