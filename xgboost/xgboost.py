@@ -2,10 +2,8 @@
 chloe rushing
 
 this script attempts classification of images by using a simple 
-xgboost tree with gradients and steps to ensure the training 
-data fits to the indicies and ensure the testing data does not 
-converge. it allows randomization and reproducibility 
-using a seed and global variables.
+xgboost tree with gradients and steps. it allows randomization 
+and reproducibility using a seed and global variables.
 """
 
 
