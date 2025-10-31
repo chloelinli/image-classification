@@ -23,13 +23,11 @@ def main():
     # grab actual test labels from one file
     actual = np.genfromtxt('results/eigen.csv', delimiter=',', skip_header=1).astype(int)[:, 0]
     print(actual)
-"""
     # initialize plot
     fig = plt.figure(figsize=(5,5))
 
     # y=x line for true=prediction
-    plt.plot([0,total_img], [0,total_img], 'g-')
-
+    plt.plot([0,actual.min()], [0,actual.max()], 'k--')
     # set axes and title
     plt.xlabel('True Values')
     plt.ylabel('Predicted Values')
@@ -43,10 +41,9 @@ def main():
     
     plt.legend()
     plt.show()
-
+    
     # export graph
     fig.savefig('results/prediction_results.jpg')
-"""
 
 
 def plot(method, color):
