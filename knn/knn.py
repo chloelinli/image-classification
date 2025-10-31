@@ -19,8 +19,8 @@ def main():
 
     train_X, test_X, train_y, test_y, train_ind = train_test_split(X, y, TEST_SIZE, len(X))
 
+    # get predictions (no fit needed)
     preds = predict(train_X, train_y, test_X)
-    print(preds)
 
 
 def get_labels(size):
@@ -98,6 +98,19 @@ def train_test_split(X, y, test_size, data_size):
 
 
 def predict(train, train_label, test):
+
+    """
+    this function is the sole executor of finding the k-nearest neighbors 
+    with the shortest euclidian distance for each test image.
+    
+    ### arguments:
+    train: training data\n
+    train_label: training data labels\n
+    test: test data
+    
+    ### returns:
+    preds: predictions from k-nearest neighbors
+    """
 
     preds = []
 
