@@ -25,7 +25,7 @@ def main():
 
     # grab actual test labels from one file
     actual = np.genfromtxt('results/eigen.csv', delimiter=',', skip_header=1).astype(int)[:, 0]
-    print(actual)
+
     # initialize plot
     fig = plt.figure(figsize=(6,6))
 
