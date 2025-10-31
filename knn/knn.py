@@ -20,7 +20,11 @@ def main():
     train_X, test_X, train_y, test_y, train_ind = train_test_split(X, y, TEST_SIZE, len(X))
 
     # get predictions (no fit needed)
-    preds = predict(train_X, train_y, test_X)
+    test_preds = predict(train_X, train_y, test_X)
+
+    # check accuracy of predictions
+    #accu = check_accuracy(test_preds, test_y)
+    #print(f"recognition accuracy: {accu:.2f}%")
 
 
 def get_labels(size):
