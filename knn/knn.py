@@ -19,6 +19,9 @@ def main():
 
     train_X, test_X, train_y, test_y, train_ind = train_test_split(X, y, TEST_SIZE, len(X))
 
+    preds = predict(train_X, train_y, test_X)
+    print(preds)
+
 
 def get_labels(size):
 
@@ -93,6 +96,29 @@ def train_test_split(X, y, test_size, data_size):
 
     return train_X, test_X, train_y, test_y, train_ind
 
+
+def predict(train, train_label, test):
+
+    preds = []
+
+    # loop through each test image
+    for t in test:
+
+        # compute euclidean distance between test and all train
+        dist = np.linalg.norm(train - t, axis=1)
+
+        # get indicies and labels of closest neighbors
+        near_ind = np.argsort(dist)[:K]
+        near_label = train_label[near_ind]
+
+        # grab most frequent label
+        vals, counts = np.unique(near_label, return_counts=True)
+        freq = vals[np.argmax(counts)]
+
+        # append
+        preds.append(freq)
+
+    return np.array(preds)
 
 if __name__ == '__main__':
     main()
