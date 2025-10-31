@@ -5,8 +5,7 @@ import pandas as pd
 
 # global variables
 TEST_SIZE = 0.2
-HEIGHT = 300
-WIDTH = 300
+K = 3
 
 # reproducibility
 np.random.seed(7)
