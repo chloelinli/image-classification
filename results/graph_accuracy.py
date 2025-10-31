@@ -15,11 +15,15 @@ import os
 
 def main():
 
-    methods = ['eigen', 'xgboost']
-    colors = ['r', 'b']
+    methods = ['eigen', 'xgboost', 'knn']
+    colors = ['r', 'b', 'g']
 
     total_img = count_img('data/gray')
 
+    # grab actual test labels from one file
+    actual = np.genfromtxt('results/eigen.csv', delimiter=',', skip_header=1).astype(int)[:, 0]
+    print(actual)
+"""
     # initialize plot
     fig = plt.figure(figsize=(5,5))
 
@@ -38,10 +42,11 @@ def main():
         plot(methods[i], colors[i])
     
     plt.legend()
-    #plt.show()
+    plt.show()
 
     # export graph
     fig.savefig('results/prediction_results.jpg')
+"""
 
 
 def plot(method, color):
