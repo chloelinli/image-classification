@@ -5,9 +5,9 @@ import time
 #os.system('python3 convert_images.py')
 
 # eigennvalues
-print("now running eigenvalue and svd recognition: loading...")
+print("now running eigenvalue and svd classification: loading...")
 start = time.perf_counter()
-os.system('python3 eigen/recognize_eigen.py')
+os.system('python3 eigen/eigen.py')
 end = time.perf_counter()
 print(f"time elapsed: {end-start:.3f} seconds")
 
@@ -16,9 +16,20 @@ print("********")
 print()
 
 # xgboost
-print("now running xgboost tree recognition: loading...")
+print("now running xgboost tree classification: loading...")
 start = time.perf_counter()
-os.system('python3 xgboost/recognize_xgboost.py')
+os.system('python3 xgboost/xgboost.py')
+end = time.perf_counter()
+print(f"time elapsed: {end-start:.3f} seconds")
+
+print()
+print("********")
+print()
+
+# k-nearest neighbors
+print("now running k-nearest neighbors classification: loading...")
+start = time.perf_counter()
+os.system('python3 knn/knn.py')
 end = time.perf_counter()
 print(f"time elapsed: {end-start:.3f} seconds")
 
