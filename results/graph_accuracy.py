@@ -20,6 +20,7 @@ def main():
 
     methods = ['eigen', 'xgboost', 'knn']
     colors = ['r', 'b', 'g']
+    size = [100, 66, 33]
 
     total_img = count_img('data/gray')
 
@@ -40,7 +41,7 @@ def main():
     # loop through methods and plot
     length = len(methods)
     for i in range(length):
-        plot(methods[i], colors[i])
+        plot(methods[i], colors[i], size[i])
     
     plt.legend()
     plt.show()
@@ -49,7 +50,7 @@ def main():
     fig.savefig('results/prediction_results.jpg')
 
 
-def plot(method, color):
+def plot(method, color, size):
 
     """
     plots predicted vs. true image index position in directory 
@@ -64,7 +65,7 @@ def plot(method, color):
     indicies = np.genfromtxt('results/'+method+'.csv', delimiter=',', skip_header=1).astype(int)
     true_val = indicies[:, 0]
     pred_val = indicies[:, 1]
-    plt.scatter(true_val, pred_val, color=color, label=method)
+    plt.scatter(true_val, pred_val, color=color, label=method, s=size)
 
 
 def count_img(dir_path):
