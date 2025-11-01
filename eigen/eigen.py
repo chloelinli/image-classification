@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 
 # global variables
-TEST_SIZE = 0.2
+TEST_SIZE = 0.15
 HEIGHT = 300
 WIDTH = 300
 
