@@ -105,13 +105,6 @@ def train_test_split(X, y, test_size, data_size):
     train_X, test_X = X[train_ind,:], X[test_ind,:]
     train_y, test_y = y[train_ind], y[test_ind]
 
-    # export training and test data
-    train_df = pd.DataFrame(train_X)
-    test_df = pd.DataFrame(test_X)
-
-    train_df.to_csv('eigen/training.csv', index=False, header=False)
-    test_df.to_csv('eigen/testing.csv', index=False, header=False)
-
     return train_X, test_X, train_y, test_y
 
 
