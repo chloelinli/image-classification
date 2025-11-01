@@ -14,9 +14,13 @@ def main():
     # get full data and split into train test sets
     X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     y = get_labels(len(X))
-    print(y)
+
+    # for each class, train binary classifier where 1 is the class and -1 is not
     # get unique labels/classes
     #unique y
+    # initialize 
+    # for c in unique classes
+        # get params(train x, train y)
 
     # initialize
 
