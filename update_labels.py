@@ -22,11 +22,11 @@ def main():
     curr_labels.columns = cols
 
     # get labeled images
-    labeled_img = curr_labels['img']
+    labeled_img = curr_labels['img'].tolist()
 
     # get all image names from directory
     total_img = get_img('data/gray')
-    print(total_img)
+    print(list(set(total_img)-set(labeled_img)))
 
     """
     # get total images
@@ -56,7 +56,7 @@ def get_img(path):
         f = f[0:-4]
         files_lst[i] = f
     
-    return pd.DataFrame(files_lst)
+    return files_lst
 
 
 def get_labels(size):
