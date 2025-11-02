@@ -1,6 +1,8 @@
 import os
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as im
 
 
 # get missing labels
@@ -24,9 +26,15 @@ def main():
     # get labeled images
     labeled_img = curr_labels['img'].tolist()
 
-    # get all image names from directory
+    # get all image names from directory and find unlabeled images
     total_img = get_img('data/gray')
-    print(list(set(total_img)-set(labeled_img)))
+    unlabeled_img = list(set(total_img)-set(labeled_img))
+
+    for u in unlabeled_img:
+        img = im.imread('data/gray/'+u+'.jpg')
+        plt.imshow(img)
+        plt.show()
+    #plt.imsave(path+'/avg.jpg', np.reshape(avg, (HEIGHT, WIDTH)), cmap='gray')
 
     """
     # get total images
