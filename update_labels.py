@@ -44,7 +44,7 @@ def main():
     new_df = pd.DataFrame.from_dict(new_labels.items())
     new_df.columns = cols
     df = pd.concat([curr_labels, new_df], ignore_index=True)
-    print(df)
+    df.to_csv('data/labels.csv', index=False, header=False)
 
     """
     # get total images
