@@ -31,13 +31,13 @@ def main():
     unlabeled_img = list(set(total_img)-set(labeled_img))
 
     new_labels = {}
+    mapping = map_name_label()
+    print(mapping)
     for u in unlabeled_img:
         img = im.imread('data/gray/'+u+'.jpg')
-        plt.imshow(img)
-        plt.show(block=False)
-        name = input('who is this character? ')
-        print(name, u)
-
+        #plt.imshow(img)
+        #plt.show(block=False)
+        #name = input('who is this character? ')
 
     """
     # get total images
@@ -68,42 +68,6 @@ def get_img(path):
         files_lst[i] = f
     
     return files_lst
-
-
-def get_labels(size):
-
-    """
-    creates array of labels corresponding to the character 
-    in each image
-    
-    ### arguments:
-    size: length of dataset
-
-    ### returns:
-    arr: numpy array containing integer labels
-    """
-
-    arr = []
-
-    for i in range(size):
-        
-        # append label given img num -1
-        if (i >= 0) and (i < 30):
-            arr.append(0)
-        elif (i >= 30) and (i < 35):
-            arr.append(1)
-        elif (i >= 35) and (i < 40):
-            arr.append(2)
-        elif (i >= 40) and (i < 45):
-            arr.append(3)
-        elif (i >= 47) and (i < 50):
-            arr.append(4)
-        elif (i >= 50) and (i < 55):
-            arr.append(5)
-        else:
-            arr.append(6)
-
-    return np.array(arr)
 
 
 def map_name_label():
