@@ -22,18 +22,23 @@ def main():
     new_labels = {}
     mapping = map_name_label()
 
-    for u in unlabeled_img:
-        img = im.imread('data/gray/'+u+'.jpg')
-        plt.imshow(img)
-        plt.show(block=False)
-        name = input('who is this character? ')
-        if name in mapping.keys():
-            new_labels[u] = mapping[name]
+    if len(unlabeled_img) > 0:
+
+        for u in unlabeled_img:
+            img = im.imread('data/gray/'+u+'.jpg')
+            plt.imshow(img)
+            plt.show(block=False)
+            name = input('who is this character? ')
+            if name in mapping.keys():
+                new_labels[u] = mapping[name]
+        
+        new_df = pd.DataFrame.from_dict(new_labels.items())
+        new_df.columns = cols
+        df = pd.concat([curr_labels, new_df], ignore_index=True)
+        df.to_csv('data/labels.csv', index=False, header=False)
     
-    new_df = pd.DataFrame.from_dict(new_labels.items())
-    new_df.columns = cols
-    df = pd.concat([curr_labels, new_df], ignore_index=True)
-    df.to_csv('data/labels.csv', index=False, header=False)
+    else:
+        print('no unlabeled images')
 
 
 def get_img(path):
