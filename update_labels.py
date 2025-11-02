@@ -42,7 +42,9 @@ def main():
             new_labels[u] = mapping[name]
     
     new_df = pd.DataFrame.from_dict(new_labels.items())
-    print(new_df)
+    new_df.columns = cols
+    df = pd.concat([curr_labels, new_df], ignore_index=True)
+    print(df)
 
     """
     # get total images
