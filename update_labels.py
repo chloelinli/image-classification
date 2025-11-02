@@ -20,7 +20,10 @@ def main():
     curr_labels = pd.read_csv('data/labels.csv', header=None)
     cols = ['img', 'label']
     curr_labels.columns = cols
-    print(curr_labels)
+
+    # get labeled images
+    labeled_img = curr_labels['img']
+    print(labeled_img)
 
     """
     # get total images
