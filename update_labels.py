@@ -41,7 +41,8 @@ def main():
         if name in mapping.keys():
             new_labels[u] = mapping[name]
     
-    print(new_labels)
+    new_df = pd.DataFrame.from_dict(new_labels.items())
+    print(new_df)
 
     """
     # get total images
