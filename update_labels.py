@@ -18,6 +18,8 @@ def main():
 
     # current labels
     curr_labels = pd.read_csv('data/labels.csv', header=None)
+    cols = ['img', 'label']
+    curr_labels.columns = cols
     print(curr_labels)
 
     """
