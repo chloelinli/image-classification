@@ -23,7 +23,10 @@ def main():
 
     # get labeled images
     labeled_img = curr_labels['img']
-    print(labeled_img)
+
+    # get all image names from directory
+    total_img = get_img('data/gray')
+    print(total_img)
 
     """
     # get total images
@@ -36,22 +39,24 @@ def main():
     """
 
 
-def count_img(dir_path):
-
-    """
-    counts and returns total files/images contained in directory
-    
-    ### arguments:
-    dir_path: directory containing images to count
-
-    ### returns:
-    num: total file count
-    """
+def get_img(path):
 
     num = 0
-    for root_dir, cur_dir, files in os.walk(dir_path):
+    for root_dir, cur_dir, files in os.walk(path):
         num += len(files)
-    return num
+    
+
+    files_lst = []
+    for root_dir, cur_dir, files in os.walk(path):
+        for f in files:
+            files_lst.append(f)
+    
+    for i in range(num):
+        f = files_lst[i]
+        f = f[0:-4]
+        files_lst[i] = f
+    
+    return pd.DataFrame(files_lst)
 
 
 def get_labels(size):
