@@ -32,12 +32,16 @@ def main():
 
     new_labels = {}
     mapping = map_name_label()
-    print(mapping)
+
     for u in unlabeled_img:
         img = im.imread('data/gray/'+u+'.jpg')
-        #plt.imshow(img)
-        #plt.show(block=False)
-        #name = input('who is this character? ')
+        plt.imshow(img)
+        plt.show(block=False)
+        name = input('who is this character? ')
+        if name in mapping.keys():
+            new_labels[u] = mapping[name]
+    
+    print(new_labels)
 
     """
     # get total images
