@@ -30,11 +30,14 @@ def main():
     total_img = get_img('data/gray')
     unlabeled_img = list(set(total_img)-set(labeled_img))
 
+    new_labels = {}
     for u in unlabeled_img:
         img = im.imread('data/gray/'+u+'.jpg')
         plt.imshow(img)
-        plt.show()
-    #plt.imsave(path+'/avg.jpg', np.reshape(avg, (HEIGHT, WIDTH)), cmap='gray')
+        plt.show(block=False)
+        name = input('who is this character? ')
+        print(name, u)
+
 
     """
     # get total images
