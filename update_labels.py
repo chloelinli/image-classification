@@ -28,7 +28,8 @@ def main():
     else:
         print('no unlabeled images')
     
-    curr_labels.to_csv('data/labels.csv', index=False, header=False)
+    curr_labels = sort_imgs(curr_labels)
+    #curr_labels.to_csv('data/labels.csv', index=False, header=False)
 
 
 def get_img(path):
@@ -36,7 +37,6 @@ def get_img(path):
     num = 0
     for root_dir, cur_dir, files in os.walk(path):
         num += len(files)
-    
 
     files_lst = []
     for root_dir, cur_dir, files in os.walk(path):
@@ -81,6 +81,11 @@ def map_new_img(lst):
 
     return pd.DataFrame.from_dict(new_labels.items())
 
+
+def sort_imgs(df):
+
+    df['img_num'] = df['img'].str[4:]
+    print(df['img_num'])
     
 if __name__ == '__main__':
     main()
