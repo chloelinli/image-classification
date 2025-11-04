@@ -4,6 +4,13 @@ import time
 # image conversion
 #os.system('python3 convert_images.py')
 
+# ensure labels
+os.system('python3 update_labels.py')
+
+print()
+print("********")
+print()
+
 # eigennvalues
 print("now running eigenvalue and svd classification: loading...")
 start = time.perf_counter()
