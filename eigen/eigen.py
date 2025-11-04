@@ -55,11 +55,8 @@ def main():
 def get_labels():
 
     """
-    creates array of labels corresponding to the character 
+    grabs array of labels corresponding to the character 
     in each image
-    
-    ### arguments:
-    size: length of dataset
 
     ### returns:
     arr: numpy array containing integer labels
