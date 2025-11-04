@@ -73,7 +73,7 @@ def train_test_split(X, y, test_size, data_size):
     ### returns:
     train_X: training data split\n
     test_X: testing data split\n
-    train_y: training data labels
+    train_y: training data labels\n
     test_y: test data actual labels
     """
 
