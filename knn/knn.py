@@ -25,9 +25,9 @@ def main():
 
     # get full data and split into train and test sets
     X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
-    y = get_labels(len(X))
+    y = get_labels()
 
-    train_X, test_X, train_y, test_y, train_ind = train_test_split(X, y, TEST_SIZE, len(X))
+    train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
 
     # get predictions (no fit needed)
     test_preds = predict(train_X, train_y, test_X)
@@ -41,40 +41,22 @@ def main():
     df.to_csv('results/knn.csv', index=False)
 
 
-def get_labels(size):
+def get_labels():
 
     """
-    creates array of labels corresponding to the character 
+    grabs array of labels corresponding to the character 
     in each image
-    
-    ### arguments:
-    size: length of dataset
 
     ### returns:
-    arr: numpy array containing integer labels
+    numpy array containing integer labels
     """
 
-    arr = []
+    labels = pd.read_csv('data/labels.csv', header=None)
+    cols = ['img', 'label']
+    labels.columns = cols
+    labels_lst = labels['label'].tolist()
 
-    for i in range(size):
-        
-        # append label given img num -1
-        if (i >= 0) and (i < 30):
-            arr.append(0)
-        elif (i >= 30) and (i < 35):
-            arr.append(1)
-        elif (i >= 35) and (i < 40):
-            arr.append(2)
-        elif (i >= 40) and (i < 45):
-            arr.append(3)
-        elif (i >= 47) and (i < 50):
-            arr.append(4)
-        elif (i >= 50) and (i < 55):
-            arr.append(5)
-        else:
-            arr.append(6)
-
-    return np.array(arr)
+    return np.array(labels_lst)
 
 
 def train_test_split(X, y, test_size, data_size):
@@ -83,15 +65,16 @@ def train_test_split(X, y, test_size, data_size):
     splits data array based on test set size and dataset size
     
     ### arguments:
-    arr: numpy array of dataset\n
+    X: numpy array of dataset\n
+    y: dataset label\n
     test_size: percentage of dataset to create as test set\n
     data_size: size of dataset
 
     ### returns:
-    train: training data\n
-    test: test data\n
-    train_ind: indicies of training data\n
-    test_ind: indicies of test data
+    train_X: training data split\n
+    test_X: testing data split\n
+    train_y: training data labels\n
+    test_y: test data actual labels
     """
 
     # store mixed up indicies of array and save split sizes
@@ -105,7 +88,7 @@ def train_test_split(X, y, test_size, data_size):
     train_X, test_X = X[train_ind,:], X[test_ind,:]
     train_y, test_y = y[train_ind], y[test_ind]
 
-    return train_X, test_X, train_y, test_y, train_ind
+    return train_X, test_X, train_y, test_y
 
 
 def predict(train, train_label, test):
