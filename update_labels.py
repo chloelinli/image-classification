@@ -19,26 +19,16 @@ def main():
     total_img = get_img('data/gray')
     unlabeled_img = list(set(total_img)-set(labeled_img))
 
-    new_labels = {}
-    mapping = map_name_label()
-
     if len(unlabeled_img) > 0:
-
-        for u in unlabeled_img:
-            img = im.imread('data/gray/'+u+'.jpg')
-            plt.imshow(img)
-            plt.show(block=False)
-            name = input('who is this character? ')
-            if name in mapping.keys():
-                new_labels[u] = mapping[name]
         
-        new_df = pd.DataFrame.from_dict(new_labels.items())
+        new_df = map_new_img(unlabeled_img)
         new_df.columns = cols
-        df = pd.concat([curr_labels, new_df], ignore_index=True)
-        df.to_csv('data/labels.csv', index=False, header=False)
+        curr_labels = pd.concat([curr_labels, new_df], ignore_index=True)
     
     else:
         print('no unlabeled images')
+    
+    curr_labels.to_csv('data/labels.csv', index=False, header=False)
 
 
 def get_img(path):
@@ -74,6 +64,22 @@ def map_name_label():
     }
 
     return mapping
+
+
+def map_new_img(lst):
+
+    new_labels = {}
+    mapping = map_name_label()
+
+    for u in lst:
+        img = im.imread('data/gray/'+u+'.jpg')
+        plt.imshow(img)
+        plt.show(block=False)
+        name = input('who is this character? ')
+        if name in mapping.keys():
+            new_labels[u] = mapping[name]
+
+    return pd.DataFrame.from_dict(new_labels.items())
 
     
 if __name__ == '__main__':
