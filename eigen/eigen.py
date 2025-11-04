@@ -59,7 +59,7 @@ def get_labels():
     in each image
 
     ### returns:
-    arr: numpy array containing integer labels
+    numpy array containing integer labels
     """
 
     labels = pd.read_csv('data/labels.csv', header=None)
@@ -76,15 +76,16 @@ def train_test_split(X, y, test_size, data_size):
     splits data array based on test set size and dataset size
     
     ### arguments:
-    arr: numpy array of dataset\n
+    X: numpy array of dataset\n
+    y: dataset label\n
     test_size: percentage of dataset to create as test set\n
     data_size: size of dataset
 
     ### returns:
-    train: training data\n
-    test: test data\n
-    train_ind: indicies of training data\n
-    test_ind: indicies of test data
+    train_X: training data split\n
+    test_X: testing data split\n
+    test_y: test data actual labels\n
+    train_ind: indicies of train data
     """
 
     # store mixed up indicies of array and save split sizes
