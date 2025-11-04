@@ -29,8 +29,7 @@ def main():
         print('no unlabeled images')
     
     curr_labels = sort_imgs(curr_labels)
-    print(curr_labels)
-    #curr_labels.to_csv('data/labels.csv', index=False, header=False)
+    curr_labels.to_csv('data/labels.csv', index=False, header=False)
 
 
 def get_img(path):
