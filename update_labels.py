@@ -29,6 +29,7 @@ def main():
         print('no unlabeled images')
     
     curr_labels = sort_imgs(curr_labels)
+    print(curr_labels)
     #curr_labels.to_csv('data/labels.csv', index=False, header=False)
 
 
@@ -84,8 +85,10 @@ def map_new_img(lst):
 
 def sort_imgs(df):
 
-    df['img_num'] = df['img'].str[4:]
-    print(df['img_num'])
-    
+    df['img_num'] = df['img'].str[4:].astype(int)
+    df = df.sort_values('img_num', ignore_index=True)
+    return df.drop('img_num', axis=1)
+
+
 if __name__ == '__main__':
     main()
