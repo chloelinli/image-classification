@@ -152,7 +152,7 @@ def predict(test_data, gradients, steps):
         update = test_data @ gradients[i]
         prediction += steps[i] * update
 
-    return np.round(prediction).astype(int)
+    return np.round(np.abs(prediction)).astype(int)
 
 
 def check_accuracy(pred, actual):
