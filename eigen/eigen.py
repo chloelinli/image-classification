@@ -34,10 +34,10 @@ def main():
     k_90, data_k90, k_99, data_k99, avg, V, scores = reconstruct('eigen', train_X, train_ind)
 
     # calculate accuracies
-    #print(f"average for k_90 energy: {k_90}")
-    #accuracy(train, data_k90)
-    #print(f"average for k_99: {k_99}")
-    #accuracy(train, data_k99)
+    print(f"average for k_90 energy: {k_90}")
+    reconstruct_accu(train_X, data_k90)
+    print(f"average for k_99: {k_99}")
+    reconstruct_accu(train_X, data_k99)
 
     # recognition
     pred_ind = recognition(test_X, avg, V, scores)
@@ -233,7 +233,7 @@ def reconstruct(path, data, ind):
     return k_90, data_k90, k_99, data_k99, avg, V, scores
 
 
-def accuracy(original, reconstructed):
+def reconstruct_accu(original, reconstructed):
 
     """
     calculates average accuracy of reconstructed grayscale pixel
@@ -262,9 +262,9 @@ def accuracy(original, reconstructed):
         tmp = acc[i]
         avg.append(np.sum(tmp)/len(tmp))
     
-    avg = np.array(avg)
+    avg = np.mean(avg, axis=0)
 
-    print(avg)
+    print(f"average reconstruction accuracy: {avg*100:.2f}%")
 
 
 def recognition(test_data, avg, V, scores):
