@@ -19,6 +19,7 @@ def main():
     total_img = get_img('data/gray')
     unlabeled_img = list(set(total_img)-set(labeled_img))
 
+    # if contains unlabeled image, map label
     if len(unlabeled_img) > 0:
         
         new_df = map_new_img(unlabeled_img)
@@ -28,11 +29,22 @@ def main():
     else:
         print('no unlabeled images')
     
+    # rewrite labels
     curr_labels = sort_imgs(curr_labels)
     curr_labels.to_csv('data/labels.csv', index=False, header=False)
 
 
 def get_img(path):
+
+    """
+    counts and returns file image names without extension
+    
+    ### arguments:
+    path: directory containing images
+
+    ### returns:
+    files_lst: list of file names
+    """
 
     num = 0
     for root_dir, cur_dir, files in os.walk(path):
@@ -53,6 +65,13 @@ def get_img(path):
 
 def map_name_label():
 
+    """
+    currently used characters for mapping
+
+    ### returns:
+    mapping: dictionary containing name to integer label map
+    """
+
     mapping = {
         'shenhe':0,
         'mai':1,
@@ -67,6 +86,16 @@ def map_name_label():
 
 
 def map_new_img(lst):
+
+    """
+    maps images to label
+    
+    ### arguments:
+    lst: list containing image names that have not been mapped
+
+    ### returns:
+    dataframe conversion of dictionary containing mapped images
+    """
 
     new_labels = {}
     mapping = map_name_label()
@@ -83,6 +112,16 @@ def map_new_img(lst):
 
 
 def sort_imgs(df):
+
+    """
+    sorts dataframe by integer image position
+    
+    ### arguments:
+    df: dataframe of mapped images
+
+    ### returns:
+    sorted dataframe
+    """
 
     df['img_num'] = df['img'].str[4:].astype(int)
     df = df.sort_values('img_num', ignore_index=True)
