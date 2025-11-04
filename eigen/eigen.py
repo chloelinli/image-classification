@@ -28,16 +28,16 @@ def main():
     X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     y = get_labels()
 
-    train_X, test_X, train_y, test_y, train_ind = train_test_split(X, y, TEST_SIZE, len(X))
+    train_X, test_X, test_y, train_ind = train_test_split(X, y, TEST_SIZE, len(X))
 
     # reconstruct training data
     k_90, data_k90, k_99, data_k99, avg, V, scores = reconstruct('eigen', train_X, train_ind)
 
     # calculate accuracies
-    print(f"average for k_90 energy: {k_90}")
-    reconstruct_accu(train_X, data_k90)
-    print(f"average for k_99: {k_99}")
-    reconstruct_accu(train_X, data_k99)
+    #print(f"average for k_90 energy: {k_90}")
+    #reconstruct_accu(train_X, data_k90)
+    #print(f"average for k_99: {k_99}")
+    #reconstruct_accu(train_X, data_k99)
 
     # recognition
     pred_ind = recognition(test_X, avg, V, scores)
@@ -96,9 +96,9 @@ def train_test_split(X, y, test_size, data_size):
     # split indicies based on split sizes then use indicies to split data to return
     train_ind, test_ind = indicies[:train_p], indicies[train_p:]
     train_X, test_X = X[train_ind,:], X[test_ind,:]
-    train_y, test_y = y[train_ind], y[test_ind]
+    test_y = y[test_ind]
 
-    return train_X, test_X, train_y, test_y, train_ind
+    return train_X, test_X, test_y, train_ind
 
 
 def reconstruct(path, data, ind):
