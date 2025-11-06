@@ -28,11 +28,9 @@ def main():
     # train binary classifer
     weight, bias = train_binary_ovr(train_X, train_y, unique_y, weight, bias)
 
-    """
-    for test
-        scores = dot(features, x) + labels
-        predict label = argmax(scores)
-    """
+    # compute test scores
+    test_preds = predict(test_X, weight, bias)
+    print(test_preds)
 
 
 def get_labels():
@@ -128,6 +126,19 @@ def train_binary_ovr(X, y, unique_y, W, B):
         B[u] = b
 
     return W, B
+
+
+def predict(test_X, W, B):
+
+    size = len(W)
+    test_len = len(test_X)
+
+    scores = np.zeros((size, test_len))
+
+    for i in range(size):
+        scores[i] = np.dot(test_X, W[i]) + B[i]
+    
+    return np.argmax(scores, axis=1)
 
 
 if __name__ == '__main__':
