@@ -14,7 +14,8 @@ def main():
     # get full data and split into train test sets
     X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     y = get_labels()
-    print(y)
+    train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
+    print(train_X)
 
     # for each class, train binary classifier where 1 is the class and -1 is not
     # get unique labels/classes
@@ -82,7 +83,7 @@ def train_test_split(X, y, test_size, data_size):
     train_X, test_X = X[train_ind,:], X[test_ind,:]
     train_y, test_y = y[train_ind], y[test_ind]
 
-    return train_X, test_X, train_y, test_y, train_ind
+    return train_X, test_X, train_y, test_y
 
     
 if __name__ == '__main__':
