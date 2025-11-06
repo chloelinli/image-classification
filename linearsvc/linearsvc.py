@@ -16,7 +16,9 @@ def main():
     y = get_labels()
     train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
 
-    # get unique labels from y
+    # get unique labels
+    unique_y = np.unique(y)
+    print(unique_y)
     # init (labels, features) and (labels)
     # learning rate
 
