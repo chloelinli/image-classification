@@ -90,8 +90,8 @@ def initialize_params(X, y):
     n_labels = len(np.unique(y))
     n_cols = X.shape[1]
 
-    w = np.zeros((n_labels, n_cols)).astype
-    b = np.zeros(n_labels).astype
+    w = np.zeros((n_labels, n_cols))
+    b = np.zeros(n_labels)
 
     return w, b
 
@@ -128,18 +128,7 @@ def train_binary_ovr(X, y, unique_y, W, B):
         B[u] = b
 
     return W, B
-"""
-        for epoch
-            for each (x, y) in x and temp_array
-                m = y * (dot(temp_feat, x) + temp_labels)
 
-                if m < 1
-                    temp_feat = teamp_feat - lr * (temp_feat - C * x * y)
-                    temp_labels = temp_labels + lr * C * y
-                else
-                    temp_feat = temp_feat - lr * temp_feat
-        append temp labels and feat to init
-    """
 
 if __name__ == '__main__':
     main()
