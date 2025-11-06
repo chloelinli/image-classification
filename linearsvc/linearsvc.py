@@ -15,7 +15,6 @@ def main():
     X = np.genfromtxt('data/converted_dataset.csv', delimiter=',')
     y = get_labels()
     train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
-    print(train_X)
 
     # for each class, train binary classifier where 1 is the class and -1 is not
     # get unique labels/classes
@@ -61,15 +60,16 @@ def train_test_split(X, y, test_size, data_size):
     splits data array based on test set size and dataset size
     
     ### arguments:
-    arr: numpy array of dataset\n
+    X: numpy array of dataset\n
+    y: dataset label\n
     test_size: percentage of dataset to create as test set\n
     data_size: size of dataset
 
     ### returns:
-    train: training data\n
-    test: test data\n
-    train_ind: indicies of training data\n
-    test_ind: indicies of test data
+    train_X: training data split\n
+    test_X: testing data split\n
+    train_y: training data labels\n
+    test_y: test data actual labels
     """
 
     # store mixed up indicies of array and save split sizes
