@@ -4,6 +4,9 @@ import pandas as pd
 
 # global variables
 TEST_SIZE = 0.15
+LEARNING_RATE = 0.001
+COST = 1.0
+EPOCHS = 100
 
 # reproducibility
 np.random.seed(7)
@@ -22,24 +25,8 @@ def main():
     # initialize weight and bias
     weight, bias = initialize_params(train_X, train_y)
 
-    # learning rate
-
-    """
-    for each unique label
-        temp_array = if l in y is label, then 1, else -1
-        init temp (labels, features) and (labels)
-
-        for epoch
-            for each (x, y) in x and temp_array
-                m = y * (dot(temp_feat, x) + temp_labels)
-
-                if m < 1
-                    temp_feat = teamp_feat - lr * (temp_feat - C * x * y)
-                    temp_labels = temp_labels + lr * C * y
-                else
-                    temp_feat = temp_feat - lr * temp_feat
-        append temp labels and feat to init
-    """
+    # train binary classifer
+    weight, bias = train_binary_ovr(train_X, train_y, unique_y, weight, bias)
 
     """
     for test
@@ -107,6 +94,39 @@ def initialize_params(X, y):
     b = np.zeros(n_labels).astype(int)
 
     return w, b
-    
+
+
+def train_binary_ovr(X, y, unique_y, W, B):
+
+    # train classifer and update weight and bias
+    for u in unique_y:
+
+        # initizlize binaries and current weight and bias
+        binary_y = np.where(y == u, 1, -1)
+        w = np.zeros(X.shape[1]).astype(int)
+        b = 0.0
+
+        # fit training data
+
+    return W, B
+
+
+    """
+    for each unique label
+        temp_array = if l in y is label, then 1, else -1
+        init temp (labels, features) and (labels)
+
+        for epoch
+            for each (x, y) in x and temp_array
+                m = y * (dot(temp_feat, x) + temp_labels)
+
+                if m < 1
+                    temp_feat = teamp_feat - lr * (temp_feat - C * x * y)
+                    temp_labels = temp_labels + lr * C * y
+                else
+                    temp_feat = temp_feat - lr * temp_feat
+        append temp labels and feat to init
+    """
+
 if __name__ == '__main__':
     main()
