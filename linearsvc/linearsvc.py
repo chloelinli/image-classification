@@ -16,24 +16,32 @@ def main():
     y = get_labels()
     train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
 
-    # for each class, train binary classifier where 1 is the class and -1 is not
-    # get unique labels/classes
-    #unique y
-    # initialize 
-    # for c in unique classes
-        # get params(train x, train y)
+    # get unique labels from y
+    # init (labels, features) and (labels)
+    # learning rate
 
-    # initialize
+    """
+    for each unique label
+        temp_array = if l in y is label, then 1, else -1
+        init temp (labels, features) and (labels)
 
-    # training
+        for epoch
+            for each (x, y) in x and temp_array
+                m = y * (dot(temp_feat, x) + temp_labels)
 
-    # predict - compute scores
-    # for test x:
-        # scores =
-        #predict class = armax of scores
-    
-    # preds
-    # compare preds to test y, get accuracy
+                if m < 1
+                    temp_feat = teamp_feat - lr * (temp_feat - C * x * y)
+                    temp_labels = temp_labels + lr * C * y
+                else
+                    temp_feat = temp_feat - lr * temp_feat
+        append temp labels and feat to init
+    """
+
+    """
+    for test
+        scores = dot(features, x) + labels
+        predict label = argmax(scores)
+    """
 
 
 def get_labels():
