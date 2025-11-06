@@ -98,6 +98,8 @@ def initialize_params(X, y):
 
 def train_binary_ovr(X, y, unique_y, W, B):
 
+    size = len(X)
+
     # train classifer and update weight and bias
     for u in unique_y:
 
@@ -106,16 +108,27 @@ def train_binary_ovr(X, y, unique_y, W, B):
         w = np.zeros(X.shape[1]).astype(int)
         b = 0.0
 
-        # fit training data
+        # fit training data for each row
+        for e in range(EPOCHS):
+
+            for i in range(size):
+                curr_x = X[i]
+                curr_y = binary_y[i]
+
+                # compute margin and update current weight and bias
+                margin = curr_y * (np.dot(w, curr_x) + b)
+                if margin < 1:
+                    w -= LEARNING_RATE * (w - COST * curr_y * curr_x)
+                    b += LEARNING_RATE * COST * curr_y
+                else:
+                    w -= LEARNING_RATE * w
+        
+        # store weight and bias for current unique label
+        W[u] = w
+        B[u] = b
 
     return W, B
-
-
-    """
-    for each unique label
-        temp_array = if l in y is label, then 1, else -1
-        init temp (labels, features) and (labels)
-
+"""
         for epoch
             for each (x, y) in x and temp_array
                 m = y * (dot(temp_feat, x) + temp_labels)
