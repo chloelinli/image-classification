@@ -30,8 +30,11 @@ def main():
 
     # compute test scores
     test_preds = predict(test_X, weight, bias)
-    print(test_preds)
 
+    # check accuracy of predictions
+    accu = check_accuracy(test_preds, test_y)
+    print(f"recognition accuracy: {accu:.2f}%")
+    
 
 def get_labels():
 
@@ -133,6 +136,31 @@ def predict(test_X, W, B):
     scores = np.dot(test_X, W.T) + B
     
     return np.argmax(scores, axis=1)
+
+
+def check_accuracy(pred, actual):
+
+    """
+    this function the expected and actual image labels generated 
+    from the predictions tree
+    
+    ### arguments:
+    pred: expected image labels\n
+    actual: actual image labels
+
+    ### returns:
+    error rate of exact classification using formula (measured - given) / given * 100
+    """
+
+    correct = 0
+
+    size = len(actual)
+    
+    for i in range(size):
+        if int(actual[i]) == int(pred[i]):
+            correct += 1
+
+    return 100 - (abs(correct-size)/size * 100)
 
 
 if __name__ == '__main__':
