@@ -90,8 +90,8 @@ def initialize_params(X, y):
     n_labels = len(np.unique(y))
     n_cols = X.shape[1]
 
-    w = np.zeros((n_labels, n_cols)).astype(int)
-    b = np.zeros(n_labels).astype(int)
+    w = np.zeros((n_labels, n_cols)).astype
+    b = np.zeros(n_labels).astype
 
     return w, b
 
@@ -105,7 +105,7 @@ def train_binary_ovr(X, y, unique_y, W, B):
 
         # initizlize binaries and current weight and bias
         binary_y = np.where(y == u, 1, -1)
-        w = np.zeros(X.shape[1]).astype(int)
+        w = np.zeros(X.shape[1])
         b = 0.0
 
         # fit training data for each row
