@@ -18,9 +18,9 @@ CURR_MAX = 6
 
 def main():
 
-    methods = ['eigen', 'xgboost', 'knn']
-    colors = ['r', 'b', 'g']
-    size = [100, 66, 33]
+    methods = ['eigen', 'xgboost', 'knn', 'linearsvc_ovr']
+    colors = ['r', 'b', 'g', 'c']
+    size = [100, 66, 33, 10]
 
     total_img = count_img('data/gray')
 
