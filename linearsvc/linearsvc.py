@@ -92,6 +92,19 @@ def train_test_split(X, y, test_size, data_size):
 
 def initialize_params(X, y):
 
+    """
+    initializes weight and bias parameters for one-vs-rest (ovr) 
+    multiclass lienar svm
+
+    ### arguments:
+    X: training data pixels\n
+    y: training data labels
+
+    ### returns:
+    w: initialized weight\n
+    b: initialized bias
+    """
+
     n_labels = len(np.unique(y))
     n_cols = X.shape[1]
 
@@ -102,6 +115,20 @@ def initialize_params(X, y):
 
 
 def train_binary_ovr(X, y, unique_y, W, B):
+
+    """
+    trains one-vs-rest (ovr) multiclass classifer
+
+    ### arguments:
+    X: training data pixels\n
+    y: training data labels\n
+    unique_y: unique labels\n
+    W: initial weight\n
+    B: initial bias
+
+    ### returns
+    updated weight and bias
+    """
 
     size = len(X)
 
@@ -136,6 +163,18 @@ def train_binary_ovr(X, y, unique_y, W, B):
 
 
 def predict(test_X, W, B):
+
+    """
+    computes scores and labels for each test image using weight and bias
+
+    ### arguments:
+    test_X: test data pixels\n
+    W: final weight\n
+    B: final bias
+
+    ### returns:
+    numpy array containing predicted labels
+    """
 
     scores = np.dot(test_X, W.T) + B
     
