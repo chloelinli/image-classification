@@ -34,7 +34,11 @@ def main():
     # check accuracy of predictions
     accu = check_accuracy(test_preds, test_y)
     print(f"recognition accuracy: {accu:.2f}%")
-    
+
+    # export predicted vs actual values
+    df = pd.DataFrame({'actual':test_y, 'predicted':test_preds})
+    df.to_csv('results/linearsvc_ovr.csv', index=False)
+
 
 def get_labels():
 
