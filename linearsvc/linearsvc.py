@@ -130,13 +130,7 @@ def train_binary_ovr(X, y, unique_y, W, B):
 
 def predict(test_X, W, B):
 
-    size = len(W)
-    test_len = len(test_X)
-
-    scores = np.zeros((size, test_len))
-
-    for i in range(size):
-        scores[i] = np.dot(test_X, W[i]) + B[i]
+    scores = np.dot(test_X, W.T) + B
     
     return np.argmax(scores, axis=1)
 
