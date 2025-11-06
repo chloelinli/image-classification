@@ -18,8 +18,10 @@ def main():
 
     # get unique labels
     unique_y = np.unique(y)
-    print(unique_y)
-    # init (labels, features) and (labels)
+
+    # initialize weight and bias
+    weight, bias = initialize_params(train_X, train_y)
+
     # learning rate
 
     """
@@ -95,6 +97,16 @@ def train_test_split(X, y, test_size, data_size):
 
     return train_X, test_X, train_y, test_y
 
+
+def initialize_params(X, y):
+
+    n_labels = len(np.unique(y))
+    n_cols = X.shape[1]
+
+    w = np.zeros((n_labels, n_cols)).astype(int)
+    b = np.zeros(n_labels).astype(int)
+
+    return w, b
     
 if __name__ == '__main__':
     main()
