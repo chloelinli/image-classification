@@ -6,7 +6,7 @@ import pandas as pd
 TEST_SIZE = 0.15
 LEARNING_RATE = 0.005
 COST = 1.0
-EPOCHS = 100
+EPOCHS = 50
 
 # reproducibility
 np.random.seed(7)
