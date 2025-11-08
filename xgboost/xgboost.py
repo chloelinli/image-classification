@@ -13,7 +13,7 @@ import pandas as pd
 
 # global variables
 TEST_SIZE = 0.15
-NUM_LOOPS = 30
+NUM_LOOPS = 5
 
 # reproducibility
 np.random.seed(7)
