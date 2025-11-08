@@ -5,7 +5,7 @@ import pandas as pd
 # global variables
 TEST_SIZE = 0.15
 LEARNING_RATE = 0.005
-COST = 5.0
+COST = 1.0
 EPOCHS = 100
 
 # reproducibility
