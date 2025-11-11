@@ -157,6 +157,8 @@ def predict(test_X, classifiers):
     """
 
     scores = []
+
+    # for each unique weight, predict labels
     for c in classifiers:
 
         w, b = classifiers[c]
@@ -165,6 +167,8 @@ def predict(test_X, classifiers):
         scores.append(prob)
     
     scores = np.array(scores).T
+
+    # return highest probability for each image label
     return np.argmax(scores, axis=1)
 
 
