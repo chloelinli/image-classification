@@ -82,10 +82,31 @@ def train_test_split(X, y, test_size, data_size):
 
 def sigmoid(z):
 
+    """
+    flatten input to a range between 0 and 1
+    
+    ### arguments:
+    z: linear combination of inputs and weights
+    
+    ### returns:
+    standardized value
+    """
+
     return 1 / (1 + np.exp(-z))
 
 
 def train_binary_logreg(X, y):
+
+    """
+    train model using gradient descent for each unique label
+    
+    ### arguments:
+    X: training data pixels\n
+    y: training data labels
+    
+    ### returns:
+    classifiers: dictionary mapping weight and bias for each label
+    """
 
     # initialize weight and bias
     n_samples, n_cols = X.shape
@@ -123,6 +144,17 @@ def train_binary_logreg(X, y):
 
 
 def predict(test_X, classifiers):
+
+    """
+    computes scores and labels for each test image using weight and bias
+
+    ### arguments:
+    test_X: test data pixels\n
+    classifiers: dictionary mapping weight and bias for each unique label
+
+    ### returns:
+    numpy array containing predicted labels
+    """
 
     scores = []
     for c in classifiers:
