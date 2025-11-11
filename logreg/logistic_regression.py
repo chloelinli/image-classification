@@ -16,6 +16,9 @@ def main():
     y = get_labels()
     train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
 
+    # initialize weight and bias
+    weight, bias = initialize_params(train_X, train_y)
+
 
 def get_labels():
 
@@ -65,6 +68,17 @@ def train_test_split(X, y, test_size, data_size):
     train_y, test_y = y[train_ind], y[test_ind]
 
     return train_X, test_X, train_y, test_y
+
+
+def initialize_params(X, y):
+
+    n_labels = len(np.unique(y))
+    n_cols = X.shape[1]
+
+    w = np.zeros((n_labels, n_cols))
+    b = np.zeros(n_labels)
+
+    return w, b
 
 
 if __name__ == '__main__':
