@@ -51,5 +51,16 @@ os.system('python3 linearsvc/linearsvc.py')
 end = time.perf_counter()
 print(f"time elapsed: {end-start:.3f} seconds")
 
+print()
+print("********")
+print()
+
+# linear svc (ovr)
+print("now running logistic regression: loading...")
+start = time.perf_counter()
+os.system('python3 logreg/logistic_regression.py')
+end = time.perf_counter()
+print(f"time elapsed: {end-start:.3f} seconds")
+
 # graph analysis
 os.system('python3 results/graph_accuracy.py')
