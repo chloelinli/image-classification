@@ -20,10 +20,10 @@ def main():
     train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
 
     # fit data to compute weight and bias
-    weight, bias = train_binary_logreg(train_X, train_y)
+    classifiers = train_binary_logreg(train_X, train_y)
 
     # compute prediction scores
-    test_preds = predict(test_X, weight, bias)
+    test_preds = predict(test_X, classifiers)
 
     # check accuracy of predictions
     accu = check_accuracy(test_preds, test_y)
@@ -89,33 +89,51 @@ def train_binary_logreg(X, y):
 
     # initialize weight and bias
     n_samples, n_cols = X.shape
+    labels = np.unique(y)
     weight = np.zeros(n_cols)
     bias = 0.0
 
-    for e in range(EPOCHS):
+    classifiers = {}
 
-        # raw score
-        z = np.dot(X, weight) + bias
+    for l in labels:
 
-        # probability
+        # initizlize binaries and current weight and bias
+        binary_y = np.where(y == l, 1, -1)
+        w = np.zeros(X.shape[1])
+        b = 0.0
+
+        for e in range(EPOCHS):
+
+            # raw score
+            z = np.dot(X, weight) + bias
+
+            # probability
+            prob = sigmoid(z)
+
+            error = prob - y
+            w = np.dot(X.T, error) / n_samples
+            b = np.mean(error)
+
+            weight -= LEARNING_RATE * w
+            bias -= LEARNING_RATE * b
+        
+        classifiers[l] = (weight, bias)
+
+    return classifiers
+
+
+def predict(test_X, classifiers):
+
+    scores = []
+    for c in classifiers:
+
+        w, b = classifiers[c]
+        z = np.dot(test_X, w) + b
         prob = sigmoid(z)
-
-        error = prob - y
-        w = np.dot(X.T, error) / n_samples
-        b = np.mean(error)
-
-        weight -= LEARNING_RATE * w
-        bias -= LEARNING_RATE * b
-
-    return weight, bias
-
-
-def predict(test_X, W, B):
+        scores.append(prob)
     
-    z = np.dot(test_X, W) + B
-    prob = sigmoid(z)
-
-    return (prob >= THRESHOLD).astype(int)
+    scores = np.array(scores).T
+    return np.argmax(scores, axis=1)
 
 
 def check_accuracy(pred, actual):
