@@ -4,6 +4,8 @@ import pandas as pd
 
 # global variables
 TEST_SIZE = 0.15
+LEARNING_RATE = 0.005
+EPOCHS = 100
 
 # reproducibility
 np.random.seed(7)
