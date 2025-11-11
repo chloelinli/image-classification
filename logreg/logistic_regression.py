@@ -18,8 +18,8 @@ def main():
     y = get_labels()
     train_X, test_X, train_y, test_y = train_test_split(X, y, TEST_SIZE, len(X))
 
-    # initialize weight and bias
-    weight, bias = initialize_params(train_X, train_y)
+    # fit data to compute weight and bias
+    weight, bias = train_binary_logreg(train_X, train_y)
 
 
 def get_labels():
@@ -72,15 +72,14 @@ def train_test_split(X, y, test_size, data_size):
     return train_X, test_X, train_y, test_y
 
 
-def initialize_params(X, y):
+def train_binary_logreg(X, y):
 
-    n_labels = len(np.unique(y))
+    # initialize weight and bias
     n_cols = X.shape[1]
+    W = np.zeros(n_cols)
+    B = 0.0
 
-    w = np.zeros((n_labels, n_cols))
-    b = np.zeros(n_labels)
-
-    return w, b
+    return W, B
 
 
 if __name__ == '__main__':
