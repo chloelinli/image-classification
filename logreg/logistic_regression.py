@@ -20,6 +20,9 @@ def main():
 
     # fit data to compute weight and bias
     weight, bias = train_binary_logreg(train_X, train_y)
+    print(weight)
+    print("---")
+    print(bias)
 
 
 def get_labels():
@@ -72,14 +75,34 @@ def train_test_split(X, y, test_size, data_size):
     return train_X, test_X, train_y, test_y
 
 
+def sigmoid(z):
+
+    return 1 / (1 + np.exp(-z))
+
+
 def train_binary_logreg(X, y):
 
     # initialize weight and bias
-    n_cols = X.shape[1]
-    W = np.zeros(n_cols)
-    B = 0.0
+    n_samples, n_cols = X.shape
+    weight = np.zeros(n_cols)
+    bias = 0.0
 
-    return W, B
+    for e in range(EPOCHS):
+
+        # raw score
+        z = np.dot(X, weight) + bias
+
+        # probability
+        prob = sigmoid(z)
+
+        error = prob - y
+        w = np.dot(X.T, error) / n_samples
+        b = np.mean(error)
+
+        weight -= LEARNING_RATE * w
+        bias -= LEARNING_RATE * b
+
+    return weight, bias
 
 
 if __name__ == '__main__':
