@@ -6,6 +6,7 @@ import pandas as pd
 TEST_SIZE = 0.15
 LEARNING_RATE = 0.005
 EPOCHS = 100
+THRESHOLD = 0.5
 
 # reproducibility
 np.random.seed(7)
@@ -20,9 +21,9 @@ def main():
 
     # fit data to compute weight and bias
     weight, bias = train_binary_logreg(train_X, train_y)
-    print(weight)
-    print("---")
-    print(bias)
+
+    # compute prediction scores
+    test_preds = predict(test_X, weight, bias)
 
 
 def get_labels():
@@ -103,6 +104,14 @@ def train_binary_logreg(X, y):
         bias -= LEARNING_RATE * b
 
     return weight, bias
+
+
+def predict(test_X, W, B):
+    
+    z = np.dot(test_X, W) + B
+    prob = sigmoid(z)
+
+    return (prob >= THRESHOLD).astype(int)
 
 
 if __name__ == '__main__':
