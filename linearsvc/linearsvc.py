@@ -1,3 +1,13 @@
+"""
+chloe rushing
+
+this script attempts classification of images by using a simple 
+linear support vector implementation, using one-vs rest, to compare 
+the test and training data to make predictions. it allows 
+randomization and reproducibility using a seed and global variables.
+"""
+
+
 # import statements
 import numpy as np
 import pandas as pd
