@@ -88,9 +88,9 @@ def compare_agreement(methods):
     for i in range(length):
         true_val, pred_val = get_preds_true(methods[i])
         if i == 0:
-            values.append(true_val.T)
+            values.append(true_val)
         
-        values.append(pred_val.T)
+        values.append(pred_val)
     
     columns = ['True']
     for i in range(length):
@@ -98,10 +98,12 @@ def compare_agreement(methods):
     
     df = pd.DataFrame(np.array(values).T, columns=columns)
 
+    plt.figure(figsize=(8,4))
     sns.heatmap(df.astype(int), annot=True, cmap='coolwarm', cbar=False)
     plt.title("Prediction Agreement Across Models")
     plt.xlabel("Model")
     plt.ylabel("Label Prediction")
+    plt.xticks(rotation=45)
     plt.tight_layout()
     plt.show()
     
