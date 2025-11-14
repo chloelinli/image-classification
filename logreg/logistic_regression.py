@@ -4,7 +4,7 @@ import pandas as pd
 
 # global variables
 TEST_SIZE = 0.15
-LEARNING_RATE = 0.005
+LEARNING_RATE = 0.0001
 EPOCHS = 100
 THRESHOLD = 0.5
 
@@ -123,7 +123,7 @@ def train_binary_logreg(X, y):
     for l in labels:
 
         # initizlize binaries and current weight and bias
-        binary_y = np.where(y == l, 1, -1)
+        binary_y = np.where(y == l, 1, 0)
         w = np.zeros(X.shape[1])
         b = 0.0
 
@@ -167,8 +167,7 @@ def predict(test_X, classifiers):
 
         w, b = classifiers[c]
         z = np.dot(test_X, w) + b
-        prob = sigmoid(z)
-        scores.append(prob)
+        scores.append(z)
     
     scores = np.array(scores).T
 
