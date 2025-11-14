@@ -87,7 +87,8 @@ def compare_agreement(methods):
     for i in range(length):
         columns.append(methods[i])
     
-    print(pd.DataFrame(np.array(values).T))
+    df = pd.DataFrame(np.array(values).T, columns=columns)
+    print(df)
     
 
 def get_preds_true(method):
