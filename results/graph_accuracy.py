@@ -63,7 +63,8 @@ def plot(method, color, size):
 
     ### arguments:
     method: current classification method\n
-    color: corresponding color to method
+    color: corresponding color to method\n
+    size: size of scatterplot point for method
     """
 
     # get actual and predicted indicies
