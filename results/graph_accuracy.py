@@ -11,8 +11,7 @@ perfect predictions.
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import ConfusionMatrixDisplay
+import pandas as pd
 
 # global variable
 CURR_MAX = 6
@@ -80,14 +79,15 @@ def compare_agreement(methods):
     for i in range(length):
         true_val, pred_val = get_preds_true(methods[i])
         if i == 0:
-            values.append(true_val)
+            values.append(true_val.T)
         
-        values.append(pred_val)
+        values.append(pred_val.T)
     
     columns = ['True']
     for i in range(length):
         columns.append(methods[i])
-    print(columns)
+    
+    print(pd.DataFrame(np.array(values).T))
     
 
 def get_preds_true(method):
