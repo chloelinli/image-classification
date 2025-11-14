@@ -84,8 +84,11 @@ def compare_agreement(methods):
         
         values.append(pred_val)
     
-    print(len(values))
-
+    columns = ['True']
+    for i in range(length):
+        columns.append(methods[i])
+    print(columns)
+    
 
 def get_preds_true(method):
 
