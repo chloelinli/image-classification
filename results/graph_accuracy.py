@@ -51,9 +51,8 @@ def main():
     # export graph
     fig.savefig('results/prediction_results.jpg')
 
-    # plot confusion matrix for each method
-    for i in range(length):
-        plot_confusion_matrix(methods[i])
+    # compare agreement
+    compare_agreement(methods)
 
 
 def plot(method, color, size):
@@ -68,24 +67,33 @@ def plot(method, color, size):
     """
 
     # get actual and predicted indicies
-    indicies = np.genfromtxt('results/'+method+'.csv', delimiter=',', skip_header=1).astype(int)
-    true_val = indicies[:, 0]
-    pred_val = indicies[:, 1]
+    true_val, pred_val = get_preds_true(method)
     plt.scatter(true_val, pred_val, color=color, label=method, s=size)
 
 
-def plot_confusion_matrix(method):
-    
+def compare_agreement(methods):
+
+    values = []
+
     # get actual and predicted indicies
+    length = len(methods)
+    for i in range(length):
+        true_val, pred_val = get_preds_true(methods[i])
+        if i == 0:
+            values.append(true_val)
+        
+        values.append(pred_val)
+    
+    print(len(values))
+
+
+def get_preds_true(method):
+
     indicies = np.genfromtxt('results/'+method+'.csv', delimiter=',', skip_header=1).astype(int)
     true_val = indicies[:, 0]
     pred_val = indicies[:, 1]
-    
-    cm = confusion_matrix(true_val, pred_val, labels=sorted(set(true_val)))
-    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=sorted(set(true_val)))
-    disp.plot(cmap='Blues', xticks_rotation=45)
-    plt.title(f"Confusion Matrix - {method}")
-    plt.show()
+
+    return true_val, pred_val
 
 
 def count_img(dir_path):
