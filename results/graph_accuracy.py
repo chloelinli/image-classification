@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pandas as pd
+import seaborn as sns
 
 # global variable
 CURR_MAX = 6
@@ -88,7 +89,13 @@ def compare_agreement(methods):
         columns.append(methods[i])
     
     df = pd.DataFrame(np.array(values).T, columns=columns)
-    print(df)
+
+    sns.heatmap(df.astype(int), annot=True, cmap='coolwarm', cbar=False)
+    plt.title("Prediction Agreement Across Models")
+    plt.xlabel("Model")
+    plt.ylabel("Label Prediction")
+    plt.tight_layout()
+    plt.show()
     
 
 def get_preds_true(method):
