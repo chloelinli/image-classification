@@ -100,6 +100,17 @@ def compare_agreement(methods):
 
 def get_preds_true(method):
 
+    """
+    imports and grabs a method's true and predicted labels
+    
+    ### arguments:
+    method: current classification method\n
+
+    ### returns:
+    true_val: true labels\n
+    pred_val: predicted labels
+    """
+
     indicies = np.genfromtxt('results/'+method+'.csv', delimiter=',', skip_header=1).astype(int)
     true_val = indicies[:, 0]
     pred_val = indicies[:, 1]
