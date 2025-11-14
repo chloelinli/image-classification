@@ -135,7 +135,7 @@ def train_binary_logreg(X, y):
             # probability
             prob = sigmoid(z)
 
-            error = prob - y
+            error = prob - binary_y
             w = np.dot(X.T, error) / n_samples
             b = np.mean(error)
 
