@@ -11,6 +11,8 @@ perfect predictions.
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
 
 # global variable
 CURR_MAX = 6
@@ -49,6 +51,10 @@ def main():
     # export graph
     fig.savefig('results/prediction_results.jpg')
 
+    # plot confusion matrix for each method
+    for i in range(length):
+        plot_confusion_matrix(methods[i])
+
 
 def plot(method, color, size):
 
@@ -66,6 +72,20 @@ def plot(method, color, size):
     true_val = indicies[:, 0]
     pred_val = indicies[:, 1]
     plt.scatter(true_val, pred_val, color=color, label=method, s=size)
+
+
+def plot_confusion_matrix(method):
+    
+    # get actual and predicted indicies
+    indicies = np.genfromtxt('results/'+method+'.csv', delimiter=',', skip_header=1).astype(int)
+    true_val = indicies[:, 0]
+    pred_val = indicies[:, 1]
+    
+    cm = confusion_matrix(true_val, pred_val, labels=sorted(set(true_val)))
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=sorted(set(true_val)))
+    disp.plot(cmap='Blues', xticks_rotation=45)
+    plt.title(f"Confusion Matrix - {method}")
+    plt.show()
 
 
 def count_img(dir_path):
