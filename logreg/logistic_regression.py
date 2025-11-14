@@ -139,10 +139,10 @@ def train_binary_logreg(X, y):
             w = np.dot(X.T, error) / n_samples
             b = np.mean(error)
 
-            weight -= LEARNING_RATE * w
-            bias -= LEARNING_RATE * b
+            w -= LEARNING_RATE * w
+            b -= LEARNING_RATE * b
         
-        classifiers[l] = (weight, bias)
+        classifiers[l] = (w, b)
 
     return classifiers
 
