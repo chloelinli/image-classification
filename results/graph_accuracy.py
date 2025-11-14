@@ -74,6 +74,13 @@ def plot(method, color, size):
 
 def compare_agreement(methods):
 
+    """
+    compares predicted labels across all classification methods
+    
+    ### arguments:
+    methods: list of methods as strings
+    """
+
     values = []
 
     # get actual and predicted indicies
@@ -105,7 +112,7 @@ def get_preds_true(method):
     imports and grabs a method's true and predicted labels
     
     ### arguments:
-    method: current classification method\n
+    method: current classification method
 
     ### returns:
     true_val: true labels\n
