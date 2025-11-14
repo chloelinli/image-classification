@@ -4,7 +4,7 @@ import pandas as pd
 
 # global variables
 TEST_SIZE = 0.15
-LEARNING_RATE = 0.0001
+LEARNING_RATE = 0.005
 EPOCHS = 100
 THRESHOLD = 0.5
 
@@ -167,7 +167,8 @@ def predict(test_X, classifiers):
 
         w, b = classifiers[c]
         z = np.dot(test_X, w) + b
-        scores.append(z)
+        prob = sigmoid(z)
+        scores.append(prob)
     
     scores = np.array(scores).T
 
