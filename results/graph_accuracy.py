@@ -20,7 +20,7 @@ def main():
 
     methods = ['eigen', 'xgboost', 'knn', 'linearsvc_ovr', 'logistic_regression']
     colors = ['y', 'r', 'b', 'g', 'c']
-    size = [150, 100, 66, 33, 10]
+    size = [150, 100, 60, 30, 10]
 
     total_img = count_img('data/gray')
 
