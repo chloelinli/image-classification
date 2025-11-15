@@ -47,7 +47,6 @@ def main():
         plot(methods[i], axes[i], colors[i], size[i])
     
     plt.legend()
-    plt.show()
 
     # export graph
     fig.savefig('results/prediction_results.jpg')
@@ -107,7 +106,6 @@ def compare_agreement(methods, axes):
     plt.xlabel("Model", labelpad=10, fontsize=12)
     plt.ylabel("Label Prediction", labelpad=10, fontsize=12)
     plt.tight_layout()
-    plt.show()
 
     # export graph
     plt.savefig('results/prediction_agreement.jpg')
