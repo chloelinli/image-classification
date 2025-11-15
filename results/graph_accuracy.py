@@ -21,6 +21,7 @@ CURR_MAX = 6
 def main():
 
     methods = ['eigen', 'xgboost', 'knn', 'linearsvc_ovr', 'logistic_regression']
+    axes = ['SVD', 'XGBoost', 'KNN', 'LinearSVC', 'Log Reg']
     colors = ['y', 'r', 'b', 'g', 'c']
     size = [150, 100, 60, 30, 10]
 
@@ -30,20 +31,20 @@ def main():
     actual = np.genfromtxt('results/eigen.csv', delimiter=',', skip_header=1).astype(int)[:, 0]
 
     # initialize plot
-    fig = plt.figure(figsize=(6,6))
+    fig = plt.figure(figsize=(7,6))
 
     # y=x line for true=prediction
     plt.plot([0, CURR_MAX], [0, CURR_MAX], 'k--', label='Perfect Prediction (y=x)')
     # set axes and title
-    plt.xlabel('True Values')
-    plt.ylabel('Predicted Values')
+    plt.xlabel('True Values', labelpad=10, fontsize=12)
+    plt.ylabel('Predicted Values', labelpad=10, fontsize=12)
     plt.title('Image Classification With Various Machine Learning Methods')
     plt.axis('equal')
 
     # loop through methods and plot
     length = len(methods)
     for i in range(length):
-        plot(methods[i], colors[i], size[i])
+        plot(methods[i], axes[i], colors[i], size[i])
     
     plt.legend()
     plt.show()
@@ -52,10 +53,10 @@ def main():
     fig.savefig('results/prediction_results.jpg')
 
     # compare agreement
-    compare_agreement(methods)
+    compare_agreement(methods, axes)
 
 
-def plot(method, color, size):
+def plot(method, axis, color, size):
 
     """
     plots predicted vs. true image index position in directory 
@@ -63,22 +64,24 @@ def plot(method, color, size):
 
     ### arguments:
     method: current classification method\n
+    axis: label for current classification method\n
     color: corresponding color to method\n
     size: size of scatterplot point for method
     """
 
     # get actual and predicted indicies
     true_val, pred_val = get_preds_true(method)
-    plt.scatter(true_val, pred_val, color=color, label=method, s=size)
+    plt.scatter(true_val, pred_val, color=color, label=axis, s=size)
 
 
-def compare_agreement(methods):
+def compare_agreement(methods, axes):
 
     """
     compares predicted labels across all classification methods
     
     ### arguments:
-    methods: list of methods as strings
+    methods: list of methods as strings\n
+    axes: labels for classification methods
     """
 
     values = []
@@ -94,18 +97,20 @@ def compare_agreement(methods):
     
     columns = ['True']
     for i in range(length):
-        columns.append(methods[i])
+        columns.append(axes[i])
     
     df = pd.DataFrame(np.array(values).T, columns=columns)
 
-    plt.figure(figsize=(8,4))
+    plt.figure(figsize=(9,4))
     sns.heatmap(df.astype(int), annot=True, cmap='coolwarm', cbar=False)
     plt.title("Prediction Agreement Across Models")
-    plt.xlabel("Model")
-    plt.ylabel("Label Prediction")
-    plt.xticks(rotation=45)
+    plt.xlabel("Model", labelpad=10, fontsize=12)
+    plt.ylabel("Label Prediction", labelpad=10, fontsize=12)
     plt.tight_layout()
     plt.show()
+
+    # export graph
+    plt.savefig('results/prediction_agreement.jpg')
     
 
 def get_preds_true(method):
